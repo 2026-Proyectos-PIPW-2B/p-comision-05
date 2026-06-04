@@ -1,0 +1,21 @@
+:root {
+    --neutral: 4px;
+}
+
+.p-neutral {
+    padding: calc(var(--neutral) * 2) calc(var(--neutral) * 3);
+}
+
+.px-neutral {
+    padding-left: calc(var(--neutral) * 3);
+    padding-right: calc(var(--neutral) * 3);
+}
+
+.py-neutral {
+    padding-top: calc(var(--neutral) * 2);
+    padding-bottom: calc(var(--neutral) * 2);
+}
+
+.max-width-900 {
+    max-width: 900px;
+}
