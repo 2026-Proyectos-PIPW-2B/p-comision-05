@@ -16,6 +16,29 @@
     padding-bottom: calc(var(--neutral) * 2);
 }
 
-.max-width-900 {
+.max-w-900 {
     max-width: 900px;
+}
+
+.max-w-1200 {
+    max-width: 1200px !important;
+}
+
+.w-40 {
+    width: 40% !important;
+}
+
+.w-30 {
+    width: 30% !important;
+}
+
+@media (min-width: 992px) {
+  .vw-lg-50 {
+    width: 50vw;
+  }
+  
+  .pixel-w-lg-180 {
+    width: 180px;
+    flex: 0 0 180px; 
+  }
 }
