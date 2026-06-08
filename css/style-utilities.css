@@ -1,7 +1,15 @@
 :root {
     --neutral: 4px;
+    --primary: #0dcaf0;
 }
 
+/* modificacion clases boostrap */
+.active {
+    cursor: default;
+    pointer-events: none;
+}
+
+/* clase personales */
 .p-neutral {
     padding: calc(var(--neutral) * 2) calc(var(--neutral) * 3);
 }
@@ -16,12 +24,41 @@
     padding-bottom: calc(var(--neutral) * 2);
 }
 
+.pt-neutral {
+    padding-top: calc(var(--neutral) * 2);
+}
+
+.ps-neutral {
+    padding-left: calc(var(--neutral) * 3);
+}
+
+.mx-neutral {
+    margin-left: calc(var(--neutral) * 3);
+    margin-right: calc(var(--neutral) * 3);
+}
+
+.mt-neutral {
+    margin-top: calc(var(--neutral) * 2);
+}
+
+.mb-neutral {
+    margin-bottom: calc(var(--neutral) * 2);
+}
+
+.ms-neutral {
+    margin-left: calc(var(--neutral) * 3);
+}
+
 .max-w-900 {
     max-width: 900px;
 }
 
 .max-w-1200 {
     max-width: 1200px !important;
+}
+
+.w-85 {
+    width: 85% !important;
 }
 
 .w-40 {
@@ -32,13 +69,64 @@
     width: 30% !important;
 }
 
+.w-15 {
+    width: 15% !important;
+}
+
+.shadow-element {
+  position: relative;
+  z-index: 1; /* Ensures content stays above the shadow */
+}
+
+.shadow-element::before {
+  content: '';
+  position: absolute;
+  top: -30px; /* Increased height to make room for peaks */
+  left: -40%;
+  right: -40%;
+  height: 30px; 
+  background: linear-gradient(to top, white, var(--primary));
+  
+  /* Creates a jagged edge with 4 distinct peaks */
+  clip-path: polygon(
+    0% 100%,    /* Bottom-left */
+    0% 40%,     /* Start first peak */
+    12.5% 0%,   /* Peak 1 */
+    25% 40%,    /* Valley 1 */
+    37.5% 0%,   /* Peak 2 */
+    50% 40%,    /* Valley 2 */
+    62.5% 0%,   /* Peak 3 */
+    75% 40%,    /* Valley 3 */
+    87.5% 0%,   /* Peak 4 */
+    100% 40%,   /* End final peak */
+    100% 100%   /* Bottom-right */
+  );
+  
+  filter: blur(4px); /* Lower blur keeps the sharp peak shapes visible */
+  z-index: -1;
+  pointer-events: none;
+}
+
 @media (min-width: 992px) {
-  .vw-lg-50 {
-    width: 50vw;
+  .w-lg-75 {
+    width: 75% !important;
   }
   
   .pixel-w-lg-180 {
     width: 180px;
     flex: 0 0 180px; 
+  }
+
+  .static-lg {
+    position: static;
+    z-index: 0;
+  }
+
+  .top-gap-lg-64 {
+    top: 64px;
+  }
+
+  .ms-lg-neutral {
+    margin-left: calc(var(--neutral) * 3);
   }
 }
