@@ -107,6 +107,21 @@
   pointer-events: none;
 }
 
+.img-2 {
+    right: 10%;
+    z-index: 1;
+}
+
+.img-3 {
+    right: 20%;
+    z-index: 2;
+}
+
+.img-4 {
+    right: 30%;
+    z-index: 3;
+}
+
 @media (min-width: 992px) {
   .w-lg-75 {
     width: 75% !important;
