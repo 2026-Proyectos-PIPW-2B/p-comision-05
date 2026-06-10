@@ -32,6 +32,10 @@
     padding-left: calc(var(--neutral) * 3);
 }
 
+.m-neutral {
+    margin: calc(var(--neutral) * 2) calc(var(--neutral) * 3);
+}
+
 .mx-neutral {
     margin-left: calc(var(--neutral) * 3);
     margin-right: calc(var(--neutral) * 3);
@@ -82,8 +86,8 @@
   content: '';
   position: absolute;
   top: -30px; /* Increased height to make room for peaks */
-  left: -40%;
-  right: -40%;
+  left: -12px;
+  right: -12px;
   height: 30px; 
   background: linear-gradient(to top, white, var(--primary));
   
@@ -105,6 +109,21 @@
   filter: blur(4px); /* Lower blur keeps the sharp peak shapes visible */
   z-index: -1;
   pointer-events: none;
+}
+
+.img-2 {
+    right: 10%;
+    z-index: 1;
+}
+
+.img-3 {
+    right: 20%;
+    z-index: 2;
+}
+
+.img-4 {
+    right: 30%;
+    z-index: 3;
 }
 
 @media (min-width: 992px) {

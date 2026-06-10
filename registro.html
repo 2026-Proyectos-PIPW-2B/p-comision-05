@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -23,13 +23,13 @@
             <div class="collapse navbar-collapse flex-grow-0 w-30" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ms-auto">
-                        <a class="nav-link" href="#">Tienda</a>
+                        <a class="nav-link" href="tienda.html">Tienda</a>
                     </li>
                      <li class="nav-item ms-auto">
-                        <a class="nav-link" href="#">Carrito</a>
+                        <a class="nav-link" href="carrito.html">Carrito</a>
                     </li>
                     <li class="nav-item ms-auto">
-                        <a class="nav-link active" aria-current="page" href="#">Registro</a>
+                        <a class="nav-link active" aria-current="page" href="registro.html">Registro</a>
                     </li>
                 </ul>
             </div>
@@ -37,8 +37,140 @@
     </nav>
 
     <main class="flex-grow-1 w-100 d-flex justify-content-center">
-        <section id="registro" class="w-100 flex-grow-1 d-flex flex-column flex-lg-row align-items-lg-start max-w-1200">
-
+        <section id="registro" class="w-100 flex-grow-1 d-flex flex-column flex-lg-row align-items-lg-start max-w-1200 p-neutral">
+            <div class="w-100 border rounded rounded-2 p-neutral d-flex flex-column">
+                <div class="w-100 d-flex border-bottom mb-neutral align-items-baseline">
+                    <h5 class="w-50">Compra #12</h5>
+                    <span class="w-50 fs-5 text-end">Fecha: 02/06/2025</span>
+                </div>
+                <div class="w-100 d-flex">
+                    <div class="w-50 d-flex">
+                        <img src="img/medialuna.png" alt="medialuna" class="w-25 rounded">
+                        <img src="img/medialuna.png" alt="medialuna" class="w-25 rounded position-relative img-2">
+                        <img src="img/medialuna.png" alt="medialuna" class="w-25 rounded position-relative img-3">
+                        <div class="w-25 position-relative rounded border d-flex bg-light justify-content-center align-items-center img-4">
+                            <span><i class="bi bi-three-dots"></i></span>
+                        </div>
+                    </div>
+                    <div class="w-50 d-flex flex-column justify-content-end">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <span class="fs-5">Total: $9000</span>
+                        </div>
+                        <div class="d-flex justify-content-end align-items-center">
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#ModalCompra12">Ver mas</button>
+                            <div class="modal fade" id="ModalCompra12" tabindex="-1" aria-labelledby="ModalCompra12Label" aria-hidden="true">
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <div class="modal-dialog modal-dialog-scrollable w-100 max-w-1200 m-neutral">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5 p-neutral" id="ModalCompra12Label">Productos de la compra</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
+                                                    <div class="w-15">
+                                                        <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
+                                                    </div>
+                                                    <div class="w-85 ps-neutral d-flex flex-column">
+                                                        <h5>Medialunas</h5>
+                                                        <p class="flex-grow-1">Facturas frescas</p>
+                                                        <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
+                                                    </div>
+                                                    <div class="w-100 pt-neutral border-top mt-neutral">
+                                                        <div class="w-100 d-flex justify-content-end align-items-center">
+                                                            <span class="fw-semibold">Cantidad: 12</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
+                                                    <div class="w-15">
+                                                        <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
+                                                    </div>
+                                                    <div class="w-85 ps-neutral d-flex flex-column">
+                                                        <h5>Medialunas</h5>
+                                                        <p class="flex-grow-1">Facturas frescas</p>
+                                                        <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
+                                                    </div>
+                                                    <div class="w-100 pt-neutral border-top mt-neutral">
+                                                        <div class="w-100 d-flex justify-content-end align-items-center">
+                                                            <span class="fw-semibold">Cantidad: 12</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
+                                                    <div class="w-15">
+                                                        <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
+                                                    </div>
+                                                    <div class="w-85 ps-neutral d-flex flex-column">
+                                                        <h5>Medialunas</h5>
+                                                        <p class="flex-grow-1">Facturas frescas</p>
+                                                        <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
+                                                    </div>
+                                                    <div class="w-100 pt-neutral border-top mt-neutral">
+                                                        <div class="w-100 d-flex justify-content-end align-items-center">
+                                                            <span class="fw-semibold">Cantidad: 12</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
+                                                    <div class="w-15">
+                                                        <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
+                                                    </div>
+                                                    <div class="w-85 ps-neutral d-flex flex-column">
+                                                        <h5>Medialunas</h5>
+                                                        <p class="flex-grow-1">Facturas frescas</p>
+                                                        <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
+                                                    </div>
+                                                    <div class="w-100 pt-neutral border-top mt-neutral">
+                                                        <div class="w-100 d-flex justify-content-end align-items-center">
+                                                            <span class="fw-semibold">Cantidad: 12</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
+                                                    <div class="w-15">
+                                                        <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
+                                                    </div>
+                                                    <div class="w-85 ps-neutral d-flex flex-column">
+                                                        <h5>Medialunas</h5>
+                                                        <p class="flex-grow-1">Facturas frescas</p>
+                                                        <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
+                                                    </div>
+                                                    <div class="w-100 pt-neutral border-top mt-neutral">
+                                                        <div class="w-100 d-flex justify-content-end align-items-center">
+                                                            <span class="fw-semibold">Cantidad: 12</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
+                                                    <div class="w-15">
+                                                        <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
+                                                    </div>
+                                                    <div class="w-85 ps-neutral d-flex flex-column">
+                                                        <h5>Medialunas</h5>
+                                                        <p class="flex-grow-1">Facturas frescas</p>
+                                                        <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
+                                                    </div>
+                                                    <div class="w-100 pt-neutral border-top mt-neutral">
+                                                        <div class="w-100 d-flex justify-content-end align-items-center">
+                                                            <span class="fw-semibold">Cantidad: 12</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="d-flex justify-content-end p-neutral">
+                                                    <span class="fs-5 fw-semibold">Envio: $1500</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
