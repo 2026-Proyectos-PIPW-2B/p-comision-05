@@ -1,4 +1,4 @@
-import { Producto } from "../Classes/Producto"
+import { Producto } from "../classes/Producto"
 
 //#region Documentacion
 /**

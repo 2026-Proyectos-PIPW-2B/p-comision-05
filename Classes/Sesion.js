@@ -25,7 +25,19 @@ export class Sesion {
      * @readonly
      */
     apellido
+    /**
+     * Carrito asignado al usuario de la sesion actual si es un user.
+     * 
+     * @type {Carrito}
+     * @public
+     */
     carrito
+    /**
+     * Array de carritos asignado al usuario de la sesion actual si es un user.
+     * 
+     * @type {Array<Carrito>}
+     * @public
+     */
     registro
 
     /**

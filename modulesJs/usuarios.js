@@ -1,4 +1,4 @@
-import { Usuario } from "../Classes/Usuario"
+import { Usuario } from "../classes/Usuario"
 
 //#region Documentacion
 /**

@@ -1,5 +1,5 @@
-import { Sesion } from "../Classes/Sesion"
-import { Usuario } from "../Classes/Usuario"
+import { Sesion } from "../classes/Sesion.js"
+import { Usuario } from "../classes/Usuario.js"
 import * as usuarios from "./usuarios.js"
 import * as carritos from "./carritos.js"
 import * as registros from "./registros.js"
