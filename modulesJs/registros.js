@@ -1,41 +1,44 @@
+import { Producto } from "../Classes/Producto"
+
 //#region Documentacion
-
 /**
- * @fileoverview Manejo de los carritos de los usuarios, con guardado en localStorage.
- * @module carritos
+ * @fileoverview Manejo de los registros de los usuarios, con guardado en localStorage.
+ * @module registros
  */
-
-/**
- * @typedef {object} productoAComprar
- * Objeto productoAComprar para agregar a carritos o compras.
- * 
- * @property {string} nombre - Nombre del producto dado por el producto base.
- * @property {string} descripcion - Descripcion del producto dado por el producto base.
- * @property {number} cantidad - Cantidad del producto a comprar.
- * @property {number} valor - Valor del producto a comprar dado por el producto base.
- * @property {number} valorTotal - Valor total calculado a partir del valor y la cantidad.
- * @property {string} id - Identificacion del producto para vincularlo con el producto en el stock.
- */
-
 //#endregion
 
 //#region Variables
-
-/** @type {Map<string, Array<Map<string, productoAComprar>>>}> */
+/** @type {Map<string, Array<Map<string, Producto>>>}> */
 const registros = JSON.parse(localStorage.getItem("registros")) || new Map()
-
 //#endregion
 
+/**
+ * Crea un mapa de carritos(Map<string, Producto>), lo guarda en registros y lo sube al localStorage.
+ * 
+ * @param {string} nombreUsuario - NombreUsuario que se quiere pasar como clave.
+ */
 export function setRegistro(nombreUsuario) {
-    registros.set(nombreUsuario, new Map())
+    registros.set(nombreUsuario, [])
     localStorage.setItem("registros", JSON.stringify(registros))
 }
 
+/**
+ * Obtine de los registros la lista de carritos guardados del nombreUsuario dado.
+ * 
+ * @param {string} nombreUsuario - NombreUsuario que se quiere pasar como clave.
+ * @returns {Array<Map<string, Producto>>} Retorna una lista con los carritos que se compraron de ese usuario.
+ */
 export function getRegistro(nombreUsuario) {
     return registros.get(nombreUsuario)
 }
 
-export function addCompra(nombreUsuario, compra) {
-    registros.get(nombreUsuario).push(compra)
+/**
+ * Añade un carrito dado a el registro asignado a el nombreUsuario dado.
+ * 
+ * @param {string} nombreUsuario - NombreUsuario que se quiere pasar como clave.
+ * @param {Map<string, Producto>} carrito - Carrito a agregar a el registro del usuario dado.
+ */
+export function addCarrito(nombreUsuario, carrito) {
+    registros.get(nombreUsuario).push(carrito)
     localStorage.setItem("registros", JSON.stringify(registros))
 }

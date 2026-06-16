@@ -1,44 +1,26 @@
-//#region 
-
-import * as registros from "./registros.js"
-
-//#endregion
+import { Producto } from "../Classes/Producto.js"
+import { addCompra } from "./registros.js"
 
 //#region Documentacion
-
 /**
  * @fileoverview Manejo de los carritos de los usuarios, con guardado en localStorage.
  * @module carritos
  */
-
-/**
- * @typedef {object} productoAComprar
- * Objeto productoAComprar para agregar a carritos o compras.
- * 
- * @property {string} nombre - Nombre del producto dado por el producto base.
- * @property {string} descripcion - Descripcion del producto dado por el producto base.
- * @property {number} cantidad - Cantidad del producto a comprar.
- * @property {number} valor - Valor del producto a comprar dado por el producto base.
- * @property {number} valorTotal - Valor total calculado a partir del valor y la cantidad.
- * @property {string} id - Identificacion del producto para vincularlo con el producto en el stock.
- */
-
 //#endregion
 
 //#region Variables
-
-/** @type {Map<string, Map<string, productoAComprar>>}> */
+/** @type {Map<string, Map<string, Producto>>}> */
 const carritos = JSON.parse(localStorage.getItem("carritos")) || new Map()
-
 //#endregion
 
 /**
- * Añade un nuevo carrito asignado a el nombreUsuario que se pasa como paramentro y lo guarda en el localStorage.
+ * Crea el producto y lo añade al carrito asignado a el nombreUsuario dado, lo guarda y lo sube al localStorage.
  * 
  * @param {string} nombreUsuario - El nombreUsuario que se quiere pasar como clave.
- */
-export function addCarrito(nombreUsuario) {
-    carritos.set(nombreUsuario, new Map())
+ * @param {Producto} producto - El objeto productoAComprar que se quiere guardar en el carrito.
+*/
+export function setProductoToCarrito(nombreUsuario, producto) {
+    carritos.get(nombreUsuario).set(producto.id, producto.generateProductoNewAlmacenamiento("carritos", carritos))
     localStorage.setItem("carritos", JSON.stringify(carritos))
 }
 
@@ -62,24 +44,18 @@ export function getCarrito(nombreUsuario) {
  * @param {string} id - El id del productoAComprar que se quiere buscar.
  * @returns {productoAComprar | null} Retorna el objeto productoAComprar asignado al id y si no existe devuelve null.
  */
-export function getProductoDeCarrito(nombreUsuario, id) {
+export function getProducto(nombreUsuario, id) {
     return carritos.get(nombreUsuario).get(id)
 }
 
 /**
- * Añade el productoAComprar al carrito asignado a la clave dada, lo guarda y lo sube al localStorage.
+ * Añade un nuevo carrito asignado a el nombreUsuario que se pasa como paramentro y lo guarda en el localStorage.
  * 
  * @param {string} nombreUsuario - El nombreUsuario que se quiere pasar como clave.
- * @param {productoAComprar} productoAComprar - El objeto productoAComprar que se quiere guardar en el carrito.
  */
-export function addProducto(nombreUsuario, productoAComprar) {
-    carritos.get(usuario).set(productoAComprar.id, productoAComprar)
+export function addCarrito(nombreUsuario) {
+    carritos.set(nombreUsuario, new Map())
     localStorage.setItem("carritos", JSON.stringify(carritos))
-}
-
-function clearCarrito(nombreUsuario) {
-    carritos.get(nombreUsuario).delete()
-    addCarrito(nombreUsuario)
 }
 
 /**
@@ -87,7 +63,8 @@ function clearCarrito(nombreUsuario) {
  * 
  * @param {string} nombreUsuario - El nombreUsuario que se quiere pasar como clave.
  */
-export function addCarritoARegistro(nombreUsuario) {
-    registros.addCompra(nombreUsuario, carritos.get(nombreUsuario))
-    clearCarrito(nombreUsuario)
+export function addCarritoToRegistro(nombreUsuario) {
+    addCarrito(nombreUsuario, carritos.get(nombreUsuario))
+    carritos.get(nombreUsuario).delete()
+    addCarrito(nombreUsuario)
 }
