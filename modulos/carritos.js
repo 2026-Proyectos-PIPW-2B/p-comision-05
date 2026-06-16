@@ -1,5 +1,5 @@
-import { Carrito } from "../classes/Carrito.js"
-import { Producto } from "../classes/Producto.js"
+import { Carrito } from "../clases/Carrito.js"
+import { Producto } from "../clases/Producto.js"
 import * as registros from "./registros.js"
 
 //#region Documentacion
