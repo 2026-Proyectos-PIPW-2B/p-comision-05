@@ -1,5 +1,4 @@
-import * as myModule from "./LocalStorage.js";
-
+import * as users from "../modulos/usuarios.js";
 
 const inputNombre = document.getElementById("inputNombre")
 const inputPassword = document.getElementById("inputPassword")
@@ -20,7 +19,7 @@ inputBotonLogin.addEventListener("click", function (e) {
     e.preventDefault()
     let nombre = inputNombre.value
     let password = inputPassword.value
-    let usuario = myModule.getUsuario(nombre)
+    let usuario = users.getUsuario(nombre)
 
     if (usuario === null) {
         vaciarMensajes()
