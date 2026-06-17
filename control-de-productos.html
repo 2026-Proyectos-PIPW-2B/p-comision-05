@@ -7,12 +7,12 @@
     <title>alta-productos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
-    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="css/style-utilities.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <!--Navbar -->
     <nav class="navbar navbar-expand-xxl navbar-dark bg-black sticky-top">
         <div class="container-fluid d-flex">
             <a class="navbar-brand w-30 m-0">Panaderia</a>
@@ -42,6 +42,8 @@
         </div>
     </nav>
 
+    <!--Filtros-->
+
     <section id="tienda" class="flex-grow-1 w-100 d-flex flex-column flex-lg-row bg">
         <div class="p-neutral d-flex flex-wrap pixel-w-lg-180">
             <div class="ms-auto d-lg-none">
@@ -62,6 +64,8 @@
             </form>
         </div>
 
+        <!--Tabla de productos-->
+
         <div class="p-neutral ps-lg-0 flex-grow-1 d-flex justify-content-center align-items-start">
             <div class="w-100 max-w-1200">
                 <div class="table-responsive rounded border shadow">
@@ -73,165 +77,11 @@
                                 <th scope="col">Informacion</th>
                                 <th scope="col">Stock</th>
                                 <th scope="col">Etiquetas</th>
-                                <th scope="col">Imagen</th>
+                                <th scope="col">Valor</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Medialuna</td>
-                                <td>Medialuna normal</td>
-                                <td class="text-center">5</td>
-                                <td>Panificados</td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">
-                                        Vista Previa
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-fullscreen">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Vista Previa Del Producto</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="col d-flex justify-content-center">
-                                                        <div class="card w-100" style="width: 18rem;">
-                                                            <img src="img\medialuna.png" class="card-img-top"
-                                                                alt="medialuna">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">Medialunas</h5>
-                                                                <p class="card-text">Medialunas saladas, sin glaceado
-                                                                </p>
-                                                                <a href="#" class="btn btn-primary">Comprar</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <i class="bi bi-pencil-square"></i>
-                                    <i class="bi bi-trash3-fill"></i>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Medialuna</td>
-                                <td>Medialuna normal</td>
-                                <td class="text-center">5</td>
-                                <td>Panificados</td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">
-                                        Vista Previa
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Vista Previa Del
-                                                        Producto</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="col d-flex justify-content-center">
-                                                        <div class="card w-100" style="width: 18rem;">
-                                                            <img src="img\medialuna.png" class="card-img-top"
-                                                                alt="medialuna">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">Medialunas</h5>
-                                                                <p class="card-text">Medialunas saladas, sin glaceado
-                                                                </p>
-                                                                <a href="#" class="btn btn-primary">Comprar</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <i class="bi bi-pencil-square"></i>
-                                    <i class="bi bi-trash3-fill"></i>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Medialuna</td>
-                                <td>Medialuna normal</td>
-                                <td class="text-center">5</td>
-                                <td>Panificados</td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" 
-                                        data-bs-target="#exampleModal">
-                                        Vista Previa
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Vista Previa Del
-                                                        Producto</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="col d-flex justify-content-center">
-                                                        <div class="card w-100" style="width: 18rem;">
-                                                            <img src="img\medialuna.png" class="card-img-top"
-                                                                alt="medialuna">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">Medialunas</h5>
-                                                                <p class="card-text">Medialunas saladas, sin glaceado
-                                                                </p>
-                                                                <a href="#" class="btn btn-primary">Comprar</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <i class="bi bi-pencil-square"></i>
-                                    <i class="bi bi-trash3-fill"></i>
-                                </td>
-                            </tr>
-
+                        <tbody id="cuerpoDeTabla">
                         </tbody>
                     </table>
                 </div>
@@ -258,7 +108,12 @@
                             <form id="formLogin ">
                                 <div class="mb-4">
                                     <label for="titulo" class="form-label">Titulo</label>
-                                    <input type="text" id="titulo" class="form-control" />
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
                                 </div>
 
                                 <div class="mb-4">
@@ -267,8 +122,19 @@
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="etiqueta" class="form-label">Etiquetas</label>
-                                    <input type="text" id="etiqueta" class="form-control" />
+                                    <label for="etiquetas" class="form-label ">Etiquetas del Producto</label>
+                                    <div class="input-group mb-4">
+                                        <select id="etiquetas" class="form-select">
+                                            <option value="" disabled selected>Elegir una etiqueta</option>
+                                            <option value="panificados">Panificados</option>
+                                            <option value="facturas">Facturas</option>
+                                            <option value="glaseados">Glaseadas</option>
+                                            <option value="confitado">Confitado</option>
+                                        </select>
+                                        <button class="btn btn-primary" type="button" id="btn-agregar-tag">
+                                            <i class="bi bi-plus-lg"></i> Agregar
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="mb-4">
@@ -277,8 +143,12 @@
                                 </div>
 
                                 <div class="mb-4">
+                                    <label for="info" class="form-label">Valor </label>
+                                    <input type="text" id="info" class="form-control" />
+                                </div>
+
+                                <div class="mb-4">
                                     <label for="formFile" class="form-label">Imagen</label>
-                                    <input class="form-control" type="file" id="formFile" accept="image/*">
                                 </div>
                             </form>
                         </div>
@@ -293,6 +163,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
             </script>
+        <script type="module" src="js/control-de-productos.js"></script>
 </body>
 
 </html>
