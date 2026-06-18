@@ -154,6 +154,6 @@ export class Producto {
     }
     
     #guardarLocalStorage() {
-        localStorage.setItem(this.#lugarAlmacenado, JSON.stringify(this.#referencia))
+        localStorage.setItem(this.#lugarAlmacenado, JSON.stringify(Array.from(this.#referencia.entries())))
     }
 }

@@ -11,7 +11,7 @@ import * as registros from "./registros.js"
 
 //#region Variables
 /** @type {Map<string, Carrito>}> */
-const carritos = JSON.parse(localStorage.getItem("carritos")) || new Map()
+const carritos = new Map(JSON.parse(localStorage.getItem("carritos"))) || new Map()
 //#endregion
 
 /**
@@ -21,7 +21,7 @@ const carritos = JSON.parse(localStorage.getItem("carritos")) || new Map()
  */
 export function setCarrito(nombreUsuario) {
     carritos.set(nombreUsuario, new Carrito("carritos", carritos))
-    localStorage.setItem("carritos", JSON.stringify(carritos))
+    localStorage.setItem("carritos", JSON.stringify(Array.from(carritos.entries())))
 }
 
 
@@ -45,7 +45,7 @@ export function getCarrito(nombreUsuario) {
  */
 export function removeCarrito(nombreUsuario) {
     carritos.delete(nombreUsuario)
-    localStorage.setItem("carritos", JSON.stringify(carritos))
+    localStorage.setItem("carritos", JSON.stringify(Array.from(carritos.entries())))
 }
 
 /**

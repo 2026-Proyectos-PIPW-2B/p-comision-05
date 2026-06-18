@@ -51,13 +51,13 @@ export class Carrito {
     }
 
     /**
-     * Crea el producto y lo añade al carrito asignado a el nombreUsuario dado, lo guarda y lo sube al localStorage.
+     * Crea el producto y lo añade a los productos del carrito, lo guarda y lo sube al localStorage.
      * 
      * @param {Producto} producto - El objeto producto que se quiere guardar en el carrito.
      * @param {Number} cantidad - La cantidad de un producto que se quiere comprar.
      */
     setProducto(producto, cantidad) {
-        this.#productos.set(producto.id, producto.generateProductoNewAlmacenamiento(this.#lugarAlmacenado, this.#referencia))
+        this.#productos.set(producto.id, producto.generateProductoNewAlmacenamiento(this.#lugarAlmacenado, this.#referencia, cantidad))
         this.#guardarLocalStorage()
     }
     
@@ -71,12 +71,17 @@ export class Carrito {
         return this.#productos.get(id)
     }
 
+    /**
+     * Remueve un Producto del mapa del carrito, que este asociado al id
+     * 
+     * @param {string} id - Id que se quiere pasar como clave para encontrar al Producto.
+     */
     removeProducto(id) {
         this.#productos.delete(id)
         this.#guardarLocalStorage()
     }
 
     #guardarLocalStorage() {
-        localStorage.setItem(this.#lugarAlmacenado, JSON.stringify(this.#referencia))
+        localStorage.setItem(this.#lugarAlmacenado, JSON.stringify(Array.from(this.#referencia.entries())))
     }
 }

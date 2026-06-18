@@ -9,7 +9,7 @@ import { Producto } from "../clases/Producto.js"
 
 //#region Variables
 /** @type {Map<string, Producto>}> */
-const stock = JSON.parse(localStorage.getItem("stock")) || new Map()
+const stock = new Map(JSON.parse(localStorage.getItem("stock"))) || new Map()
 //#endregion
 
 
@@ -26,7 +26,7 @@ export function setProducto(nombre, etiquetas, descripcion, cantidad, valor) {
     /** @type {Producto} */
     const producto = new Producto(nombre, etiquetas, descripcion, cantidad, valor, "stock", stock)
     stock.set(producto.id, producto)
-    localStorage.setItem("stock", JSON.stringify(stock))
+    localStorage.setItem("stock", JSON.stringify(Array.from(stock.entries())))
 }
 
 /**
@@ -54,5 +54,5 @@ export function getProducto(id) {
  */
 export function removeProducto(id) {
     stock.delete(id)
-    localStorage.setItem("stock", JSON.stringify(stock))
+    localStorage.setItem("stock", JSON.stringify(Array.from(stock.entries())))
 }
