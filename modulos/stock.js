@@ -22,7 +22,7 @@ const stock = JSON.parse(localStorage.getItem("stock")) || new Map()
  * @param {number} cantidad - Cantidad de productos disponibles en stock.
  * @param {number} valor - Valor del producto.
  */
-export function setProductoToStock(nombre, etiquetas, descripcion, cantidad, valor) {
+export function setProducto(nombre, etiquetas, descripcion, cantidad, valor) {
     /** @type {Producto} */
     const producto = new Producto(nombre, etiquetas, descripcion, cantidad, valor, "stock", stock)
     stock.set(producto.id, producto)
@@ -45,4 +45,14 @@ export function getStock() {
  */
 export function getProducto(id) {
     return stock.get(id)
+}
+
+/**
+ * Elimina un Producto del sotck.
+ * 
+ * @param {string} id - Id del producto que se quiere eliminar del stock.
+ */
+export function removeProducto(id) {
+    stock.delete(id)
+    localStorage.setItem("stock", JSON.stringify(stock))
 }

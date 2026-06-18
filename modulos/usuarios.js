@@ -42,3 +42,12 @@ export function getUsuario(nombreUsuario) {
     }
     return toReturn
 }
+
+/**
+ * 
+ * @param {string} nombreUsuario 
+ */
+export function removeUsuario(nombreUsuario) {
+    usuarios.delete(nombreUsuario)
+    localStorage.setItem("usuarios", JSON.stringify(usuarios))
+}
