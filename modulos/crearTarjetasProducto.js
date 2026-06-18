@@ -1,6 +1,5 @@
 import { Producto } from "../clases/Producto";
 
-
 {/* <div class="col d-flex justify-content-center">
     <div class="card w-100">
         <img src="img\medialuna.png" class="card-img-top" alt="medialuna">
@@ -40,7 +39,7 @@ import { Producto } from "../clases/Producto";
  * Crea una tarjeta de un Producto dado para mostrarla en la tienda.
  * 
  * @param {Producto} producto - El objeto Producto sobre el cual se quiere crear la tarjeta.
- * @returns {HTMLDivElement} Retorna un objeto para agregar al DOM como hijo.
+ * @returns {Array<HTMLElement>} Retorna.
  */
 export function createTarjetaTienda(producto) {
     // Primero
@@ -83,7 +82,7 @@ export function createTarjetaTienda(producto) {
     divTarjeta.append(img, divBody)
     divContenedor.append(divTarjeta)
 
-    return divContenedor
+    return {divContenedor, button}
 }
 
 /**
