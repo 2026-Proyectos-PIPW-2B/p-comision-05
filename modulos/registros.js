@@ -9,7 +9,7 @@ import { Producto } from "../clases/Producto"
 
 //#region Variables
 /** @type {Map<string, Array<Map<string, Producto>>>}> */
-const registros = JSON.parse(localStorage.getItem("registros")) || new Map()
+const registros = new Map(JSON.parse(localStorage.getItem("registros"))) || new Map()
 //#endregion
 
 /**
@@ -19,7 +19,7 @@ const registros = JSON.parse(localStorage.getItem("registros")) || new Map()
  */
 export function setRegistro(nombreUsuario) {
     registros.set(nombreUsuario, [])
-    localStorage.setItem("registros", JSON.stringify(registros))
+    localStorage.setItem("registros", JSON.stringify(Array.from(registros.entries())))
 }
 
 /**
@@ -40,5 +40,5 @@ export function getRegistro(nombreUsuario) {
  */
 export function addCarrito(nombreUsuario, carrito) {
     registros.get(nombreUsuario).push(carrito)
-    localStorage.setItem("registros", JSON.stringify(registros))
+    localStorage.setItem("registros", JSON.stringify(Array.from(registros.entries())))
 }

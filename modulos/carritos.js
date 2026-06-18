@@ -11,7 +11,7 @@ import * as registros from "./registros.js"
 
 //#region Variables
 /** @type {Map<string, Carrito>}> */
-const carritos = JSON.parse(localStorage.getItem("carritos")) || new Map()
+const carritos = new Map(JSON.parse(localStorage.getItem("carritos"))) || new Map()
 //#endregion
 
 /**
@@ -20,20 +20,10 @@ const carritos = JSON.parse(localStorage.getItem("carritos")) || new Map()
  * @param {string} nombreUsuario - El nombreUsuario que se quiere pasar como clave.
  */
 export function setCarrito(nombreUsuario) {
-    carritos.set(nombreUsuario, new Carrito())
-    localStorage.setItem("carritos", JSON.stringify(carritos))
+    carritos.set(nombreUsuario, new Carrito("carritos", carritos))
+    localStorage.setItem("carritos", JSON.stringify(Array.from(carritos.entries())))
 }
 
-/**
- * Crea el producto y lo añade al carrito asignado a el nombreUsuario dado, lo guarda y lo sube al localStorage.
- * 
- * @param {string} nombreUsuario - El nombreUsuario que se quiere pasar como clave.
- * @param {Producto} producto - El objeto productoAComprar que se quiere guardar en el carrito.
-*/
-export function setProductoToCarrito(nombreUsuario, producto) {
-    carritos.get(nombreUsuario).productos.set(producto.id, producto.generateProductoNewAlmacenamiento("carritos", carritos))
-    localStorage.setItem("carritos", JSON.stringify(carritos))
-}
 
 /**
  * Añade un nuevo carrito asignado a el nombreUsuario que se pasa como paramentro y lo guarda en el localStorage.
@@ -49,14 +39,23 @@ export function getCarrito(nombreUsuario) {
 }
 
 /**
- * Devuelve el productoAComprar, que coincide con el id, del carrito asignado al nombreUsuario dado.
+ * Borra el carrito asignado al usuario dado y guarda el localStorage.
  * 
- * @param {string} nombreUsuario - NombreUsuario que se quiere pasar como clave.
- * @param {string} id - El id del productoAComprar que se quiere buscar.
- * @returns {productoAComprar | null} Retorna el objeto productoAComprar asignado al id y si no existe devuelve null.
+ * @param {string} nombreUsuario - NombreUsuario que esta asignado al carrito.
  */
-export function getProductoFromCarrito(nombreUsuario, id) {
-    return carritos.get(nombreUsuario).productos.get(id)
+export function removeCarrito(nombreUsuario) {
+    carritos.delete(nombreUsuario)
+    localStorage.setItem("carritos", JSON.stringify(Array.from(carritos.entries())))
+}
+
+/**
+ * Borra todo el carrito y crea uno nuevo asignado al mismo usuario, para "limpiarlo", y guarda el localStorage.
+ * 
+ * @param {string} nombreUsuario - NombreUsuario que esta asignado al carrito.
+ */
+export function clearCarrito(nombreUsuario) {
+    carritos.delete(nombreUsuario)
+    setCarrito(nombreUsuario)
 }
 
 /**
@@ -72,7 +71,7 @@ export function addCarritoToRegistro(nombreUsuario) {
     const mes = String(fecha.getMonth() + 1).padStart(2, '0')
     const fechaFormateada = `${dia}/${mes}/${fecha.getFullYear()} ${fecha.getHours}:${fecha.getMinutes}`
     carritoAgregar.fecha = fechaFormateada
+    // Guardo y limpio el carrito
     registros.addCarrito(nombreUsuario, carritoAgregar)
-    carritos.get(nombreUsuario).delete()
-    setCarrito(nombreUsuario)
+    clearCarrito(nombreUsuario)
 }

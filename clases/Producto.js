@@ -139,14 +139,21 @@ export class Producto {
     }
 
     // Methods
-    generateProductoNewAlmacenamiento(lugarAlmacenado, referencia) {
+    /**
+     * Crea y devuelve un nuevo producto con las caracteristicas del que llama a la funcion y algunas que se pueden asignar.
+     * 
+     * @param {string} lugarAlmacenado - Nombre del lugar donde se almacena en el localStorage.
+     * @param {object} referencia - Referencia a la nueva estructura a la que se agrega. 
+     * @param {Number} cantidadAgregada - Cantidad que se va a comprar, por defecto agrega 1.
+     * @returns {Producto} Retorna un nuevo objeto creado a partir del que llamo a la funcion.
+     */
+    generateProductoNewAlmacenamiento(lugarAlmacenado, referencia, cantidadAgregada = 1) {
         /** @type {Producto} */
-        const nuevoProducto = new this.constructor(this.nombre, this.etiquetas, this.descripcion, this.cantidad, this.valor, lugarAlmacenado, referencia, this.#id)
+        const nuevoProducto = new this.constructor(this.nombre, this.etiquetas, this.descripcion, cantidadAgregada, this.valor, lugarAlmacenado, referencia, this.#id)
         return nuevoProducto
     }
     
     #guardarLocalStorage() {
-        console.log("hola2")
-        localStorage.setItem(this.#lugarAlmacenado, JSON.stringify(this.#referencia))
+        localStorage.setItem(this.#lugarAlmacenado, JSON.stringify(Array.from(this.#referencia.entries())))
     }
 }
