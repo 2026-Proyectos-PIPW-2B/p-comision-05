@@ -10,6 +10,7 @@ import { Producto } from "../clases/Producto.js"
 //#region Variables
 /** @type {Map<string, Producto>}> */
 const stock = JSON.parse(localStorage.getItem("stock")) || new Map()
+console.log(stock)
 //#endregion
 
 
