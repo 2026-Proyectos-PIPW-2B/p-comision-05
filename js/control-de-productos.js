@@ -112,9 +112,8 @@ function crearBotonEditar(id) {
 
   boton.addEventListener("click", function () {
     console.log("Estoy en el boton");
-    /*editProducto(id[], etiquetas[array[string]], stock[number], valor[number]): Edita un
-    obj producto, correspondiente al id dado, y cambia las propiedades etiquetas,
-    stock y valor. */
+    
+    
   });
   return boton; 
 }

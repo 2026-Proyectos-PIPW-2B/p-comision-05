@@ -57,3 +57,5 @@ export function removeProducto(id) {
     stock.delete(id)
     console.log(stock)
 }
+
+
