@@ -23,7 +23,7 @@ console.log(stock)
  * @param {number} cantidad - Cantidad de productos disponibles en stock.
  * @param {number} valor - Valor del producto.
  */
-export function setProductoToStock(nombre, etiquetas, descripcion, cantidad, valor) {
+export function setProducto(nombre, etiquetas, descripcion, cantidad, valor) {
     /** @type {Producto} */
     const producto = new Producto(nombre, etiquetas, descripcion, cantidad, valor, "stock", stock)
     stock.set(producto.id, producto)
@@ -49,11 +49,11 @@ export function getProducto(id) {
 }
 
 /**
- * Remueve el producto asociado, a la id dada en stock
+ * Elimina un Producto del sotck.
  * 
- * 
+ * @param {string} id - Id del producto que se quiere eliminar del stock.
  */
 export function removeProducto(id) {
     stock.delete(id)
-    console.log(stock)
+    localStorage.setItem("stock", JSON.stringify(stock))
 }
