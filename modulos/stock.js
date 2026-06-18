@@ -10,6 +10,7 @@ import { Producto } from "../clases/Producto.js"
 //#region Variables
 /** @type {Map<string, Producto>}> */
 const stock = JSON.parse(localStorage.getItem("stock")) || new Map()
+console.log(stock)
 //#endregion
 
 
@@ -45,4 +46,14 @@ export function getStock() {
  */
 export function getProducto(id) {
     return stock.get(id)
+}
+
+/**
+ * Remueve el producto asociado, a la id dada en stock
+ * 
+ * 
+ */
+export function removeProducto(id) {
+    stock.delete(id)
+    console.log(stock)
 }

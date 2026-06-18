@@ -1,4 +1,4 @@
-import * as moduloProductos from "../modulesJs/productos.js";
+import * as moduloProductos from "../modulos/stock.js";
 
 //para probar la tabla
 //Simulacion de local storage
@@ -32,8 +32,14 @@ if (!localStorage.getItem("stock")) {
 
 const tbody = document.getElementById("cuerpoDeTabla");
 
+//
+console.log("fuera del for")
+const misProductos = moduloProductos.getStock();
+  console.log(misProductos)
+
 function mostrarProductos() {
   const misProductos = moduloProductos.getStock();
+  console.log(misProductos)
   tbody.innerHTML = "";
   let contador = 1;
 
@@ -91,7 +97,9 @@ function crearBotonEliminar(id) {
   boton.appendChild(botonEliminar);
 
   boton.addEventListener("click", function () {
-    removeProducto(id);
+    console.log("Borre un producto")
+    moduloProductos.removeProducto(id);
+    mostrarProductos()
   });
   return boton;
 }
