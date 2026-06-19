@@ -1,4 +1,4 @@
-import { Producto } from "./Producto";
+import { Producto } from "./Producto.js";
 
 /**
  * Conjunto de mapa de productos y fecha para guardado del mismo.
@@ -19,10 +19,8 @@ export class Carrito {
     /**
      * Crea un Carrito con un mapa vacio asignado a productos y sin fecha.
      */
-    constructor(lugarAlmacenado, referencia) {
+    constructor() {
         this.#productos = new Map()
-        this.#lugarAlmacenado = lugarAlmacenado
-        this.#referencia = referencia
         this.fecha = null
     }
 
