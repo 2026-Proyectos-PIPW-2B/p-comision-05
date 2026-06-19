@@ -1,5 +1,6 @@
 import { Carrito } from "../clases/Carrito.js"
 import { Producto } from "../clases/Producto.js"
+import * as loader from "./loader.js"
 import * as registros from "./registros.js"
 
 //#region Documentacion
@@ -11,7 +12,7 @@ import * as registros from "./registros.js"
 
 //#region Variables
 /** @type {Map<string, Carrito>}> */
-const carritos = new Map(JSON.parse(localStorage.getItem("carritos"))) || new Map()
+const carritos = loader.loadCarritos()
 //#endregion
 
 /**
@@ -20,8 +21,8 @@ const carritos = new Map(JSON.parse(localStorage.getItem("carritos"))) || new Ma
  * @param {string} nombreUsuario - El nombreUsuario que se quiere pasar como clave.
  */
 export function setCarrito(nombreUsuario) {
-    carritos.set(nombreUsuario, new Carrito("carritos", carritos))
-    localStorage.setItem("carritos", JSON.stringify(Array.from(carritos.entries())))
+    carritos.set(nombreUsuario, new Carrito())
+    saveCarritos()
 }
 
 export function getCarritos() {
@@ -48,7 +49,7 @@ export function getCarrito(nombreUsuario) {
  */
 export function removeCarrito(nombreUsuario) {
     carritos.delete(nombreUsuario)
-    localStorage.setItem("carritos", JSON.stringify(Array.from(carritos.entries())))
+    saveCarritos()
 }
 
 /**
@@ -77,4 +78,13 @@ export function addCarritoToRegistro(nombreUsuario) {
     // Guardo y limpio el carrito
     registros.addCarrito(nombreUsuario, carritoAgregar)
     clearCarrito(nombreUsuario)
+}
+
+export function saveCarritos() {
+    localStorage.setItem("carritosKeys", JSON.stringify(Array.from(carritos.keys())))
+    let values = ""
+    for (const carrito of carritos.values()) {
+        values += `${carrito.save()}|`
+    }
+    localStorage.setItem("carritosValues", values)
 }
