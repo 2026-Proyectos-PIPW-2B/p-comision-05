@@ -6,8 +6,6 @@ import { Producto } from "./Producto.js";
 export class Carrito {
     #productos
     #valorTotal
-    #lugarAlmacenado
-    #referencia
     /**
      * Fecha para guarda al confirmar el carrito.
      * 
@@ -19,9 +17,9 @@ export class Carrito {
     /**
      * Crea un Carrito con un mapa vacio asignado a productos y sin fecha.
      */
-    constructor() {
-        this.#productos = new Map()
-        this.fecha = null
+    constructor(productos = new Map(), fecha = "no definida") {
+        this.#productos = productos
+        this.fecha = fecha
     }
 
     // Getters
@@ -55,8 +53,7 @@ export class Carrito {
      * @param {Number} cantidad - La cantidad de un producto que se quiere comprar.
      */
     setProducto(producto, cantidad) {
-        this.#productos.set(producto.id, producto.generateProductoNewAlmacenamiento(this.#lugarAlmacenado, this.#referencia, cantidad))
-        this.#guardarLocalStorage()
+        this.#productos.set(producto.id, producto.cloneProducto(cantidad))
     }
     
     /**
@@ -76,10 +73,21 @@ export class Carrito {
      */
     removeProducto(id) {
         this.#productos.delete(id)
-        this.#guardarLocalStorage()
     }
 
-    #guardarLocalStorage() {
-        localStorage.setItem(this.#lugarAlmacenado, JSON.stringify(Array.from(this.#referencia.entries())))
+    /**
+     * Convierte el carrito en un string para reconstruir posteriormente.
+     * 
+     * @returns {string}
+     */
+    save() {
+        let toReturn = `${this.fecha}¿`
+        toReturn += `${JSON.stringify(Array.from(this.#productos.keys()))}¿`
+        let values = ""
+        for (const producto of this.#productos.values()) {
+            values += `${producto.save()}°`
+        }
+        toReturn += `${values}`
+        return toReturn
     }
 }
