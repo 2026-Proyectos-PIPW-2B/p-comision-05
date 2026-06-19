@@ -38,7 +38,6 @@ export class Usuario {
             console.error(error.message); 
         }
         this.#tipo = nuevoValor
-        this.#guardarLocalStorage()
     }
 
     // Getters
@@ -104,15 +103,10 @@ export class Usuario {
      */
     toggleHabilitado() {
         this.habilitado = !this.habilitado
-        // this.#guardarLocalStorage()
         return this.habilitado
     }
 
     save() {
-        return `${this.#nombreUsuario},${this.#nombre},${this.#apellido},${this.#contraseña},${this.#tipo},${this.#habilitado}`
-    }
-
-    #guardarLocalStorage() {
-        
+        return `${this.#nombreUsuario}!${this.#nombre}!${this.#apellido}!${this.#contraseña}!${this.#tipo}!${this.#habilitado}`
     }
 }

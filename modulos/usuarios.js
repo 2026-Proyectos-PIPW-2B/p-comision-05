@@ -1,4 +1,5 @@
 import { Usuario } from "../clases/Usuario"
+import * as loader from "./loader.js"
 
 //#region Documentacion
 /**
@@ -9,7 +10,7 @@ import { Usuario } from "../clases/Usuario"
 
 //#region Variables
 /** @type {Map<string, Usuario>}> */
-const usuarios = new Map(JSON.parse(localStorage.getItem("usuarios"))) || new Map()
+const usuarios = loader.loadUsuarios()
 //#endregion
 
 /**
@@ -25,7 +26,7 @@ export function setUsuario(nombreUsuario, nombre, apellido, contraseña, tipo) {
     /** @type {Usuario}> */
     const usuario = new Usuario(nombreUsuario, nombre, apellido, contraseña, tipo)
     usuarios.set(nombreUsuario, usuario)
-    localStorage.setItem("usuarios", JSON.stringify(Array.from(usuarios.entries())))
+    saveUsuarios()
 }
 
 /**
@@ -48,5 +49,14 @@ export function getUsuario(nombreUsuario) {
  */
 export function removeUsuario(nombreUsuario) {
     usuarios.delete(nombreUsuario)
-    localStorage.setItem("usuarios", JSON.stringify(Array.from(usuarios.entries())))
+    saveUsuarios()
+}
+
+export function saveUsuarios() {
+    localStorage.setItem("usuariosKeys", JSON.stringify(Array.from(usuarios.keys())))
+    let values = ""
+    for (const usuario of usuarios.values()) {
+        values += `${usuario.save()}|`
+    }
+    localStorage.setItem("usuariosValues", values)
 }
