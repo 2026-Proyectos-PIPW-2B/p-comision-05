@@ -17,14 +17,15 @@ export class Usuario {
      * @param {string} apellido - Apellido del usuario publico.
      * @param {string} contraseña - Contraseña del usuario.
      * @param {string} tipo - Tipo de usuario(admin/user), arroja un error si se intenta asignar algo que no sea "user" o "admin".
+     * @param {boolean} habilitado - Si el usuario esta habilitado, por defecto es true
      */
-    constructor(nombreUsuario, nombre, apellido, contraseña, tipo, lugarAlmacenado, referencia) {
+    constructor(nombreUsuario, nombre, apellido, contraseña, tipo, habilitado = true) {
         this.#nombreUsuario = nombreUsuario
         this.#nombre = nombre
         this.#apellido = apellido
         this.#contraseña = contraseña
         this.#tipo = tipo
-        this.#habilitado = true
+        this.#habilitado = habilitado
     }
 
     // Setters
@@ -103,11 +104,15 @@ export class Usuario {
      */
     toggleHabilitado() {
         this.habilitado = !this.habilitado
-        this.#guardarLocalStorage()
+        // this.#guardarLocalStorage()
         return this.habilitado
     }
 
+    save() {
+        return `${this.#nombreUsuario},${this.#nombre},${this.#apellido},${this.#contraseña},${this.#tipo},${this.#habilitado}`
+    }
+
     #guardarLocalStorage() {
-        localStorage.setItem(this.#lugarAlmacenado, JSON.stringify(Array.from(this.#referencia.entries())))
+        
     }
 }

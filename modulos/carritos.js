@@ -24,6 +24,9 @@ export function setCarrito(nombreUsuario) {
     localStorage.setItem("carritos", JSON.stringify(Array.from(carritos.entries())))
 }
 
+export function getCarritos() {
+    return carritos
+}
 
 /**
  * Añade un nuevo carrito asignado a el nombreUsuario que se pasa como paramentro y lo guarda en el localStorage.
