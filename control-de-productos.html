@@ -53,14 +53,19 @@
                     <label for="btnFiltros" class="btn btn-outline-primary">Filtros !</label>
                 </div>
             </div>
-            <form id="filtros" class="collapse d-lg-block w-100">
-                <label for="filtroCategoria" class="form-label">Categorias</label>
-                <select id="filtroCategoria" class="form-select">
-                    <option value="">Seleccione categoria</option>
-                    <option value="categoria1">Categoria 1</option>
-                </select>
-                <label for="filtroNombre" class="form-label mt-2">Titulo</label>
-                <input type="text" class="form-control" placeholder="Ingrese un Titulo">
+            <form id="filtros" class="collapse d-lg-block w-100">        
+                <label for="filtroTitulo" class="form-label mt-2">Titulo</label>
+                <input type="text" id="filtroTitulo" class="form-control" placeholder="Ingrese un Titulo">
+            
+                <label for="filtroDescripcion" class="form-label mt-2">Descripción</label>
+                <input type="text" id="filtroDescripcion" class="form-control" placeholder="Ingrese una Descripción">
+            
+                <label for="filtroStock" class="form-label mt-2">Stock</label>
+                <input type="number" id="filtroStock" class="form-control" placeholder="Ingrese Una Cantidad">
+
+                <label for="filtroEtiqueta" class="form-label mt-2">Etiquetas</label>
+                <input type="text" id="filtroEtiqueta" class="form-control" placeholder="Ingrese una etiqueta">
+                <button type="button" id="botonAplicarFiltros" class="btn btn-primary mt-2">Aplicar Filtros</button>
             </form>
         </div>
 
@@ -159,6 +164,46 @@
                 </div>
             </div>
         </div>
+    </div>
+
+        <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalEditarLabel">Modificar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card shadow">
+                        <div class="card-body p-4">
+                            <h1 class="card-title text-center mb-4">Editar Producto</h1>
+                            <form id="formEditar">
+                                <div class="mb-4">
+                                    <label for="editar-titulo" class="form-label">Titulo</label>
+                                    <input type="text" id="editar-titulo" class="form-control" />
+                                </div>
+                                <div class="mb-4">
+                                    <label for="editar-info" class="form-label">Información</label>
+                                    <input type="text" id="editar-info" class="form-control" />
+                                </div>
+                                <div class="mb-4">
+                                    <label for="editar-stock" class="form-label">Stock</label>
+                                    <input type="number" id="editar-stock" class="form-control" />
+                                </div>
+                                <div class="mb-4">
+                                    <label for="editar-valor" class="form-label">Valor</label>
+                                    <input type="number" id="editar-valor" class="form-control" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="botonGuardarCambios" type="button" class="btn btn-success">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
