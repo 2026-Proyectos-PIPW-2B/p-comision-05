@@ -1,4 +1,7 @@
-import { Producto } from "../clases/Producto";
+import { saveCarritos } from "./carritos.js"
+import * as sesionActual from "./sesionActual.js"
+import * as stock from "./stock.js"
+import * as carritos from "./carritos.js"
 
 {/* <div class="col d-flex justify-content-center">
     <div class="card w-100">
@@ -35,26 +38,30 @@ import { Producto } from "../clases/Producto";
     </div>
 </div> */}
 
+function handlerAñadirACarrito() {
+    carritos.getCarrito(sesionActual.get().nombreUsuario).setProducto(stock.getProducto(this.dataset.id))
+    saveCarritos()
+}
 /**
  * Crea una tarjeta de un Producto dado para mostrarla en la tienda.
  * 
  * @param {Producto} producto - El objeto Producto sobre el cual se quiere crear la tarjeta.
- * @returns {Array<HTMLElement>} Retorna.
+ * @param {*} divAgregar
  */
-export function createTarjetaTienda(producto) {
+export function createTarjetaTienda(producto, divAgregar) {
     // Primero
     const divContenedor = document.createElement("div")
-    divContenedor.classList.add("col d-flex justify-content-center")
+    divContenedor.classList.add("col", "d-flex", "justify-content-center")
     // Segundo
     const divTarjeta = document.createElement("div")
-    divTarjeta.classList.add("card w-100")
+    divTarjeta.classList.add("card", "w-100")
     // Tercero
     const img = document.createElement("img")
     img.src = producto.imagen
     img.alt = producto.nombre
-    img.classList.add(card-img-top)
+    img.classList.add("card-img-top")
     const divBody = document.createElement("div")
-    divBody.classList.add("card-body d-flex flex-column")
+    divBody.classList.add("card-body", "d-flex", "flex-column")
     // Cuarto
     const h5 = document.createElement("h5")
     h5.textContent = producto.nombre
@@ -63,17 +70,18 @@ export function createTarjetaTienda(producto) {
     p.textContent = producto.descripcion
     p.classList.add("card-text")
     const divPrecio = document.createElement("div")
-    divPrecio.classList.add("d-flex justify-content-between align-items-center")
+    divPrecio.classList.add("d-flex", "justify-content-between", "align-items-center")
     // Quinto
     const span = document.createElement("span")
     span.textContent = `$${producto.valor} C/U`
     span.classList.add("fs-5")
     const button = document.createElement("button")
     button.dataset.id = producto.id
-    button.classList.add("btn btn-primary align-self-end")
+    button.classList.add("btn", "btn-primary", "align-self-end")
+    button.addEventListener("click", handlerAñadirACarrito)
     // Sexto
     const i = document.createElement("i")
-    i.classList.add("bi bi-cart-plus")
+    i.classList.add("bi", "bi-cart-plus")
 
     // Anidamiento
     button.append(i)
@@ -81,8 +89,7 @@ export function createTarjetaTienda(producto) {
     divBody.append(h5, p, divPrecio)
     divTarjeta.append(img, divBody)
     divContenedor.append(divTarjeta)
-
-    return {divContenedor, button}
+    divAgregar.append(divContenedor)
 }
 
 /**
@@ -94,7 +101,7 @@ export function createTarjetaTienda(producto) {
 export function createTarjetaCarrito(producto) {
     // Primero
     const divContenedor = document.createElement("div")
-    divContenedor.classList.add("d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral")
+    divContenedor.classList.add("d-flex", "flex-wrap", "rounded rounded-2", "border", "p-neutral", "mb-neutral")
 
 
     return divContenedor
