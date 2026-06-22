@@ -107,6 +107,6 @@ export class Usuario {
     }
 
     save() {
-        return `${this.#nombreUsuario}!${this.#nombre}!${this.#apellido}!${this.#contraseña}!${this.#tipo}!${this.#habilitado}`
+        return `${this.#nombreUsuario}¡${this.#nombre}¡${this.#apellido}¡${this.#contraseña}¡${this.#tipo}¡${this.#habilitado}`
     }
 }

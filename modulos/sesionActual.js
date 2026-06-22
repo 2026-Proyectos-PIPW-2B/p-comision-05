@@ -1,8 +1,11 @@
-import { Sesion } from "../clases/Sesion.js"
-import { Usuario } from "../clases/Usuario.js"
-import * as usuarios from "./usuarios.js"
-import * as carritos from "./carritos.js"
-import * as registros from "./registros.js"
+//#region Tipos
+/**
+ * @typedef {Object} Sesion
+ * @property {string} nombreUsuario - Nombre de usuario que se usa como clave
+ * @property {string} nombre - Nombre publico para ver en el login.
+ * @property {string} apellido - Apellido del usuario publico.
+ */
+//#endregion
 
 //#region Documentacion
 /**
@@ -11,24 +14,22 @@ import * as registros from "./registros.js"
  */
 //#endregion
 
-//#region Variables
-/** @type {Sesion}> */
-let sesionActual = JSON.parse(localStorage.getItem("sesionActual")) || null
-//#endregion
+/** @type {Sesion | null} */
+let sesionActual = JSON.parse(localStorage.getItem("sesionActual")) | null
 
 /**
  * Crea un nuevo usuarioActual apartir del usuario obtenido del localStorage correspondiente a la clave dada, lo asigna a usuarioActual y lo sube al localStorage.
  * 
  * @param {string} nombreUsuario - NombreUsuario que se quiere pasar como clave.
- */
-export function setSesionActual(nombreUsuario) {
-    /** @type {Usuario} */
-    const user = usuarios.getUsuario(nombreUsuario)
-    if (user.tipo === "user") {
-        sesionActual = new Sesion(user.nombreUsuario, user.nombre, user.apellido, carritos.getCarrito(user.nombreUsuario), registros.getRegistro(user.nombreUsuario))
-    }
-    else {
-        sesionActual = new Sesion(user.nombreUsuario, user.nombre, user.apellido)
+ * @param {string} nombre - Nombre del usuario para vista publica.
+ * @param {string} apellido - Apellido del usuario que se quiere mostrar publicamente.
+*/
+export function set(nombreUsuario, nombre, apellido) {
+    /** @type {Sesion} */
+    sesionActual = {
+        nombreUsuario: nombreUsuario,
+        nombre: nombre,
+        apellido: apellido,
     }
     localStorage.setItem("sesionActual", JSON.stringify(sesionActual))
 }
@@ -36,8 +37,8 @@ export function setSesionActual(nombreUsuario) {
 /**
  * Devuelve el objeto usuarioActual guardado en el localStorage.
  * 
- * @returns {usuarioActual | null} Retorna el objeto usuarioActual y si no existe retorna null.
- */
-export function getSesionActual() {
+ * @returns {Sesion | null} Retorna el objeto usuarioActual y si no existe retorna null.
+*/
+export function get() {
     return sesionActual
 }
