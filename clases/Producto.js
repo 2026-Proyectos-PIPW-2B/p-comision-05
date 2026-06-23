@@ -59,7 +59,7 @@ export class Producto {
         this.descripcion = descripcion
         this.cantidad = cantidad
         this.valor = valor
-        this.#imagen = "imagenes[nombre]"
+        this.#imagen = `img\\${nombre}.png`
         this.#id = id
     }
 

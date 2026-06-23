@@ -1,5 +1,7 @@
-import { Usuario } from "../clases/Usuario"
+import { Usuario } from "../clases/Usuario.js"
 import * as loader from "./loader.js"
+import * as carritos from "../modulos/carritos.js"
+import * as registros from "../modulos/registros.js"
 
 //#region Documentacion
 /**
@@ -26,6 +28,10 @@ export function setUsuario(nombreUsuario, nombre, apellido, contraseña, tipo) {
     /** @type {Usuario}> */
     const usuario = new Usuario(nombreUsuario, nombre, apellido, contraseña, tipo)
     usuarios.set(nombreUsuario, usuario)
+    if (tipo === "user") {
+        carritos.setCarrito(nombreUsuario)
+        registros.setRegistro(nombreUsuario)
+    }
     saveUsuarios()
 }
 
