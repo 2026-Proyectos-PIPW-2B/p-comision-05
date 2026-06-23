@@ -28,7 +28,8 @@
             <div class="collapse navbar-collapse flex-grow-0 w-30" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ms-auto">
-                        <a class="nav-link text-nowrap" aria-current="page" href="control-de-productos.html">Alta Productos</a>
+                        <a class="nav-link text-nowrap" aria-current="page" href="control-de-productos.html">Alta
+                            Productos</a>
                     </li>
                     <li class="nav-item ms-auto">
                         <a class="nav-link " href="control-registros.html">Registros</a>
@@ -42,7 +43,7 @@
     </nav>
     <section id="tienda" class="flex-grow-1 w-100 d-flex flex-column flex-lg-row">
         <div class="p-neutral d-flex flex-wrap pixel-w-lg-180 border-end">
-            <div class="ms-auto d-lg-none">
+            <!--<div class="ms-auto d-lg-none">
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                     <input type="checkbox" id="btnFiltros" class="btn-check" data-bs-toggle="collapse"
                         data-bs-target="#filtros" aria-expanded="false" aria-controls="filtros">
@@ -56,7 +57,7 @@
                     <option value="categoria1">Decendente </option>
                     <option value="categoria1">Por Apellido</option>
                 </select>
-            </form>
+            </form> -->
         </div>
         <div class="p-neutral ps-lg-0 flex-grow-1 d-flex justify-content-center align-items-start">
             <div class="w-100 max-w-1200">
@@ -64,7 +65,6 @@
                     <table class="table m-0 table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellido</th>
                                 <th scope="col">Usuario</th>
@@ -75,31 +75,12 @@
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Tim</td>
-                                <td>Payne</td>
-                                <td>tim-payne</td>
-                                <td>messi123</td>
-                                <td><button type="button" class="btn btn-sm btn-warning" disabled>Habilitado</button>
-                                </td>
-                                <td class="">
-                                    <button type="button" class="btn btn-sm btn-success" disabled>Usuario</button>
-                                </td>
-                                <td>
-                                    <i class="bi bi-justify"></i>
-                                </td>
+                        <tbody id="tabla-usuarios-body">
 
-                                <td>
-                                    <i class="bi bi-pencil-square"></i>
-                                    <i class="bi bi-trash3-fill"></i>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
-                    </div>
                 </div>
+            </div>
         </div>
     </section>
 
@@ -118,58 +99,54 @@
                     <div class="card shadow">
                         <div class="card-body p-4">
                             <h1 class="card-title text-center mb-4">Registro De Usuarios</h1>
-                            <form id="formLogin">
+                            <form id="formRegistro_usuario">
                                 <div class="mb-4">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" id="nombre" class="form-control" />
+                                    <input type="text" id="registro_nombre" class="form-control" />
                                 </div>
                                 <div class="mb-4">
                                     <label for="apellido" class="form-label">Apellido</label>
-                                    <input type="text" id="apellido" class="form-control" />
+                                    <input type="text" id="registro_apellido" class="form-control" />
                                 </div>
 
                                 <div class="mb-4">
                                     <label for="nombre-usuario" class="form-label">Nombre De Usuario</label>
-                                    <input type="text" id="nombre-usuario" class="form-control" />
+                                    <input type="text" id="registro_nombre_usuario" class="form-control" />
                                 </div>
 
                                 <div class="mb-4">
                                     <label for="contraseña" class="form-label">Contraseña</label>
-                                    <input type="password" id="contraseña" class="form-control" />
+                                    <input type="password" id="registro_contraseña" class="form-control" />
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="form-check" class="form-label">Rol De Usuario</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="radioDefault"
-                                            id="rol-usuario-usuario">
-                                        <label class="form-check-label" for="rol-usuario-usuario">
-                                            Usuario
-                                        </label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="rolUsuario"
+                                                id="rol_usuario" value="user" checked />
+                                            <label class="form-check-label" for="rol_usuario">Usuario</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="rolUsuario"
+                                                id="rol_usuario_admin" value="admin" />
+                                            <label class="form-check-label" for="rol_usuario_admin">Admin</label>
+                                        </div>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="radioDefault"
-                                            id="rol-usuario-admin" checked>
-                                        <label class="form-check-label" for="rol-usuario-admin">
-                                            Admin
-                                        </label>
-                                    </div>
-                                </div>
 
-                                <div class="mb-4">
-                                    <label for="form-check" class="form-label">Estado</label>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="switchCheckDefault">
-                                        <label class="form-check-label" for="switchCheckDefault">Activar Usuario</label>
+                                    <div class="mb-4">
+                                        <label for="form-check" class="form-label">Estado</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch"
+                                                id="switch_estado">
+                                            <label class="form-check-label" for="switch_estado">Activar Usuario</label>
+                                        </div>
                                     </div>
-                                </div>
 
                             </form>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Crear Usuario</button>
+                        <button id="crearUsuario" type="button" class="btn btn-primary">Crear Usuario</button>
                     </div>
                 </div>
             </div>
@@ -181,6 +158,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script type="module" src="js/alta-usuarios.js"></script>
 </body>
 
 </html>
