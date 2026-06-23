@@ -65,7 +65,11 @@
 
                 <label for="filtroEtiqueta" class="form-label mt-2">Etiquetas</label>
                 <input type="text" id="filtroEtiqueta" class="form-control" placeholder="Ingrese una etiqueta">
-                <button type="button" id="botonAplicarFiltros" class="btn btn-primary mt-2">Aplicar Filtros</button>
+                <button type="button" id="botonAplicarFiltros" class="btn btn-primary mt-2 ">Aplicar Filtros</button>
+                <button type="button" id="botonResetearFiltros" class="btn btn-primary mt-2 w-30">
+                    <i class="bi bi-arrow-clockwise"></i>
+                </button>
+                
             </form>
         </div>
 
@@ -110,46 +114,35 @@
                     <div class="card shadow">
                         <div class="card-body p-4">
                             <h1 class="card-title text-center mb-4">Registro De Producto</h1>
-                            <form id="formLogin ">
+                            <form id="formRegistroProductos">
                                 <div class="mb-4">
-                                    <label for="titulo" class="form-label">Titulo</label>
-                                    <select id="titulo"class="form-select" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                    <label for="registroTitulo" class="form-label">Titulo</label>
+                                    <input type="text" id="registroTitulo" class="form-control" />
+                                    <div class="invalid-feedback" id="mensajeRegistroTitulo"></div>
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="info" class="form-label">Informacion Del Producto</label>
-                                    <input type="text" id="info" class="form-control" />
+                                    <label for="registroInfo" class="form-label">Informacion Del Producto</label>
+                                    <input type="text" id="registroInfo" class="form-control" />
+                                    <div class="invalid-feedback" id="mensajeRegistroInfo"></div>
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="etiquetas" class="form-label ">Etiquetas del Producto</label>
-                                    <div class="input-group mb-4">
-                                        <select id="etiquetas" class="form-select">
-                                            <option value="" disabled selected>Elegir una etiqueta</option>
-                                            <option value="panificados">Panificados</option>
-                                            <option value="facturas">Facturas</option>
-                                            <option value="glaseados">Glaseadas</option>
-                                            <option value="confitado">Confitado</option>
-                                        </select>
-                                        <button class="btn btn-primary" type="button" id="btn-agregar-etiqueta">
-                                            <i class="bi bi-plus-lg"></i> Agregar
-                                        </button>
-                                    </div>
+                                    <label for="registroStock" class="form-label">Stock</label>
+                                    <input type="number" id="registroStock" class="form-control" />
+                                    <div class="invalid-feedback" id="mensajeRegistroStock"></div>
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="stock" class="form-label">Stock</label>
-                                    <input type="number" id="stock" class="form-control" />
+                                    <label for="registroEtiquetas" class="form-label ">Etiquetas del Producto</label>
+                                    <input type="text" id="registroEtiquetas" class="form-control"/>
+                                    <div class="invalid-feedback" id="mensajeRegistroEtiquetas"></div>
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="info" class="form-label">Valor </label>
-                                    <input type="text" id="info" class="form-control" />
+                                    <label for="registroValor" class="form-label">Valor </label>
+                                    <input type="number" id="registroValor" class="form-control" />
+                                    <div class="invalid-feedback " id="mensajeRegistroValor"></div>
                                 </div>
 
                                 <div class="mb-4">
@@ -159,7 +152,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="botonGuardar" type="button" class="btn btn-primary">Guardar Producto</button>
+                        <button id="botonRegistroGuardar" type="button" class="btn btn-primary">Guardar Producto</button>
                     </div>
                 </div>
             </div>
@@ -190,6 +183,10 @@
                                     <label for="editar-stock" class="form-label">Stock</label>
                                     <input type="number" id="editar-stock" class="form-control" />
                                 </div>
+                                <div class="mb-4 etiquetasEditar" id="editar-etiquetas">
+                                    <label class="form-label d-flex">Etiquetas</label>
+                                    
+                                </div>
                                 <div class="mb-4">
                                     <label for="editar-valor" class="form-label">Valor</label>
                                     <input type="number" id="editar-valor" class="form-control" />
@@ -209,6 +206,7 @@
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
             </script>
         <script type="module" src="js/control-de-productos.js"></script>
+        <script type="module" src="js/alta-productos.js"></script>
 </body>
 
 </html>
