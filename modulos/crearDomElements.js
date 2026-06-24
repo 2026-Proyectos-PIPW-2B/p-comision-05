@@ -487,6 +487,17 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
   return tr;
 }
 
+function coloresRandom() {
+  const colores = [
+    "text-bg-primary",
+    "text-bg-success",
+    "text-bg-danger",
+    "text-bg-warning",
+    "text-bg-info",
+    "text-bg-dark",
+  ];
+  return colores[Math.floor(Math.random() * colores.length)];
+}
 
 export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar) {
     const tr = document.createElement('tr');
