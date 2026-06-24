@@ -191,14 +191,95 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
 }
 
 
-function coloresRandom() {
-  const colores = [
-    "text-bg-primary",
-    "text-bg-success",
-    "text-bg-danger",
-    "text-bg-warning",
-    "text-bg-info",
-    "text-bg-dark",
-  ];
-  return colores[Math.floor(Math.random() * colores.length)];
+export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar) {
+    const tr = document.createElement('tr');
+    tr.dataset.id = usuario.nombreUsuario; 
+
+    if (!usuario.habilitado) {
+        tr.classList.add('opacity-50'); 
+    }
+    
+    let celdaNombre = document.createElement("td")
+    celdaNombre.textContent = usuario.nombre
+
+    let celdaApellido = document.createElement("td")
+    celdaApellido.textContent = usuario.apellido
+
+    let celdaUsuario = document.createElement("td")
+    celdaUsuario.textContent = usuario.nombreUsuario
+
+    let celdaContraseña = document.createElement("td")
+    celdaContraseña.textContent = usuario.contraseña
+    
+    //badge es el efecto de pastilla de bootstrap - es como un boton desactivado
+    const tdEstado = document.createElement('td');
+    const badgeEstado = document.createElement('span');
+    badgeEstado.classList.add('badge');
+    
+    if (usuario.habilitado) {
+        badgeEstado.textContent = 'Habilitado';
+        badgeEstado.classList.add('bg-success');
+    } else {
+        badgeEstado.textContent = 'Deshabilitado';
+        badgeEstado.classList.add('bg-secondary');
+    }
+    tdEstado.appendChild(badgeEstado);
+
+    const tdRol = document.createElement('td');
+    const badgeRol = document.createElement('span');
+    badgeRol.classList.add('badge', 'bg-info', 'text-dark');
+    badgeRol.textContent = usuario.tipo;
+    tdRol.appendChild(badgeRol);
+
+    const tdHistorial = document.createElement('td');
+    const iconoHistorial = document.createElement('i');
+    iconoHistorial.classList.add('bi', 'bi-justify');
+    iconoHistorial.title = "Usuario registrado";
+    iconoHistorial.style.cursor = "pointer"; 
+    iconoHistorial.setAttribute("data-bs-toggle", "modal"); 
+    iconoHistorial.setAttribute("data-bs-target", "#modalHistorial"); 
+    iconoHistorial.dataset.usuario = usuario.nombreUsuario; 
+    tdHistorial.appendChild(iconoHistorial);
+
+    const tdAcciones = document.createElement('td');
+    
+    const divContenedor = document.createElement('div');
+    divContenedor.classList.add('d-flex', 'align-items-center', 'gap-3');
+
+    const iconoBorrar = document.createElement('i');
+    iconoBorrar.classList.add('bi', 'bi-trash3-fill', 'text-danger');
+    iconoBorrar.style.cursor = 'pointer';
+    iconoBorrar.addEventListener('click', function() {
+        funcionEliminar(usuario.nombreUsuario); 
+    });
+
+    // Estructura de Switch de Bootstrap
+    const divSwitch = document.createElement('div');
+    divSwitch.classList.add('form-check', 'form-switch', 'm-0');
+
+    const inputSwitch = document.createElement('input');
+    inputSwitch.classList.add('form-check-input');
+    inputSwitch.type = 'checkbox';
+    inputSwitch.setAttribute('role', 'switch');
+    inputSwitch.checked = usuario.habilitado; 
+    
+    inputSwitch.addEventListener('change', () => {
+        funcionoCambiarEstado(usuario.nombreUsuario); 
+    });
+
+    divSwitch.appendChild(inputSwitch);
+    divContenedor.appendChild(iconoBorrar);
+    divContenedor.appendChild(divSwitch);
+    tdAcciones.appendChild(divContenedor);
+
+    tr.appendChild(celdaNombre);
+    tr.appendChild(celdaApellido);
+    tr.appendChild(celdaUsuario);
+    tr.appendChild(celdaContraseña);
+    tr.appendChild(tdEstado);
+    tr.appendChild(tdRol);
+    tr.appendChild(tdHistorial);
+    tr.appendChild(tdAcciones);
+
+    return tr;
 }
