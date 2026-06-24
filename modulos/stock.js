@@ -69,3 +69,20 @@ export function saveStock() {
     }
     localStorage.setItem("stockValues", values)
 }
+
+/**
+ * Crea un objeto producto con los datos dado, lo añade a stock y lo sube a localStorage.
+ * 
+ * @param {string} nombre - Nombre del producto.
+ * @param {array<string>} etiquetas - Lista de etiiquetas a asignar.
+ * @param {string} descripcion - Descripcion del producto.
+ * @param {number} cantidad - Cantidad de productos disponibles en stock.
+ * @param {number} valor - Valor del producto.
+ */
+export function editarProducto(id, nombre, descripcion, cantidad, valor) {
+    const producto = getProducto(id)
+    producto.nombre = nombre
+    producto.descripcion = descripcion
+    producto.cantidad = cantidad
+    producto.valor = valor
+}
