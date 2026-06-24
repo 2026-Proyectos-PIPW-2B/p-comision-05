@@ -14,8 +14,8 @@
  */
 //#endregion
 
-/** @type {Sesion | null} */
-let sesionActual = JSON.parse(localStorage.getItem("sesionActual")) | null
+/** @type {Sesion} */
+let sesionActual = JSON.parse(localStorage.getItem("sesionActual")) || null
 
 /**
  * Crea un nuevo usuarioActual apartir del usuario obtenido del localStorage correspondiente a la clave dada, lo asigna a usuarioActual y lo sube al localStorage.
@@ -28,7 +28,7 @@ export function set(nombreUsuario, nombre, apellido) {
     /** @type {Sesion} */
     sesionActual = {
         nombreUsuario: nombreUsuario,
-        nombre: nombre,
+        nombre: nombre, 
         apellido: apellido,
     }
     localStorage.setItem("sesionActual", JSON.stringify(sesionActual))

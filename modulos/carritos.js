@@ -33,13 +33,10 @@ export function getCarritos() {
  * Añade un nuevo carrito asignado a el nombreUsuario que se pasa como paramentro y lo guarda en el localStorage.
  * 
  * @param {string} nombreUsuario - El nombreUsuario que se quiere pasar como clave.
+ * @returns {Carrito | undefined}
  */
 export function getCarrito(nombreUsuario) {
-    const toReturn = carritos.get(nombreUsuario)
-    if (!toReturn) {
-        toReturn = null
-    }
-    return toReturn
+    return carritos.get(nombreUsuario)
 }
 
 /**
@@ -73,7 +70,7 @@ export function addCarritoToRegistro(nombreUsuario) {
     const fecha = new Date();
     const dia = String(fecha.getDate()).padStart(2, '0')
     const mes = String(fecha.getMonth() + 1).padStart(2, '0')
-    const fechaFormateada = `${dia}/${mes}/${fecha.getFullYear()} ${fecha.getHours}:${fecha.getMinutes}`
+    const fechaFormateada = `${dia}/${mes}/${String(fecha.getFullYear())}`
     carritoAgregar.fecha = fechaFormateada
     // Guardo y limpio el carrito
     registros.addCarrito(nombreUsuario, carritoAgregar)

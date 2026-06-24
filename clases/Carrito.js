@@ -4,6 +4,9 @@ import { Producto } from "./Producto.js";
  * Conjunto de mapa de productos y fecha para guardado del mismo.
  */
 export class Carrito {
+    /**
+     * @type {Map<string, Producto>}
+     */
     #productos
     #valorTotal
     /**
@@ -53,7 +56,12 @@ export class Carrito {
      * @param {Number} cantidad - La cantidad de un producto que se quiere comprar.
      */
     setProducto(producto, cantidad) {
-        this.#productos.set(producto.id, producto.cloneProducto(cantidad))
+        if (Array.from(this.#productos.keys()).includes(producto.id)) {
+            this.#productos.get(producto.id).cantidad += cantidad
+        }
+        else {
+            this.#productos.set(producto.id, producto.cloneProducto(cantidad))
+        }
     }
     
     /**

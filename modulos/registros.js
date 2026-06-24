@@ -1,4 +1,6 @@
+import { Carrito } from "../clases/Carrito.js"
 import { Producto } from "../clases/Producto.js"
+import * as loader from "./loader.js"
 
 //#region Documentacion
 /**
@@ -8,8 +10,8 @@ import { Producto } from "../clases/Producto.js"
 //#endregion
 
 //#region Variables
-/** @type {Map<string, Array<Map<string, Producto>>>}> */
-const registros = new Map(JSON.parse(localStorage.getItem("registros"))) || new Map()
+/** @type {Map<string, Array<Carrito>>}> */
+const registros = loader.loadRegistros()
 //#endregion
 
 /**
@@ -19,14 +21,14 @@ const registros = new Map(JSON.parse(localStorage.getItem("registros"))) || new 
  */
 export function setRegistro(nombreUsuario) {
     registros.set(nombreUsuario, [])
-    localStorage.setItem("registros", JSON.stringify(Array.from(registros.entries())))
+    saveRegistros()
 }
 
 /**
- * Obtine de los registros la lista de carritos guardados del nombreUsuario dado.
+ * Obtiene de los registros la lista de carritos guardados del nombreUsuario dado.
  * 
  * @param {string} nombreUsuario - NombreUsuario que se quiere pasar como clave.
- * @returns {Array<Map<string, Producto>>} Retorna una lista con los carritos que se compraron de ese usuario.
+ * @returns {Array<Carrito>} Retorna una lista con los carritos que se compraron de ese usuario.
  */
 export function getRegistro(nombreUsuario) {
     return registros.get(nombreUsuario)
@@ -36,9 +38,21 @@ export function getRegistro(nombreUsuario) {
  * Añade un carrito dado a el registro asignado a el nombreUsuario dado.
  * 
  * @param {string} nombreUsuario - NombreUsuario que se quiere pasar como clave.
- * @param {Map<string, Producto>} carrito - Carrito a agregar a el registro del usuario dado.
+ * @param {Carrito} carrito - Carrito a agregar a el registro del usuario dado.
  */
 export function addCarrito(nombreUsuario, carrito) {
     registros.get(nombreUsuario).push(carrito)
-    localStorage.setItem("registros", JSON.stringify(Array.from(registros.entries())))
+    saveRegistros()
+}
+
+export function saveRegistros() {
+    localStorage.setItem("registrosKeys", JSON.stringify(Array.from(registros.keys())))
+    let values = ""
+    for (const array of registros.values()) {
+        for (const carrito of array) {
+            values += `${carrito.save()}¬`  
+        }
+        values += "|"
+    }
+    localStorage.setItem("registrosValues", values)
 }

@@ -1,14 +1,11 @@
 import { createTarjetaTienda } from "../modulos/crearDomElements.js"
+import { get } from "../modulos/sesionActual.js"
 import * as stock from "../modulos/stock.js"
 
 const divProductos = document.getElementById("divProductos")
 
-function handlerAñadirACarrito() {
-    carritos.getCarrito(sesionActual.get().nombreUsuario).setProducto(stock.getProducto(this.dataset.id))
-    saveCarritos()
-}
-
 function onLoad() {
+    console.log(get())
     const productosStock = stock.getStock()
     for (const producto of productosStock.values()) {
         createTarjetaTienda(producto, divProductos)
