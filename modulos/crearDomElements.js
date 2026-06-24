@@ -6,7 +6,8 @@ import * as stock from "./stock.js"
 import * as carritos from "./carritos.js"
 import * as registros from "./registros.js"
 
-{/* <div class="col d-flex justify-content-center">
+{
+  /* <div class="col d-flex justify-content-center">
     <div class="card w-100">
         <img src="img\medialuna.png" class="card-img-top" alt="medialuna">
         <div class="card-body d-flex flex-column">
@@ -18,7 +19,8 @@ import * as registros from "./registros.js"
             </div>
         </div>
     </div>
-</div> */}
+</div> */
+}
 
 function handlerAñadirACarrito() {
     const carritoActual = carritos.getCarrito(sesionActual.get().nombreUsuario)
@@ -50,7 +52,7 @@ function handlerSumar() {
 
 /**
  * Crea una tarjeta de un Producto dado para mostrarla en la tienda.
- * 
+ *
  * @param {Producto} producto - El objeto Producto sobre el cual se quiere crear la tarjeta.
  * @param {HTMLElement} divAgregar
  */
@@ -416,4 +418,165 @@ export function createRegistroCompra(carrito, agregar, numero) {
     divTitulo.append(h5Titulo, divFecha)
     divContenedor.append(divTitulo, divContenido)
     agregar.append(divContenedor)
+}
+
+export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar,
+) {
+  const tr = document.createElement("tr");
+  tr.dataset.id = producto.id;
+
+  const tdNumero = document.createElement("td");
+  tdNumero.textContent = indice;
+
+  const tdTitulo = document.createElement("td");
+  tdTitulo.textContent = producto.nombre;
+
+  const tdInfo = document.createElement("td");
+  tdInfo.textContent = producto.descripcion;
+
+  const tdStock = document.createElement("td");
+  tdStock.textContent = producto.cantidad;
+
+  const tdEtiquetas = document.createElement("td");
+  if (producto.etiquetas && producto.etiquetas.length > 0) {
+    for (let i = 0; i < producto.etiquetas.length; i++) {
+      const etiqueta = producto.etiquetas[i];
+      const spanEtiqueta = document.createElement("span");
+      spanEtiqueta.classList.add("badge", "rounded-pill", "me-1", coloresRandom());
+      spanEtiqueta.textContent = etiqueta;
+      tdEtiquetas.appendChild(spanEtiqueta);
+    }
+  }
+
+  const tdValor = document.createElement("td");
+  tdValor.textContent = `$${producto.valor}`;
+
+  const tdAcciones = document.createElement("td");
+  const divContenedor = document.createElement("div");
+  divContenedor.classList.add("d-flex", "gap-3", "align-items-center");
+
+  const iconoBorrar = document.createElement("i");
+  iconoBorrar.classList.add("bi", "bi-trash3-fill", "text-danger");
+  iconoBorrar.style.cursor = "pointer";
+  iconoBorrar.addEventListener("click", function() {
+    funcionEliminar(producto.id)
+  });
+
+  const iconoEditar = document.createElement("i");
+  iconoEditar.classList.add("bi", "bi-pencil-square", "text-warning");
+  iconoEditar.style.cursor = "pointer";
+  iconoEditar.setAttribute("data-bs-toggle", "modal");
+  iconoEditar.setAttribute("data-bs-target", "#modalEditar");
+  iconoEditar.addEventListener("click", function(){
+    functionEditar(producto.id)
+  });
+
+  divContenedor.append(iconoBorrar, iconoEditar);
+  tdAcciones.appendChild(divContenedor);
+
+  // Unimos todas las celdas en la fila
+  tr.append(
+    tdNumero,
+    tdTitulo,
+    tdInfo,
+    tdStock,
+    tdEtiquetas,
+    tdValor,
+    tdAcciones,
+  );
+  return tr;
+}
+
+
+export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar) {
+    const tr = document.createElement('tr');
+    tr.dataset.id = usuario.nombreUsuario; 
+
+    if (!usuario.habilitado) {
+        tr.classList.add('opacity-50'); 
+    }
+    
+    let celdaNombre = document.createElement("td")
+    celdaNombre.textContent = usuario.nombre
+
+    let celdaApellido = document.createElement("td")
+    celdaApellido.textContent = usuario.apellido
+
+    let celdaUsuario = document.createElement("td")
+    celdaUsuario.textContent = usuario.nombreUsuario
+
+    let celdaContraseña = document.createElement("td")
+    celdaContraseña.textContent = usuario.contraseña
+    
+    //badge es el efecto de pastilla de bootstrap - es como un boton desactivado
+    const tdEstado = document.createElement('td');
+    const badgeEstado = document.createElement('span');
+    badgeEstado.classList.add('badge');
+    
+    if (usuario.habilitado) {
+        badgeEstado.textContent = 'Habilitado';
+        badgeEstado.classList.add('bg-success');
+    } else {
+        badgeEstado.textContent = 'Deshabilitado';
+        badgeEstado.classList.add('bg-secondary');
+    }
+    tdEstado.appendChild(badgeEstado);
+
+    const tdRol = document.createElement('td');
+    const badgeRol = document.createElement('span');
+    badgeRol.classList.add('badge', 'bg-info', 'text-dark');
+    badgeRol.textContent = usuario.tipo;
+    tdRol.appendChild(badgeRol);
+
+    const tdHistorial = document.createElement('td');
+    const iconoHistorial = document.createElement('i');
+    iconoHistorial.classList.add('bi', 'bi-justify');
+    iconoHistorial.title = "Usuario registrado";
+    iconoHistorial.style.cursor = "pointer"; 
+    iconoHistorial.setAttribute("data-bs-toggle", "modal"); 
+    iconoHistorial.setAttribute("data-bs-target", "#modalHistorial"); 
+    iconoHistorial.dataset.usuario = usuario.nombreUsuario; 
+    tdHistorial.appendChild(iconoHistorial);
+
+    const tdAcciones = document.createElement('td');
+    
+    const divContenedor = document.createElement('div');
+    divContenedor.classList.add('d-flex', 'align-items-center', 'gap-3');
+
+    const iconoBorrar = document.createElement('i');
+    iconoBorrar.classList.add('bi', 'bi-trash3-fill', 'text-danger');
+    iconoBorrar.style.cursor = 'pointer';
+    iconoBorrar.addEventListener('click', function() {
+        funcionEliminar(usuario.nombreUsuario); 
+    });
+
+    // Estructura de Switch de Bootstrap
+    const divSwitch = document.createElement('div');
+    divSwitch.classList.add('form-check', 'form-switch', 'm-0');
+
+    const inputSwitch = document.createElement('input');
+    inputSwitch.classList.add('form-check-input');
+    inputSwitch.type = 'checkbox';
+    inputSwitch.setAttribute('role', 'switch');
+    inputSwitch.checked = usuario.habilitado; 
+    
+    inputSwitch.addEventListener('change', () => {
+        funcionoCambiarEstado(usuario.nombreUsuario); 
+    });
+
+    divSwitch.appendChild(inputSwitch);
+    divContenedor.appendChild(iconoBorrar);
+    divContenedor.appendChild(divSwitch);
+    tdAcciones.appendChild(divContenedor);
+
+    tr.appendChild(celdaNombre);
+    tr.appendChild(celdaApellido);
+    tr.appendChild(celdaUsuario);
+    tr.appendChild(celdaContraseña);
+    tr.appendChild(tdEstado);
+    tr.appendChild(tdRol);
+    tr.appendChild(tdHistorial);
+    tr.appendChild(tdAcciones);
+
+    return tr;
 }

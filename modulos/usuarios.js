@@ -42,7 +42,7 @@ export function setUsuario(nombreUsuario, nombre, apellido, contraseña, tipo) {
  * @returns {Usuario | null} Retorna el objeto usuario y si no existe retorna null.
  */
 export function getUsuario(nombreUsuario) {
-    const toReturn = usuarios.get(nombreUsuario)
+    let toReturn = usuarios.get(nombreUsuario)
     if (!toReturn) {
         toReturn = null
     }
@@ -65,4 +65,14 @@ export function saveUsuarios() {
         values += `${usuario.save()}|`
     }
     localStorage.setItem("usuariosValues", values)
+}
+
+export function getUsuarios() {
+    console.log("Estoy en modulos/usuarios/getUsuarios")
+    console.log(usuarios)
+    return usuarios
+}
+
+export function existeUsuario(nombreDeUsuario) {
+    return usuarios.has(nombreDeUsuario) //compara las llaves con nombreDeUsuario y devuelve true o false
 }
