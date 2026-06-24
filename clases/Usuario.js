@@ -102,8 +102,8 @@ export class Usuario {
      * @returns {boolean} Retorna el valor al que se cambio habilitado.
      */
     toggleHabilitado() {
-        this.habilitado = !this.habilitado
-        return this.habilitado
+        this.#habilitado = !this.#habilitado
+        return this.#habilitado
     }
 
     save() {
