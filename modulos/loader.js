@@ -17,14 +17,21 @@ export function loadUsuario(str) {
     return new Usuario(values[0], values[1], values[2], values[3], values[4], JSON.parse(values[5]))
 }
 
+/**
+ * 
+ * @param {string} str 
+ * @returns {Carrito}
+ */
 export function loadCarrito(str) {
     const values = str.split("¿")
-    // values[0] = fechan, values[1] = array de keys, values[2] = string de valores
+    // values[0] = fecha, values[1] = array de keys, values[2] = string de valores
     const mapa = new Map()
-    const productosKeys = JSON.parse(values[1])
-    const productosValues = values[2].split("°")
-    for (let i = 0; i < productosKeys.length; i++) {
-        mapa.set(productosKeys[i], loadProducto(productosValues[i]))
+    if (str !== "") {
+        const productosKeys = JSON.parse(values[1])
+        const productosValues = values[2].split("°")
+        for (let i = 0; i < productosKeys.length; i++) {
+            mapa.set(productosKeys[i], loadProducto(productosValues[i]))
+        }
     }
     return new Carrito(mapa, values[0])
 }
@@ -69,6 +76,26 @@ export function loadUsuarios() {
         const usuariosValues = localStorage.getItem("usuariosValues").split("|")
         for (let i = 0; i < usuariosKeys.length; i++) {
             mapa.set(usuariosKeys[i], loadUsuario(usuariosValues[i]))
+        }
+    }
+    return mapa
+}
+
+export function loadRegistros() {
+    const mapa = new Map()
+    const registrosKeys = JSON.parse(localStorage.getItem("registrosKeys"))
+    if (registrosKeys !== null) {
+        const registrosValues = localStorage.getItem("registrosValues").split("|")
+        console.log(registrosValues)
+        for (let i = 0; i < registrosKeys.length; i++) {
+            const array = []
+            const carritosACargar = registrosValues[i].split("¬")
+            for (const cargar of carritosACargar) {
+                if (cargar !== "") {
+                    array.push(loadCarrito(cargar))
+                }
+            }
+            mapa.set(registrosKeys[i], array)
         }
     }
     return mapa
