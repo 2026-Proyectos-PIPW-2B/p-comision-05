@@ -12,21 +12,7 @@ import * as registros from "../modulos/registros.js";
 setUsuario("joaco_pan", "Joaquin", "Perez", "123456", "user");
 
 
-const compra1 = {
-  fecha: "20/06/2026",
-  productos: [
-    { nombre: "Medialuna", cantidad: 12, valor: 45000 },
-    { nombre: "Torta de chocolate", cantidad: 1, valor: 18000 },
-  ],
-};
 
-const compra2 = {
-  fecha: "23/06/2026",
-  productos: [{ nombre: "Pan Dulce de pistacho", cantidad: 2, valor: 125000 }],
-};
-
-registros.addCarrito("joaco_pan", compra1);
-registros.addCarrito("joaco_pan", compra2);
 
 const tbodyUsuarios = document.getElementById("tabla-usuarios-body");
 
@@ -42,7 +28,7 @@ function actualizarTablaCompleta() {
     );
     tbodyUsuarios.appendChild(nuevaFila);
   }
-
+ //
   tbodyUsuarios.addEventListener("click", function (e) {
     // si hago click en los usuarios, y es en la parte de historial :
     if (e.target.classList.contains("bi-justify")) {
