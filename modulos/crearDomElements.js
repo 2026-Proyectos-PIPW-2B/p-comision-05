@@ -152,6 +152,10 @@ export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar
     const iconoHistorial = document.createElement('i');
     iconoHistorial.classList.add('bi', 'bi-justify');
     iconoHistorial.title = "Usuario registrado";
+    iconoHistorial.style.cursor = "pointer"; 
+    iconoHistorial.setAttribute("data-bs-toggle", "modal"); 
+    iconoHistorial.setAttribute("data-bs-target", "#modalHistorial"); 
+    iconoHistorial.dataset.usuario = usuario.nombreUsuario; 
     tdHistorial.appendChild(iconoHistorial);
 
     const tdAcciones = document.createElement('td');
