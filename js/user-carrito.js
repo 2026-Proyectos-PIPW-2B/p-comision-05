@@ -13,6 +13,9 @@ function handlerConfirmarCompra() {
 function onLoad() {
     const carrito = carritos.getCarrito(sesionActual.get().nombreUsuario)
     if (carrito !== null) {
+        if (carrito.productos.size > 0) {
+            document.getElementById("alertaCarrito").classList.add("d-none")
+        }
         for (const producto of carrito.productos.values()) {
             createTarjetaCarrito(producto, sectionProductos)
         }
