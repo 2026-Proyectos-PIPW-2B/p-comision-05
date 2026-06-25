@@ -4,7 +4,6 @@ import {
   getUsuario,
   saveUsuarios,
   getUsuarios,
-  existeUsuario,
 } from "../modulos/usuarios.js";
 import { crearFilaUsuario } from "../modulos/crearDomElements.js";
 import * as registros from "../modulos/registros.js";
@@ -145,9 +144,9 @@ botonCrearUsuario.addEventListener("click", function (e) {
     alert("Debe completar todos los campos.");
     return;
   }
-
+  
   //verifico que el nombreDeUsuario no se repita, (si se repite, serian 2 llaves iguales)
-  if (existeUsuario(nombreUsuario)) {
+  if (compararNombreUsuario(nombreUsuario)) {
     alert("El nombre de usuario ya está registrado, elegi otro.");
     return;
   }
@@ -167,4 +166,12 @@ botonCrearUsuario.addEventListener("click", function (e) {
   alert("¡Usuario registrado!");
 });
 
+function compararNombreUsuario(nuevoNombre) { //retorna un boolean, si el nombre pasado por parametro es igual
+  let usuarios = getUsuarios()
+  return usuarios.has(nuevoNombre);
+}
+
 actualizarTablaCompleta();
+console.log("-----------------")
+console.log(getUsuarios())
+console.log("-----------------")
