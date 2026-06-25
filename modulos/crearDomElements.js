@@ -474,7 +474,6 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
   divContenedor.append(iconoBorrar, iconoEditar);
   tdAcciones.appendChild(divContenedor);
 
-  // Unimos todas las celdas en la fila
   tr.append(
     tdNumero,
     tdTitulo,
@@ -499,7 +498,7 @@ function coloresRandom() {
   return colores[Math.floor(Math.random() * colores.length)];
 }
 
-export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar) {
+export function crearFilaUsuario(usuario, funcionCambiarEstado, funcionEliminar) {
     const tr = document.createElement('tr');
     tr.dataset.id = usuario.nombreUsuario; 
 
@@ -572,7 +571,7 @@ export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar
     inputSwitch.checked = usuario.habilitado; 
     
     inputSwitch.addEventListener('change', () => {
-        funcionoCambiarEstado(usuario.nombreUsuario); 
+        funcionCambiarEstado(usuario.nombreUsuario); 
     });
 
     divSwitch.appendChild(inputSwitch);

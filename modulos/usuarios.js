@@ -35,6 +35,12 @@ export function setUsuario(nombreUsuario, nombre, apellido, contraseña, tipo) {
     saveUsuarios()
 }
 
+export function getUsuarios() {
+    console.log("Estoy en modulos/usuarios/getUsuarios")
+    console.log(usuarios)
+    return usuarios
+}
+
 /**
  * Devuelve el objeto usuario asignado al nombreUsuario dado como clave.
  * 
@@ -48,6 +54,7 @@ export function getUsuario(nombreUsuario) {
     }
     return toReturn
 }
+
 
 /**
  * 
@@ -67,12 +74,3 @@ export function saveUsuarios() {
     localStorage.setItem("usuariosValues", values)
 }
 
-export function getUsuarios() {
-    console.log("Estoy en modulos/usuarios/getUsuarios")
-    console.log(usuarios)
-    return usuarios
-}
-
-export function existeUsuario(nombreDeUsuario) {
-    return usuarios.has(nombreDeUsuario) //compara las llaves con nombreDeUsuario y devuelve true o false
-}
