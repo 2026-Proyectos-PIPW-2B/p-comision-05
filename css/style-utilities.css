@@ -58,8 +58,21 @@
     margin-left: calc(var(--neutral) * 3);
 }
 
+/* Clases para Width y Heigth */
+.min-h-130 {
+    min-height: 130px !important;
+}
+
+.min-w-220 {
+    min-width: 220px !important;
+}
+
 .max-w-900 {
-    max-width: 900px;
+    max-width: 900px !important;
+}
+
+.max-w-960 {
+    max-width: 960px !important;
 }
 
 .max-w-1200 {
