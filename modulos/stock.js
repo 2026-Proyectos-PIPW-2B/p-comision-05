@@ -65,7 +65,12 @@ export function saveStock() {
     localStorage.setItem("stockKeys", JSON.stringify(Array.from(stock.keys())))
     let values = ""
     for (const producto of stock.values()) {
-        values += `${producto.save()}|`
+        if (producto.cantidad <= 0) {
+            stock.delete(producto.id)
+        }
+        else {
+            values += `${producto.save()}|`
+        }
     }
     localStorage.setItem("stockValues", values)
 }

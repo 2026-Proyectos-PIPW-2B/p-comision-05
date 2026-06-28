@@ -1,5 +1,6 @@
 import { Carrito } from "../clases/Carrito.js"
 import { Producto } from "../clases/Producto.js"
+import * as stock from "./stock.js"
 import * as loader from "./loader.js"
 import * as registros from "./registros.js"
 
@@ -74,6 +75,10 @@ export function addCarritoToRegistro(nombreUsuario) {
     carritoAgregar.fecha = fechaFormateada
     // Guardo y limpio el carrito
     registros.addCarrito(nombreUsuario, carritoAgregar)
+    for (const producto of carritoAgregar.productos.values()) {
+        stock.getStock().get(producto.id).cantidad -= producto.cantidad
+    }
+    stock.saveStock()
     clearCarrito(nombreUsuario)
 }
 

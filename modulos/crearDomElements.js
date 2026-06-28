@@ -1,5 +1,4 @@
 import { Producto } from "../clases/Producto.js"
-import { saveCarritos } from "./carritos.js"
 import { Carrito } from "../clases/Carrito.js"
 import * as sesionActual from "./sesionActual.js"
 import * as stock from "./stock.js"
@@ -19,44 +18,51 @@ import * as registros from "./registros.js"
             </div>
         </div>
     </div>
-</div> */
+</div> */}
+
+function changeCantidadProducto() {
+    const numero = Number(this.value)
+    if (numero < Number(this.min)) {
+        this.value = this.min
+    }
+    else if (numero > Number(this.max)) {
+        this.value = this.max
+    }
 }
 
 function handlerAñadirACarrito() {
     const carritoActual = carritos.getCarrito(sesionActual.get().nombreUsuario)
-    // Realizo un chequeo de disponibilidad
-    const cantidadToAgregar = Number(document.getElementById(`${this.dataset.id}/cantidad`).textContent)
-    const cantidadDisponible = stock.getProducto(this.dataset.id).cantidad
-    let cantidadAgregada = 0
-    if (carritoActual.getProducto(this.dataset.id)) {
-        cantidadAgregada = carritoActual.getProducto(this.dataset.id).cantidad
-    }
-    if (cantidadDisponible >= (cantidadAgregada + cantidadToAgregar)) {
-        carritoActual.setProducto(stock.getProducto(this.dataset.id), cantidadToAgregar)
-        saveCarritos()
+    const inputCantidad = document.getElementById(`${this.dataset.id}/cantidad`)
+    const cantidadAgregar = Number(inputCantidad.value)
+    const productoStock = stock.getProducto(this.dataset.id)
+    let productoCarrito = carritoActual.getProducto(productoStock.id)
+    if (!productoCarrito || (productoCarrito.cantidad + cantidadAgregar) <= productoStock.cantidad) {
         bootstrap.Popover.getOrCreateInstance(document.getElementById(`${this.dataset.id}/button`)).hide()
+        carritoActual.setProducto(productoStock, cantidadAgregar)
+        carritos.saveCarritos()
+        inputCantidad.max  = inputCantidad.max - cantidadAgregar
+        setTimeout(() => {inputCantidad.value = 1}, 1000)
     }
-}
-
-function handlerRestar() {
-    const spanCantidad = document.getElementById(`${this.dataset.id}/cantidad`)
-    if (spanCantidad.textContent > 1) {
-        spanCantidad.textContent = Number(spanCantidad.textContent) - 1
+    productoCarrito = carritoActual.getProducto(productoStock.id)
+    if (productoCarrito.cantidad == productoStock.cantidad) {
+        const span = document.getElementById(`${productoStock.id}/span`)
+        span.textContent = ""
+        span.className = "text-danger text-end"
+        const iExclamation = document.createElement("i")
+        iExclamation.className = "bi bi-exclamation-circle-fill"
+        span.append(iExclamation)
+        span.append(" Todos agregados")
+        document.getElementById(`${productoStock.id}/button`).disabled = "true"
     }
-}
-
-function handlerSumar() {
-    const spanCantidad = document.getElementById(`${this.dataset.id}/cantidad`)
-    spanCantidad.textContent = Number(spanCantidad.textContent) + 1
 }
 
 /**
  * Crea una tarjeta de un Producto dado para mostrarla en la tienda.
  *
  * @param {Producto} producto - El objeto Producto sobre el cual se quiere crear la tarjeta.
- * @param {HTMLElement} divAgregar
+ * @returns 
  */
-export function createTarjetaTienda(producto, agregar) {
+export function createTarjetaTienda(producto) {
     // Primero
     const divContenedor = document.createElement("div")
     divContenedor.id = producto.id
@@ -77,36 +83,32 @@ export function createTarjetaTienda(producto, agregar) {
     h5.classList.add("card-title")
     const p = document.createElement("p")
     p.textContent = producto.descripcion
-    p.classList.add("card-text")
+    p.classList.add("card-text", "h-50", "card-descripcion")
     const divPrecio = document.createElement("div")
     divPrecio.classList.add("d-flex", "justify-content-between", "align-items-center")
     // Quinto
     const span = document.createElement("span")
     span.textContent = `$${producto.valor} C/U`
     span.classList.add("fs-5")
+    span.id = `${producto.id}/span`
+
     const button = document.createElement("button")
     button.classList.add("btn", "btn-primary", "align-self-end")
     button.id = `${producto.id}/button`
     // Crear popover
     const divPopover = document.createElement("div")
-    // <button type="button" class="btn btn-outline-info mx-neutral"><i class="bi bi-dash"></i></button>
-    const buttonRestar = document.createElement("button")
-    buttonRestar.dataset.id = producto.id
-    buttonRestar.classList.add("btn", "btn-outline-info", "me-neutral")
-    buttonRestar.addEventListener("click", handlerRestar)
-    const iRestar = document.createElement("i")
-    iRestar.classList.add("bi", "bi-dash")
-    buttonRestar.append(iRestar)
-    const spanCantidad = document.createElement("span")
-    spanCantidad.textContent = 1
-    spanCantidad.id = `${producto.id}/cantidad`
-    const buttonSumar = document.createElement("button")
-    buttonSumar.dataset.id = producto.id
-    buttonSumar.classList.add("btn", "btn-outline-info", "ms-neutral")
-    buttonSumar.addEventListener("click", handlerSumar)
-    const iSumar = document.createElement("i")
-    iSumar.classList.add("bi", "bi-plus")
-    buttonSumar.append(iSumar)
+    divPopover.classList.add("d-flex")
+    // Agrego los botones y inputs del popover
+    const inputCantidad = document.createElement("input")
+    inputCantidad.classList.add("form-control", "fw-semibold", "border-info", "text-center")
+    inputCantidad.type = "number"
+    inputCantidad.min = "1"
+    inputCantidad.max = producto.cantidad
+    inputCantidad.value = "1"
+    inputCantidad.id = `${producto.id}/cantidad`
+    inputCantidad.dataset.id = producto.id
+    inputCantidad.addEventListener("change", changeCantidadProducto)
+
     const buttonAgregar = document.createElement("button")
     buttonAgregar.dataset.id = producto.id
     buttonAgregar.classList.add("btn", "btn-primary", "ms-neutral")
@@ -114,7 +116,7 @@ export function createTarjetaTienda(producto, agregar) {
     const iAgregar = document.createElement("i")
     iAgregar.classList.add("bi", "bi-cart-plus")
     buttonAgregar.append(iAgregar)
-    divPopover.append(buttonRestar, spanCantidad, buttonSumar, buttonAgregar)
+    divPopover.append(inputCantidad, buttonAgregar)
     const popoverConDOM = new bootstrap.Popover(button, {
         content: divPopover, // <-- Pasamos el nodo del DOM directamente
         html: true, 
@@ -127,13 +129,25 @@ export function createTarjetaTienda(producto, agregar) {
     const i = document.createElement("i")
     i.classList.add("bi", "bi-bag")
 
+    // Chequeo cantidad
+    const productoCarrito = carritos.getCarrito(sesionActual.get().nombreUsuario).getProducto(producto.id)
+    if (productoCarrito && productoCarrito.cantidad >= producto.cantidad) {
+        span.textContent = ""
+        span.className = "text-danger text-end"
+        const iExclamation = document.createElement("i")
+        iExclamation.className = "bi bi-exclamation-circle-fill"
+        span.append(iExclamation)
+        span.append(" Todos agregados")
+        button.disabled = "true"
+    }
+
     // Anidamiento
     button.append(i)
     divPrecio.append(span, button)
     divBody.append(h5, p, divPrecio)
     divTarjeta.append(img, divBody)
     divContenedor.append(divTarjeta)
-    agregar.append(divContenedor)
+    return divContenedor
 }
 
 {/* <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
@@ -157,21 +171,21 @@ export function createTarjetaTienda(producto, agregar) {
     </div>
 </div> */}
 
-function changeCantidadProductoCarrito() {
-    const spanCantidad = document.getElementById(`${this.dataset.id}/cantidad`)
+
+function handlerRemoverProducto() {
     const carritoActual = carritos.getCarrito(sesionActual.get().nombreUsuario)
-    const productoACambiar = carritoActual.getProducto(this.dataset.id)
-    productoACambiar.cantidad = Number(spanCantidad.textContent)
-    saveCarritos()
-    document.getElementById(`${this.dataset.id}/total`).textContent = `$${productoACambiar.valorTotal}`
+    document.getElementById(this.dataset.id).remove()
+    carritoActual.removeProducto(this.dataset.id)
+    carritos.saveCarritos()
     document.getElementById("spanTotalCompra").textContent = `$${carritoActual.valorTotal}`
 }
 
-function handlerRemoverProducto() {
-    document.getElementById(this.dataset.id).remove()
+function changeCantidadProductoCarrito() {
     const carritoActual = carritos.getCarrito(sesionActual.get().nombreUsuario)
-    carritoActual.removeProducto(this.dataset.id)
-    saveCarritos()
+    const producto = carritoActual.getProducto(this.dataset.id)
+    producto.cantidad = this.value
+    carritos.saveCarritos()
+    document.getElementById(`${this.dataset.id}/total`).textContent = `$${producto.valorTotal}`
     document.getElementById("spanTotalCompra").textContent = `$${carritoActual.valorTotal}`
 }
 
@@ -211,28 +225,21 @@ export function createTarjetaCarrito(producto, agregar) {
     const divCantidad = document.createElement("div")
     divCantidad.classList.add("w-100", "pt-neutral", "border-top", "mt-neutral", "d-flex", "justify-content-end", "align-items-baseline")
     // Tercero
-    const buttonRestar = document.createElement("button")
-    buttonRestar.classList.add("btn", "btn-outline-info", "mx-neutral")
-    buttonRestar.dataset.id = producto.id
-    buttonRestar.addEventListener("click", handlerRestar)
-    buttonRestar.addEventListener("click", changeCantidadProductoCarrito)
-    const iRestar = document.createElement("i")
-    iRestar.classList.add("bi", "bi-dash")
-    buttonRestar.append(iRestar)
-
-    const spanCantidad = document.createElement("span")
-    spanCantidad.classList.add("fw-semibold")
-    spanCantidad.textContent = producto.cantidad
-    spanCantidad.id = `${producto.id}/cantidad`
-
-    const buttonSumar = document.createElement("button")
-    buttonSumar.classList.add("btn", "btn-outline-info", "mx-neutral")
-    buttonSumar.dataset.id = producto.id
-    buttonSumar.addEventListener("click", handlerSumar)
-    buttonSumar.addEventListener("click", changeCantidadProductoCarrito)
-    const iSumar = document.createElement("i")
-    iSumar.classList.add("bi", "bi-plus")
-    buttonSumar.append(iSumar)
+    const inputCantidad = document.createElement("input")
+    inputCantidad.classList.add("form-control", "fw-semibold", "border-info", "w-8", "text-center", "mx-neutral")
+    inputCantidad.type = "number"
+    inputCantidad.min = "1"
+    inputCantidad.max = stock.getProducto(producto.id).cantidad
+    inputCantidad.value = producto.cantidad
+    inputCantidad.id = `${producto.id}/cantidad`
+    inputCantidad.dataset.id = producto.id
+    inputCantidad.addEventListener("change", changeCantidadProducto)
+    inputCantidad.addEventListener("change", changeCantidadProductoCarrito)
+    if (producto.cantidad >= inputCantidad.max) {
+        const spanTexto = document.createElement("span")
+        spanTexto.textContent = `Ultimas ${producto.cantidad} disponibles!`
+        divCantidad.append(spanTexto)
+    }
     
     const buttonEliminar = document.createElement("button")
     buttonEliminar.classList.add("btn", "btn-info")
@@ -245,7 +252,7 @@ export function createTarjetaCarrito(producto, agregar) {
     // Anidamiento
     divImagen.append(img)
     divInfo.append(h5, pDescripcion, pTotal)
-    divCantidad.append(buttonRestar, spanCantidad, buttonSumar, buttonEliminar)
+    divCantidad.append(inputCantidad, buttonEliminar)
     divContenedor.append(divImagen, divInfo, divCantidad)
     agregar.append(divContenedor)
 }
@@ -284,8 +291,8 @@ export function createTarjetaRegistro(producto, agregar) {
     divCantidad.classList.add("w-100", "pt-neutral", "border-top", "mt-neutral", "d-flex", "justify-content-end", "align-items-baseline")
     // Tercero
     const spanTextoCantidad = document.createElement("span")
-    spanTextoCantidad.classList.add("fw-semibold")
-    spanTextoCantidad.textContent = "Cantidad "
+    spanTextoCantidad.classList.add("fw-semibold", "pe-1")
+    spanTextoCantidad.textContent = "Cantidad:"
     const spanCantidad = document.createElement("span")
     spanCantidad.classList.add("fw-semibold")
     spanCantidad.textContent = producto.cantidad
@@ -358,7 +365,7 @@ export function createRegistroCompra(carrito, agregar, numero) {
     // Tercero
     const h5Titulo = document.createElement("h5")
     h5Titulo.classList.add("w-50")
-    h5Titulo.textContent = `Compra #${numero}`
+    h5Titulo.textContent = `Compra #${numero + 1}`
     const divFecha = document.createElement("div")
     divFecha.classList.add("w-50", "fs-5", "text-end")
     divFecha.textContent = `Fecha: ${carrito.fecha}`
@@ -394,6 +401,7 @@ export function createRegistroCompra(carrito, agregar, numero) {
     if (imagenes.length > 3) {
         const spanOtros = document.createElement("span")
         spanOtros.classList.add("position-relative", "fw-semibold", "img-4")
+        spanOtros.textContent = "y otros..."
         divImagenes.append(spanOtros)
     }
     // Tercero

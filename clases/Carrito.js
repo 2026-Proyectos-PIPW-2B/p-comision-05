@@ -58,6 +58,7 @@ export class Carrito {
     setProducto(producto, cantidad) {
         if (Array.from(this.#productos.keys()).includes(producto.id)) {
             this.#productos.get(producto.id).cantidad += cantidad
+            this.#productos.get(producto.id).reservados += cantidad
         }
         else {
             this.#productos.set(producto.id, producto.cloneProducto(cantidad))
