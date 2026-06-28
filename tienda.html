@@ -11,7 +11,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top z-1080">
         <div class="container-fluid d-flex">
             <a class="navbar-brand w-30 m-0">Panaderia</a>
             <form class="d-flex w-40" role="search">
@@ -60,12 +60,14 @@
             </form>
         </div>
         <div class="p-neutral flex-grow-1 d-flex justify-content-center">
-            <div class="max-w-1200 flex-grow-1">
-                <div id="divProductos" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-5 g-2"></div>
-            </div>
+            <section id="sectionProductos" class="max-w-1200"></section>
         </div>
     </section>
-
+    <section id="pageSelect" class="p-neutral d-flex justify-content-center">
+        <button id="pageSelectBack" class="btn btn-outline-info border-0 mx-neutral"><i class="bi bi-caret-left-fill"></i></button>
+        <div id="pageNumbers"></div>
+        <button id="pageSelectFoward" class="btn btn-outline-info  border-0 mx-neutral"><i class="bi bi-caret-right-fill"></i></button>
+    </section>
     <footer class="p-neutral">
         <div class="container-fluid margin-b border-bottom border-1 border-secondary ">
             <div class="d-lg-none mt-2  align-items-center text-center">

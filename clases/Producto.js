@@ -91,6 +91,19 @@ export class Producto {
     get valorTotal() {
         return this.cantidad * this.valor
     }
+    /**
+     * La cantidad de unidades que todavia se pueden comprar
+     * 
+     * @type {Number}
+     * @readonly
+     */
+    get disponibles() {
+        let toReturn = this.cantidad - this.reservados
+        if (toReturn < 0) {
+            toReturn = 0
+        }
+        return toReturn
+    }
 
     // Methods
     /**

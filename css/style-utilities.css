@@ -10,6 +10,10 @@
     pointer-events: none;
 }
 
+.z-1080 {
+    z-index: 1080 !important;
+}
+
 /* clase personales */
 .p-neutral {
     padding: calc(var(--neutral) * 2) calc(var(--neutral) * 3);
@@ -27,6 +31,10 @@
 
 .pt-neutral {
     padding-top: calc(var(--neutral) * 2);
+}
+
+.pe-neutral {
+    padding-right: calc(var(--neutral) * 3);
 }
 
 .ps-neutral {
@@ -59,8 +67,8 @@
 }
 
 /* Clases para Width y Heigth */
-.min-h-130 {
-    min-height: 130px !important;
+.h-50 {
+    height: 50px !important;
 }
 
 .min-w-220 {
@@ -95,38 +103,34 @@
     width: 15% !important;
 }
 
+.w-8 {
+    width: 8% !important;
+}
+
+.card-descripcion {
+    display: -webkit-box; /* Required for line-clamping */
+    -webkit-box-orient: vertical; /* Sets the layout direction */
+    -webkit-line-clamp: 2; /* Change this number to stop at 2, 4, etc. lines */
+    overflow: hidden; /* Hides the text that goes past the width */
+    text-overflow: ellipsis; /* Adds the three dots (...) at the end */
+}
+
 .shadow-element {
-  position: relative;
-  z-index: 1; /* Ensures content stays above the shadow */
+    position: relative;
+    z-index: 1; /* Ensures content stays above the shadow */
 }
 
 .shadow-element::before {
-  content: '';
-  position: absolute;
-  top: -30px; /* Increased height to make room for peaks */
-  left: -12px;
-  right: -12px;
-  height: 30px; 
-  background: linear-gradient(to top, white, var(--primary));
-  
-  /* Creates a jagged edge with 4 distinct peaks */
-  clip-path: polygon(
-    0% 100%,    /* Bottom-left */
-    0% 40%,     /* Start first peak */
-    12.5% 0%,   /* Peak 1 */
-    25% 40%,    /* Valley 1 */
-    37.5% 0%,   /* Peak 2 */
-    50% 40%,    /* Valley 2 */
-    62.5% 0%,   /* Peak 3 */
-    75% 40%,    /* Valley 3 */
-    87.5% 0%,   /* Peak 4 */
-    100% 40%,   /* End final peak */
-    100% 100%   /* Bottom-right */
-  );
-  
-  filter: blur(4px); /* Lower blur keeps the sharp peak shapes visible */
-  z-index: -1;
-  pointer-events: none;
+    content: '';
+    position: absolute;
+    top: -70px; /* Increased height to make room for peaks */
+    left: -12px;
+    right: -12px;
+    height: 70px; 
+    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
+
+    z-index: -1;
+    pointer-events: none;
 }
 
 .img-1 {

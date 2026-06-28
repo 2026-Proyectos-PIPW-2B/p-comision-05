@@ -1,17 +1,18 @@
 import { createTarjetaCarrito } from "../modulos/crearDomElements.js"
 import * as carritos from "../modulos/carritos.js"
+import * as stock from "../modulos/stock.js"
 import * as sesionActual from "../modulos/sesionActual.js"
 
 const sectionProductos = document.getElementById("sectionProductos")
-
+const carrito = carritos.getCarrito(sesionActual.get().nombreUsuario)
 
 function handlerConfirmarCompra() {
     carritos.addCarritoToRegistro(sesionActual.get().nombreUsuario)
     sectionProductos.replaceChildren()
+    document.getElementById("alertaCarrito").classList.remove("d-none")
 }
 
 function onLoad() {
-    const carrito = carritos.getCarrito(sesionActual.get().nombreUsuario)
     if (carrito !== null) {
         if (carrito.productos.size > 0) {
             document.getElementById("alertaCarrito").classList.add("d-none")
