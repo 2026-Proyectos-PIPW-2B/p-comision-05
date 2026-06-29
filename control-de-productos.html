@@ -60,18 +60,8 @@
                 <input type="number" id="filtroStock" class="form-control" placeholder="Ingrese Una Cantidad">
 
                 <label for="filtroEtiqueta" class="form-label mt-2">Etiquetas</label>
-                <input type="text" id="filtroEtiqueta" class="form-control" placeholder="Ingrese una etiqueta">
+                <select id="filtroEtiqueta" class="form-select"> </select>
 
-                <label for="filtroEtiqueta" class="form-label mt-2">Etiquetas</label>
-                <div class="input-group mb-3">
-                    <label for="filtroEtiqueta" class="form-label mt-2">Etiquetas</label>
-                    <input type="text" id="filtroEtiqueta" class="form-control"
-                        aria-label="Recipient’s username" aria-describedby="basic-addon2">
-                        <button type="button" id="botonResetearFiltros" class="btn btn-primary mt-2 w-30">
-                    <i class="bi bi-arrow-clockwise"></i>
-                </button>
-                    <span class="input-group-text" id="basic-addon2">@example.com</span>
-                </div>
                 <button type="button" id="botonAplicarFiltros" class="btn btn-primary mt-2 ">Aplicar Filtros</button>
                 <button type="button" id="botonResetearFiltros" class="btn btn-primary mt-2 w-30">
                     <i class="bi bi-arrow-clockwise"></i>
@@ -84,6 +74,12 @@
 
         <div class="p-neutral ps-lg-0 flex-grow-1 d-flex justify-content-center align-items-start">
             <div class="w-100 max-w-1200">
+                <div class="w-100 max-w-1200 mb-3 d-flex justify-content-end">
+                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                        data-bs-target="#modalGestionEtiquetas">
+                        Administrar Etiquetas
+                    </button>
+                </div>
                 <div class="table-responsive rounded border shadow">
                     <table class="table m-0 table-hover">
                         <thead>
@@ -141,9 +137,11 @@
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="registroEtiquetas" class="form-label ">Etiquetas del Producto</label>
-                                    <input type="text" id="registroEtiquetas" class="form-control" />
-                                    <div class="invalid-feedback" id="mensajeRegistroEtiquetas"></div>
+                                    <label for="registroEtiquetas" class="form-label">Etiquetas del Producto</label>
+                                    <select id="registroEtiquetas" class="form-select" multiple style="height: 110px;">
+                                    </select>
+                                    <p class="text-muted">Manter presionado control para seleccionar más de
+                                        una.</p>
                                 </div>
 
                                 <div class="mb-4">
@@ -192,9 +190,10 @@
                                     <label for="editar-stock" class="form-label">Stock</label>
                                     <input type="number" id="editar-stock" class="form-control" />
                                 </div>
-                                <div class="mb-4 etiquetasEditar" id="editar-etiquetas">
-                                    <label class="form-label d-flex">Etiquetas</label>
-
+                                <div class="mb-4" id="editar-etiquetas">
+                                    <label class="form-label">Etiquetas del Producto</label>
+                                    <select id="selectEditarEtiquetas" class="form-select">
+                                    </select>
                                 </div>
                                 <div class="mb-4">
                                     <label for="editar-valor" class="form-label">Valor</label>
@@ -210,6 +209,30 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalGestionEtiquetas" tabindex="-1" aria-labelledby="modalGestionEtiquetasLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header  text-white">
+                <h5 class="modal-title text-black" id="modalGestionEtiquetasLabel">Gestión de Etiquetas</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex gap-2 mb-3">
+                    <input type="text" id="inputNuevaEtiqueta" class="form-control" placeholder="Ej: Oferta, Sin Tacc, Glaseado...">
+                    <button type="button" id="btnCrearEtiqueta" class="btn btn-primary">Agregar</button>
+                </div>
+                
+                <h6 class="border-bottom pb-2 fw-semibold text-secondary">Etiquetas Activas:</h6>
+                <div id="listaEtiquetasGlobales" class="d-flex flex-column gap-2" style="max-height: 220px; overflow-y: auto;"> <!--Estilizado parcial-->
+                    </div>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">

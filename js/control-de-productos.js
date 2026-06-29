@@ -1,5 +1,6 @@
 import * as moduloProductos from "../modulos/stock.js";
 import { crearFilaProducto } from "../modulos/crearDomElements.js";
+import * as moduloEtiquetas from "../modulos/etiquetas.js";
 let funcionParaBotonEditar = null;
 
 //para probar la tabla
@@ -45,6 +46,13 @@ const filtroEtiqueta = document.getElementById("filtroEtiqueta");
 const botonAplicarFiltros = document.getElementById("botonAplicarFiltros");
 const botonResetearFiltros = document.getElementById("botonResetearFiltros");
 
+const inputNuevaEtiqueta = document.getElementById("inputNuevaEtiqueta");
+const btnCrearEtiqueta = document.getElementById("btnCrearEtiqueta");
+const listaEtiquetasGlobales = document.getElementById(
+  "listaEtiquetasGlobales",
+);
+const registroEtiquetas = document.getElementById("registroEtiquetas");
+
 let idProductoEnEdicion = null;
 const filtrosActivos = {
   titulo: "",
@@ -57,9 +65,87 @@ botonGuardar.addEventListener("click", registrarNuevoProducto);
 botonGuardarCambios.addEventListener("click", guardarCambiosProducto);
 botonAplicarFiltros.addEventListener("click", aplicarFiltros);
 botonResetearFiltros.addEventListener("click", resetearFiltros);
+btnCrearEtiqueta.addEventListener("click", gestionarAltaEtiqueta)
+
+//funciones
+function actualizarSelectoresEtiquetas() {
+  const lista = moduloEtiquetas.getEtiquetas();
+  //primer elemento
+  registroEtiquetas.innerHTML = "";
+  filtroEtiqueta.innerHTML = "";
+  const opcionVacia = document.createElement("option");
+  opcionVacia.value = "";
+  opcionVacia.textContent = "Filtrar por etiqueta...";
+  filtroEtiqueta.appendChild(opcionVacia);
+
+  //etiquetas del array
+  for (let i = 0; i < lista.length; i++) {
+    const etiqueta = lista[i];
+
+    const optionFiltro = document.createElement("option");
+    optionFiltro.value = etiqueta;
+    optionFiltro.textContent = etiqueta;
+    filtroEtiqueta.appendChild(optionFiltro);
+
+    const optionRegistro = document.createElement("option");
+    optionRegistro.value = etiqueta;
+    optionRegistro.textContent = etiqueta;
+    registroEtiquetas.appendChild(optionRegistro);
+  }
+
+  renderizarListaGestion();
+}
+
+// administrador de etiquetas, creo la lista de etiquetas con boton de borrado
+function renderizarListaGestion() {
+  listaEtiquetasGlobales.innerHTML = "";
+  const lista = moduloEtiquetas.getEtiquetas();
+
+  for (let i = 0; i < lista.length; i++) {
+    const etiqueta = lista[i];
+
+    const divItem = document.createElement("div");
+    divItem.className ="d-flex justify-content-between align-items-center p-2 border rounded bg-light";
+
+    const spanTexto = document.createElement("span");
+    spanTexto.textContent = etiqueta;
+    spanTexto.className = "fw-semibold text-dark";
+
+    const btnBorrar = document.createElement("button");
+    btnBorrar.className = "btn btn-sm btn-danger";
+    btnBorrar.type = "button";
+
+    const iconoBorrar = document.createElement("i");
+    iconoBorrar.className = "bi bi-trash3-fill";
+    btnBorrar.appendChild(iconoBorrar);
+
+    btnBorrar.addEventListener("click", function () {
+      moduloEtiquetas.eliminarEtiquetaGlobal(etiqueta);
+      actualizarSelectoresEtiquetas();
+      actualizarTablaCompleta(); 
+    });
+
+    divItem.appendChild(spanTexto);
+    divItem.appendChild(btnBorrar);
+    listaEtiquetasGlobales.appendChild(divItem);
+  }
+}
 
 
-//funciones 
+function gestionarAltaEtiqueta() {
+  const nuevoValor = inputNuevaEtiqueta.value.trim();
+  if (nuevoValor === "") {
+    return;
+  }
+  const exito = moduloEtiquetas.agregarEtiqueta(nuevoValor);
+  if (exito) {
+    inputNuevaEtiqueta.value = "";
+    actualizarSelectoresEtiquetas();
+  } else {
+    alert("La etiqueta ya existe o no es válida.");
+  }
+}
+
 function actualizarTablaCompleta() {
   tbody.innerHTML = "";
   const misProductos = moduloProductos.getStock();
@@ -89,13 +175,14 @@ function actualizarTablaCompleta() {
     if (filtroEtiqueta) {
       let tieneEtiqueta = false;
       for (let i = 0; i < producto.etiquetas.length; i++) {
-        if (producto.etiquetas[i].toUpperCase() === filtroEtiqueta) {
+        if (producto.etiquetas[i].toUpperCase() === filtroEtiqueta) { 
           tieneEtiqueta = true;
           break;
         }
       }
       if (!tieneEtiqueta) continue;
     }
+    
 
     const fila = crearFilaProducto(
       producto,
@@ -113,10 +200,7 @@ function registrarNuevoProducto() {
   const info = document.getElementById("registroInfo").value.trim();
   const stock = parseInt(document.getElementById("registroStock").value);
   const valor = parseFloat(document.getElementById("registroValor").value);
-  const registroEtiquetas = document
-    .getElementById("registroEtiquetas")
-    .value.trim();
-
+  
   if (!titulo || !info || isNaN(stock) || isNaN(valor)) {
     alert("Por favor completar los campos faltantes");
     return;
@@ -128,7 +212,7 @@ function registrarNuevoProducto() {
   for (const [id, producto] of misProductos) {
     if (producto.nombre.toUpperCase().trim() === titulo.toUpperCase()) {
       nombreDuplicado = true;
-      break; 
+      break;
     }
   }
 
@@ -137,34 +221,22 @@ function registrarNuevoProducto() {
     return;
   }
 
-  let etiquetasArray = [];
-  if (registroEtiquetas) {
-    const arraySeparado = registroEtiquetas.split(",");
-    for (let i = 0; i < arraySeparado.length; i++) {
-      etiquetasArray.push(arraySeparado[i].trim());
-    }
+  const etiquetasArray = [];
+  const opcionesSeleccionadas = registroEtiquetas.selectedOptions;
+  for (let i = 0; i < opcionesSeleccionadas.length; i++) {
+    etiquetasArray.push(opcionesSeleccionadas[i].value);
   }
 
   moduloProductos.setProducto(titulo, etiquetasArray, info, stock, valor);
-  const todosLosProductos = moduloProductos.getStock();
-  const llaves = Array.from(todosLosProductos.keys());
-  const ultimoId = llaves[llaves.length - 1];
-  const productoCreado = moduloProductos.getProducto(ultimoId);
 
-  const proximoIndice = tbody.children.length + 1;
-
-  if (productoCreado) {
-    const nuevaFila = crearFilaProducto(productoCreado,proximoIndice,eliminarProducto,iniciarEdicionProducto,);
-    tbody.appendChild(nuevaFila);
-  }
-
+  actualizarTablaCompleta();
   formRegistro.reset();
   //busco si hay un modal activo
-  const modalInstancia = bootstrap.Modal.getInstance(
+  const modalOcultarInstancia = bootstrap.Modal.getInstance(
     document.getElementById("modal"),
   );
   //si el modal existe, lo oculto
-  if (modalInstancia) modalInstancia.hide();
+  if (modalOcultarInstancia) modalOcultarInstancia.hide();
 }
 
 function iniciarEdicionProducto(id) {
@@ -177,18 +249,26 @@ function iniciarEdicionProducto(id) {
     document.getElementById("editar-stock").value = producto.cantidad;
     document.getElementById("editar-valor").value = producto.valor;
 
-    const divEtiquetas = document.getElementById("editar-etiquetas");
-    let inputEtiquetas = divEtiquetas.querySelector("input.inputEtiquetas");
-    if (!inputEtiquetas) {
-      inputEtiquetas = document.createElement("input");
-      inputEtiquetas.classList.add("form-control", "inputEtiquetas", "mt-2");
-      divEtiquetas.appendChild(inputEtiquetas);
-    }
-    if (producto.etiquetas) {
-      //con join se unen todos elementos de un array a string, con una "," y un espacio
-      inputEtiquetas.value = producto.etiquetas.join(", ");
-    } else {
-      inputEtiquetas.value = "";
+    const selectEditar = document.getElementById("selectEditarEtiquetas");
+    selectEditar.innerHTML = "";
+
+    const listaGlobal = moduloEtiquetas.getEtiquetas();
+    for (let i = 0; i < listaGlobal.length; i++) {
+      const etiqueta = listaGlobal[i];
+      const optionEtiqueta = document.createElement("option");
+      optionEtiqueta.value = etiqueta;
+      optionEtiqueta.textContent = etiqueta;
+
+      // Si el producto actual tiene esta etiqueta, queda marcado (selected = true)
+      if (producto.etiquetas) {
+        for (let j = 0; j < producto.etiquetas.length; j++) {
+          if (producto.etiquetas[j] === etiqueta) {
+            optionEtiqueta.selected = true;
+            break;
+          }
+        }
+      }
+      selectEditar.appendChild(optionEtiqueta);
     }
   }
 }
@@ -201,15 +281,12 @@ function guardarCambiosProducto() {
   const informacionNueva = document.getElementById("editar-info").value.trim();
   const stockNuevo = parseInt(document.getElementById("editar-stock").value);
   const nuevoValor = parseFloat(document.getElementById("editar-valor").value);
-  const inputEtiquetas = document
-    .getElementById("editar-etiquetas")
-    .querySelector(".inputEtiquetas");
-  let etiquetasNuevas = [];
-  if (inputEtiquetas && inputEtiquetas.value) {
-    const arraySeparado = inputEtiquetas.value.split(",");
-    for (let i = 0; i < arraySeparado.length; i++) {
-      etiquetasNuevas.push(arraySeparado[i].trim()); //tambien elimino los espacios de la etiqueatas
-    }
+  const selectEditar = document.getElementById("selectEditarEtiquetas");
+  const etiquetasNuevas = [];
+
+  const opcionesEditadas = selectEditar.selectedOptions;
+  for (let i = 0; i < opcionesEditadas.length; i++) {
+    etiquetasNuevas.push(opcionesEditadas[i].value);
   }
 
   moduloProductos.editarProducto(
@@ -239,12 +316,12 @@ function guardarCambiosProducto() {
   }
 
   //chekeo si el modal esta activo, si esta lo oculto y borro idProductoEnEdicion
-  const modalInstancia = bootstrap.Modal.getInstance(
+  const modalEditarInstancia = bootstrap.Modal.getInstance(
     document.getElementById("modalEditar"),
   );
-  if (modalInstancia) {
-  modalInstancia.hide();
-  idProductoEnEdicion = null;
+  if (modalEditarInstancia) {
+    modalEditarInstancia.hide();
+    idProductoEnEdicion = null;
   }
 }
 
@@ -277,4 +354,5 @@ function resetearFiltros() {
   actualizarTablaCompleta();
 }
 
-actualizarTablaCompleta()
+actualizarSelectoresEtiquetas();
+actualizarTablaCompleta();

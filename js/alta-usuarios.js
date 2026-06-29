@@ -5,7 +5,7 @@ import {
   saveUsuarios,
   getUsuarios,
 } from "../modulos/usuarios.js";
-import { crearFilaUsuario } from "../modulos/crearDomElements.js";
+import { crearFilaUsuario, createRegistroCompra } from "../modulos/crearDomElements.js";
 import * as registros from "../modulos/registros.js";
 
 setUsuario("joaco_pan", "Joaquin", "Perez", "123456", "user");
@@ -24,54 +24,10 @@ function actualizarTablaCompleta() {
       usuarioObjeto,
       cambioEstado,
       eliminarUsuario,
+      mostrarHistorialUsuario
     );
     tbodyUsuarios.appendChild(nuevaFila);
   }
- //
-  tbodyUsuarios.addEventListener("click", function (e) {
-    // si hago click en los usuarios, y es en la parte de historial :
-    if (e.target.classList.contains("bi-justify")) {
-      const nombreUsuario = e.target.dataset.usuario; //
-      const contenedor = document.getElementById("historialContenedor");
-      contenedor.innerHTML = "";
-      const historialDeCarritos = registros.getRegistro(nombreUsuario);
-
-      // hacemos una lista con los carritos
-      if (historialDeCarritos && historialDeCarritos.length > 0) {
-        for (let i = 0; i < historialDeCarritos.length; i++) {
-          const carrito = historialDeCarritos[i];
-          const divCompra = document.createElement("div");
-          divCompra.classList.add(
-            "p-2",
-            "border-bottom",
-            "d-flex",
-            "justify-content-between",
-          );
-
-          let fecha;
-          if (carrito.fecha) {
-            fecha = carrito.fecha;
-          } else {
-            fecha = `Compra N° ${i + 1}`;
-          }
-          
-          divCompra.innerHTML = `<span><strong>${fecha}</strong></span> <span class="text-success">Procesada</span>`;
-          let cantidad = document.createElement("span")
-          let nombreDeProducto = document.createElement("span")
-
-          cantidad.textContent = "Cantidad: 12"
-          nombreDeProducto.textContent = "Medialunas   "
-          
-          contenedor.appendChild(divCompra);
-          contenedor.appendChild(nombreDeProducto)
-          contenedor.appendChild(cantidad)
-        }
-      } else {
-        // si el usuario es nuevo o no compro nada todavia muestor:
-        contenedor.innerHTML = `<p class="text-muted text-center my-3">Este usuario no registra compras realizadas.</p>`;
-      }
-    }
-  });
 }
 
 function cambioEstado(nombreUsuario) {
@@ -89,6 +45,7 @@ function cambioEstado(nombreUsuario) {
         usuario,
         cambioEstado,
         eliminarUsuario,
+        mostrarHistorialUsuario,
       );
       tbodyUsuarios.replaceChild(filaNueva, filaVieja);
     }
@@ -171,7 +128,33 @@ function compararNombreUsuario(nuevoNombre) { //retorna un boolean, si el nombre
   return usuarios.has(nuevoNombre);
 }
 
+function mostrarHistorialUsuario(nombreUsuario) {
+  const contenedor = document.getElementById("historialContenedor");
+  const carritosDeUsuario = registros.getRegistro(nombreUsuario);
+
+  console.log("Nombre de usuario clickeado:", nombreUsuario);
+  console.log("Lo que devuelve el registro:", carritosDeUsuario);
+
+  contenedor.innerHTML = ""
+
+  if (carritosDeUsuario && carritosDeUsuario.length > 0) {
+    for (let i = 0; i < carritosDeUsuario.length; i++) {
+      const carrito = carritosDeUsuario[i];
+      
+      createRegistroCompra(carrito, contenedor, i);
+    }
+  } else {
+    // si no tiene carrito creo el mensaje
+    const pMensaje = document.createElement("p");
+    pMensaje.classList.add("text-muted", "text-center", "my-3");
+    pMensaje.textContent = "No registra compras realizadas.";
+    contenedor.appendChild(pMensaje);
+  }
+}
+
+
 actualizarTablaCompleta();
 console.log("-----------------")
 console.log(getUsuarios())
 console.log("-----------------")
+
