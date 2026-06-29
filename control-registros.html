@@ -14,10 +14,6 @@
     <nav class="navbar navbar-expand-xxl navbar-dark bg-black sticky-top">
         <div class="container-fluid d-flex">
             <a class="navbar-brand w-30 m-0">Panaderia</a>
-            <form class="d-flex w-40" role="search">
-                <input class="form-control" type="search" aria-label="Search" placeholder="Search"/>
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
             <div class="d-flex justify-content-end d-xxl-none w-30">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,11 +41,16 @@
             <div class="bg-black text-white p-neutral w-100">
                 <label for="selectUsuario" class="py-neutral">Registro del Usuario:</label>
                 <select name="" id="selectUsuario" class="form-select">
-                    <option value="" disabled>Seleccione un Usuario...</option>
-                    <option value="prueba" selected>Prueba</option>
+                    <option value="">Seleccione un Usuario...</option>
+                    <option value="prueba" selected>Listado De Usuarios...</option>
                 </select>
-                <label for="inputFecha" class="py-neutral">Filtrar por fecha:</label>
-                <input type="date" name="" id="inputFecha" class="form-control">
+                <div>
+                <label for="inputFechaInicio" class="py-neutral">Fecha De Inicio:</label>
+                <input type="date" name="" id="inputFechaInicio" class="form-control">
+                <label for="inputFechaFinal" class="py-neutral">Fecha Final:</label>
+                <input type="date" name="" id="inputFechaFinal" class="form-control">
+                <button type="button" id="filtroRegistroAdmin" class="btn btn-info py-neutral mt-2" >Aplicar</button>
+                </div>
             </div>
         </div>
         <div class="p-neutral flex-grow-1 d-flex justify-content-center">
@@ -196,6 +197,8 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"crossorigin="anonymous"></script>
+    <script type="module" src="js/control-registros.js"></script>
+    <script type="module" src="modulos/crearDomElements.js"></script>
 </body>
 
 </html>

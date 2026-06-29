@@ -5,6 +5,7 @@ import * as sesionActual from "./sesionActual.js"
 import * as stock from "./stock.js"
 import * as carritos from "./carritos.js"
 import * as registros from "./registros.js"
+import * as usuarios from "../modulos/usuarios.js"
 
 {
   /* <div class="col d-flex justify-content-center">
@@ -589,4 +590,9 @@ export function crearFilaUsuario(usuario, funcionCambiarEstado, funcionEliminar)
     tr.appendChild(tdAcciones);
 
     return tr;
+}
+
+function crearListaProductos() {
+ const mapaDeUsuarios = usuarios.getUsuarios()
+
 }

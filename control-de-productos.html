@@ -16,10 +16,6 @@
     <nav class="navbar navbar-expand-xxl navbar-dark bg-black sticky-top">
         <div class="container-fluid d-flex">
             <a class="navbar-brand w-30 m-0">Panaderia</a>
-            <form class="d-flex w-40" role="search">
-                <input class="form-control" type="search" aria-label="Search" />
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
             <div class="d-flex justify-content-end d-xxl-none w-30">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,23 +49,34 @@
                     <label for="btnFiltros" class="btn btn-outline-primary">Filtros !</label>
                 </div>
             </div>
-            <form id="filtros" class="collapse d-lg-block w-100">        
+            <form id="filtros" class="collapse d-lg-block w-100">
                 <label for="filtroTitulo" class="form-label mt-2">Titulo</label>
                 <input type="text" id="filtroTitulo" class="form-control" placeholder="Ingrese un Titulo">
-            
+
                 <label for="filtroDescripcion" class="form-label mt-2">Descripción</label>
                 <input type="text" id="filtroDescripcion" class="form-control" placeholder="Ingrese una Descripción">
-            
+
                 <label for="filtroStock" class="form-label mt-2">Stock</label>
                 <input type="number" id="filtroStock" class="form-control" placeholder="Ingrese Una Cantidad">
 
                 <label for="filtroEtiqueta" class="form-label mt-2">Etiquetas</label>
                 <input type="text" id="filtroEtiqueta" class="form-control" placeholder="Ingrese una etiqueta">
+
+                <label for="filtroEtiqueta" class="form-label mt-2">Etiquetas</label>
+                <div class="input-group mb-3">
+                    <label for="filtroEtiqueta" class="form-label mt-2">Etiquetas</label>
+                    <input type="text" id="filtroEtiqueta" class="form-control"
+                        aria-label="Recipient’s username" aria-describedby="basic-addon2">
+                        <button type="button" id="botonResetearFiltros" class="btn btn-primary mt-2 w-30">
+                    <i class="bi bi-arrow-clockwise"></i>
+                </button>
+                    <span class="input-group-text" id="basic-addon2">@example.com</span>
+                </div>
                 <button type="button" id="botonAplicarFiltros" class="btn btn-primary mt-2 ">Aplicar Filtros</button>
                 <button type="button" id="botonResetearFiltros" class="btn btn-primary mt-2 w-30">
                     <i class="bi bi-arrow-clockwise"></i>
                 </button>
-                
+
             </form>
         </div>
 
@@ -135,7 +142,7 @@
 
                                 <div class="mb-4">
                                     <label for="registroEtiquetas" class="form-label ">Etiquetas del Producto</label>
-                                    <input type="text" id="registroEtiquetas" class="form-control"/>
+                                    <input type="text" id="registroEtiquetas" class="form-control" />
                                     <div class="invalid-feedback" id="mensajeRegistroEtiquetas"></div>
                                 </div>
 
@@ -152,14 +159,16 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="botonRegistroGuardar" type="button" class="btn btn-primary">Guardar Producto</button>
+                        <button id="botonRegistroGuardar" type="button" class="btn btn-primary">Guardar
+                            Producto</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-        <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -185,7 +194,7 @@
                                 </div>
                                 <div class="mb-4 etiquetasEditar" id="editar-etiquetas">
                                     <label class="form-label d-flex">Etiquetas</label>
-                                    
+
                                 </div>
                                 <div class="mb-4">
                                     <label for="editar-valor" class="form-label">Valor</label>
@@ -202,10 +211,10 @@
         </div>
     </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-            </script>
-        <script type="module" src="js/control-de-productos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+        </script>
+    <script type="module" src="js/control-de-productos.js"></script>
 </body>
 
 </html>
