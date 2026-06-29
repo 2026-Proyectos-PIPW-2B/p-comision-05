@@ -107,6 +107,11 @@
     width: 8% !important;
 }
 
+.hide-scrollbar {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
 .card-descripcion {
     display: -webkit-box; /* Required for line-clamping */
     -webkit-box-orient: vertical; /* Sets the layout direction */
@@ -132,6 +137,39 @@
     z-index: -1;
     pointer-events: none;
 }
+
+.shadow-box-scroll {
+    position: relative; /* Required for positioning the shadows */
+    width: 300px;
+    height: 150px;
+    background: #ffffff;
+    overflow: hidden; /* Keeps the shadows inside the box boundaries */
+}
+
+/* Base style for both top-layer shadows */
+.shadow-box-scroll::before,
+.shadow-box-scroll::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;          /* Controls how far the shadow extends inward */
+    z-index: 10;          /* Forces the shadow to sit on top of inside content */
+    pointer-events: none; /* Crucial: allows users to click text/links underneath */
+}
+
+/* Left overlay shadow */
+.shadow-box-scroll::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
+}
+
+/* Right overlay shadow */
+.shadow-box-scroll::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.4), transparent);
+}
+
 
 .img-1 {
     z-index: 3;
@@ -162,25 +200,35 @@
 }
 
 @media (min-width: 992px) {
-  .w-lg-75 {
-    width: 75% !important;
-  }
-  
-  .pixel-w-lg-180 {
-    width: 180px;
-    flex: 0 0 180px; 
-  }
+    .bg-lg-white {
+        --bs-bg-opacity: 0;
+        background-color: white !important;
+    }
 
-  .static-lg {
-    position: static;
-    z-index: 0;
-  }
+    .text-lg-black {
+        --bs-text-opacity: 1;
+    color: black !important;
+    }
 
-  .top-gap-lg-64 {
-    top: 64px;
-  }
+    .w-lg-75 {
+        width: 75% !important;
+    }
+    
+    .pixel-w-lg-180 {
+        width: 180px;
+        flex: 0 0 180px; 
+    }
 
-  .ms-lg-neutral {
-    margin-left: calc(var(--neutral) * 3);
-  }
+    .static-lg {
+        position: static;
+        z-index: 0;
+    }
+
+    .top-gap-lg-64 {
+        top: 64px;
+    }
+
+    .ms-lg-neutral {
+        margin-left: calc(var(--neutral) * 3);
+    }
 }
