@@ -6,8 +6,6 @@ const sectionRegistro = document.getElementById("sectionRegistro")
 
 function onLoad() {
     const registro = registros.getRegistro(sesionActual.get().nombreUsuario)
-    console.log(registro.length)
-    console.log(registro)
     for (const [i, carrito] of registro.entries()) {
         createRegistroCompra(carrito, sectionRegistro, i)
     }
