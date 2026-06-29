@@ -4,7 +4,6 @@ import * as sesionActual from "./sesionActual.js"
 import * as stock from "./stock.js"
 import * as carritos from "./carritos.js"
 import * as registros from "./registros.js"
-import * as usuarios from "../modulos/usuarios.js"
 
 {
   /* <div class="col d-flex justify-content-center">
@@ -344,18 +343,7 @@ function generateArrayImagenes(carrito) {
 function handlerVerMas() {
     const modalProductos = document.getElementById("modalProductos")
     modalProductos.replaceChildren()
-
-    console.log("Estoy desde handlerVerMas, hice una modificacion, si funciona, eliminar comentario")
-    //Busco si el select, fue el de la pestaña de admin(si la funcion se ejecuto desde control-de-registros)
-    //si existe el select y tiene un usuario valido, entonces estoy llamando desde admin, si no desde usuario
-    const selectUsuario = document.getElementById("selectUsuario");
-    let usuarioABuscar;
-    if (selectUsuario && selectUsuario.value !== "") {
-        usuarioABuscar = selectUsuario.value;
-    } else {
-        usuarioABuscar = sesionActual.get().nombreUsuario;
-    }
-    const carrito = registros.getRegistro(usuarioABuscar)[Number(this.dataset.numero)]
+    const carrito = registros.getRegistro(this.dataset.usuario)[Number(this.dataset.numero)]
     for (const producto of carrito.productos.values()) {
         createTarjetaRegistro(producto, modalProductos)
     }
@@ -366,8 +354,9 @@ function handlerVerMas() {
  * @param {Carrito} carrito 
  * @param {HTMLElement} agregar 
  * @param {Number} numero 
+ * @param {string} usuario - Variable opcional que por defecto es el usuario actual.
  */
-export function createRegistroCompra(carrito, agregar, numero, mostrarHistorial) {
+export function createRegistroCompra(carrito, agregar, numero, usuario = sesionActual.get().nombreUsuario) {
     // Primero
     const divContenedor = document.createElement("div")
     divContenedor.classList.add("w-100", "border", "rounded", "rounded-2", "p-neutral", "d-flex", "flex-column", "shadow")
@@ -429,6 +418,7 @@ export function createRegistroCompra(carrito, agregar, numero, mostrarHistorial)
     buttonModal.dataset.bsToggle = "modal"
     buttonModal.dataset.bsTarget = "#modalCompra"
     buttonModal.dataset.numero = numero
+    buttonModal.dataset.usuario = usuario
     buttonModal.textContent = "Ver más"
     buttonModal.addEventListener("click", handlerVerMas)
 
@@ -462,7 +452,7 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
     for (let i = 0; i < producto.etiquetas.length; i++) {
       const etiqueta = producto.etiquetas[i];
       const spanEtiqueta = document.createElement("span");
-      spanEtiqueta.classList.add("badge", "rounded-pill", "me-1");
+      spanEtiqueta.classList.add("badge", "rounded-pill", "me-1", coloresRandom());
       spanEtiqueta.textContent = etiqueta;
       tdEtiquetas.appendChild(spanEtiqueta);
     }
@@ -494,6 +484,7 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
   divContenedor.append(iconoBorrar, iconoEditar);
   tdAcciones.appendChild(divContenedor);
 
+  // Unimos todas las celdas en la fila
   tr.append(
     tdNumero,
     tdTitulo,
@@ -506,8 +497,19 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
   return tr;
 }
 
+function coloresRandom() {
+  const colores = [
+    "text-bg-primary",
+    "text-bg-success",
+    "text-bg-danger",
+    "text-bg-warning",
+    "text-bg-info",
+    "text-bg-dark",
+  ];
+  return colores[Math.floor(Math.random() * colores.length)];
+}
 
-export function crearFilaUsuario(usuario, funcionCambiarEstado, funcionEliminar, mostrarHistorialUsuario) {
+export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar) {
     const tr = document.createElement('tr');
     tr.dataset.id = usuario.nombreUsuario; 
 
@@ -555,9 +557,6 @@ export function crearFilaUsuario(usuario, funcionCambiarEstado, funcionEliminar,
     iconoHistorial.setAttribute("data-bs-toggle", "modal"); 
     iconoHistorial.setAttribute("data-bs-target", "#modalHistorial"); 
     iconoHistorial.dataset.usuario = usuario.nombreUsuario; 
-    iconoHistorial.addEventListener("click", function() {
-        mostrarHistorialUsuario(usuario.nombreUsuario)
-    })
     tdHistorial.appendChild(iconoHistorial);
 
     const tdAcciones = document.createElement('td');
@@ -582,12 +581,8 @@ export function crearFilaUsuario(usuario, funcionCambiarEstado, funcionEliminar,
     inputSwitch.setAttribute('role', 'switch');
     inputSwitch.checked = usuario.habilitado; 
     
-
-    /* inputSwitch.addEventListener("change", function() {
-        funcionCambiarEstado(usuario.nombreUsuario); 
-    }); Forma mas corta de escribir funciones, se puede usar en todas , investigar ? en condicionales*/
     inputSwitch.addEventListener('change', () => {
-        funcionCambiarEstado(usuario.nombreUsuario); 
+        funcionoCambiarEstado(usuario.nombreUsuario); 
     });
 
     divSwitch.appendChild(inputSwitch);
@@ -605,9 +600,4 @@ export function crearFilaUsuario(usuario, funcionCambiarEstado, funcionEliminar,
     tr.appendChild(tdAcciones);
 
     return tr;
-}
-
-function crearListaProductos() {
- const mapaDeUsuarios = usuarios.getUsuarios()
-
 }
