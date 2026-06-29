@@ -5,6 +5,7 @@ const sectionProductos = document.getElementById("sectionProductos")
 const pageNumbers = document.getElementById("pageNumbers")
 const pageSelectBack = document.getElementById("pageSelectBack")
 const pageSelectFoward = document.getElementById("pageSelectFoward")
+const scrollEtiquetas = document.getElementById("scrollEtiquetas")
 /** @type {Array<HTMLDivElement>} */
 const tarjetas = []
 /** @type {Array<HTMLDivElement>} */
@@ -146,7 +147,15 @@ function numeroPaginas() {
 }
 
 function onLoad() {
+    scrollEtiquetas.addEventListener("wheel", (event) => {
+    event.preventDefault()
+    scrollEtiquetas.scrollBy({
+        left: event.deltaY,
+        behavior: "smooth" // Smooths out the wheel steps
+    })
+    }, { passive: false })
     const productosStock = stock.getStock()
+    
     for (const producto of productosStock.values()) {
         if (producto.cantidad > 0) {
             tarjetas.push(createTarjetaTienda(producto))
