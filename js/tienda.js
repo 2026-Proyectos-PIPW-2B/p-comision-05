@@ -11,6 +11,7 @@ const tarjetas = []
 const paginas = []
 
 function paginado(tarjetasAMostrar) {
+    sectionProductos.replaceChildren()
     paginas.length = 0
     let cantidadPaginas = 1
     let contador = 1
@@ -31,6 +32,26 @@ function paginado(tarjetasAMostrar) {
         divPagina.append(tarjeta)
         contador++
     }
+}
+
+function filtradoNombre(str) {
+    const tarjetasACargar = []
+    for (const tarjeta of tarjetas) {
+        if (stock.getProducto(tarjeta.dataset.id).nombre.includes(str)) {
+            tarjetasACargar.push(tarjeta)
+        }
+    }
+    paginado(tarjetasACargar)
+}
+
+function filtradoCategoria(categoria) {
+    const tarjetasACargar = []
+    for (const tarjeta of tarjetas) {
+        if (stock.getProducto(tarjeta.dataset.id).etiquetas.includes(categoria)) {
+            tarjetasACargar.push(tarjeta)
+        }
+    }
+    paginado(tarjetasACargar)
 }
 
 function handlerRadioPage() {
