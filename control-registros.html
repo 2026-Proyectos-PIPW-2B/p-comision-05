@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panaderia</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"crossorigin="anonymous"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style-utilities.css">
 </head>
@@ -14,10 +15,6 @@
     <nav class="navbar navbar-expand-xxl navbar-dark bg-black sticky-top">
         <div class="container-fluid d-flex">
             <a class="navbar-brand w-30 m-0">Panaderia</a>
-            <form class="d-flex w-40" role="search">
-                <input class="form-control" type="search" aria-label="Search" placeholder="Search"/>
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
             <div class="d-flex justify-content-end d-xxl-none w-30">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,163 +36,54 @@
             </div>
         </div>
     </nav>
-    
+
     <section id="registros" class="flex-grow-1 w-100 d-flex flex-column flex-lg-row">
         <div class="d-flex flex-wrap pixel-w-lg-180 border-end sticky-top">
             <div class="bg-black text-white p-neutral w-100">
                 <label for="selectUsuario" class="py-neutral">Registro del Usuario:</label>
                 <select name="" id="selectUsuario" class="form-select">
-                    <option value="" disabled>Seleccione un Usuario...</option>
-                    <option value="prueba" selected>Prueba</option>
+                    <option value="">Seleccione un Usuario...</option>
                 </select>
-                <label for="inputFecha" class="py-neutral">Filtrar por fecha:</label>
-                <input type="date" name="" id="inputFecha" class="form-control">
+                <div>
+                    <label for="inputFechaInicio" class="py-neutral">Fecha De Inicio:</label>
+                    <input type="date" name="" id="inputFechaInicio" class="form-control">
+                    <label for="inputFechaFinal" class="py-neutral">Fecha Final:</label>
+                    <input type="date" name="" id="inputFechaFinal" class="form-control">
+                    <button type="button" id="filtroRegistroAdmin" class="btn btn-info py-neutral mt-2">Aplicar</button>
+                </div>
             </div>
         </div>
         <div class="p-neutral flex-grow-1 d-flex justify-content-center">
-            <div class="max-w-1200 w-100">
-                <div class="w-100 border rounded rounded-2 p-neutral d-flex flex-column">
-                    <div class="w-100 d-flex border-bottom mb-neutral align-items-baseline">
-                        <h5 class="w-50">Compra #12</h5>
-                        <span class="w-50 fs-5 text-end">Fecha: 02/06/2025</span>
-                    </div>
-                    <div class="w-100 d-flex">
-                        <div class="w-50 d-flex">
-                            <img src="img/medialuna.png" alt="medialuna" class="w-25 rounded">
-                            <img src="img/medialuna.png" alt="medialuna" class="w-25 rounded position-relative img-2">
-                            <img src="img/medialuna.png" alt="medialuna" class="w-25 rounded position-relative img-3">
-                            <div class="w-25 position-relative rounded border d-flex bg-light justify-content-center align-items-center img-4">
-                                <span><i class="bi bi-three-dots"></i></span>
-                            </div>
-                        </div>
-                        <div class="w-50 d-flex flex-column justify-content-end">
-                            <div class="d-flex justify-content-end align-items-center">
-                                <span class="fs-5">Total: $9000</span>
-                            </div>
-                            <div class="d-flex justify-content-end align-items-center">
-                                <button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#ModalCompra12">Ver mas</button>
-                                <div class="modal fade" id="ModalCompra12" tabindex="-1" aria-labelledby="ModalCompra12Label" aria-hidden="true">
-                                    <div class="d-flex justify-content-center align-items-center h-100">
-                                        <div class="modal-dialog modal-dialog-scrollable w-100 max-w-1200 m-neutral">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5 p-neutral" id="ModalCompra12Label">Productos de la compra</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
-                                                        <div class="w-15">
-                                                            <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
-                                                        </div>
-                                                        <div class="w-85 ps-neutral d-flex flex-column">
-                                                            <h5>Medialunas</h5>
-                                                            <p class="flex-grow-1">Facturas frescas</p>
-                                                            <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
-                                                        </div>
-                                                        <div class="w-100 pt-neutral border-top mt-neutral">
-                                                            <div class="w-100 d-flex justify-content-end align-items-center">
-                                                                <span class="fw-semibold">Cantidad: 12</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
-                                                        <div class="w-15">
-                                                            <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
-                                                        </div>
-                                                        <div class="w-85 ps-neutral d-flex flex-column">
-                                                            <h5>Medialunas</h5>
-                                                            <p class="flex-grow-1">Facturas frescas</p>
-                                                            <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
-                                                        </div>
-                                                        <div class="w-100 pt-neutral border-top mt-neutral">
-                                                            <div class="w-100 d-flex justify-content-end align-items-center">
-                                                                <span class="fw-semibold">Cantidad: 12</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
-                                                        <div class="w-15">
-                                                            <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
-                                                        </div>
-                                                        <div class="w-85 ps-neutral d-flex flex-column">
-                                                            <h5>Medialunas</h5>
-                                                            <p class="flex-grow-1">Facturas frescas</p>
-                                                            <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
-                                                        </div>
-                                                        <div class="w-100 pt-neutral border-top mt-neutral">
-                                                            <div class="w-100 d-flex justify-content-end align-items-center">
-                                                                <span class="fw-semibold">Cantidad: 12</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
-                                                        <div class="w-15">
-                                                            <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
-                                                        </div>
-                                                        <div class="w-85 ps-neutral d-flex flex-column">
-                                                            <h5>Medialunas</h5>
-                                                            <p class="flex-grow-1">Facturas frescas</p>
-                                                            <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
-                                                        </div>
-                                                        <div class="w-100 pt-neutral border-top mt-neutral">
-                                                            <div class="w-100 d-flex justify-content-end align-items-center">
-                                                                <span class="fw-semibold">Cantidad: 12</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
-                                                        <div class="w-15">
-                                                            <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
-                                                        </div>
-                                                        <div class="w-85 ps-neutral d-flex flex-column">
-                                                            <h5>Medialunas</h5>
-                                                            <p class="flex-grow-1">Facturas frescas</p>
-                                                            <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
-                                                        </div>
-                                                        <div class="w-100 pt-neutral border-top mt-neutral">
-                                                            <div class="w-100 d-flex justify-content-end align-items-center">
-                                                                <span class="fw-semibold">Cantidad: 12</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow">
-                                                        <div class="w-15">
-                                                            <img src="img/medialuna.png" alt="medialuna" class="w-100 rounded rounded-2">
-                                                        </div>
-                                                        <div class="w-85 ps-neutral d-flex flex-column">
-                                                            <h5>Medialunas</h5>
-                                                            <p class="flex-grow-1">Facturas frescas</p>
-                                                            <p id="totalProducto" class="m-0 fs-5 fw-semibold text-end">$9000</p>
-                                                        </div>
-                                                        <div class="w-100 pt-neutral border-top mt-neutral">
-                                                            <div class="w-100 d-flex justify-content-end align-items-center">
-                                                                <span class="fw-semibold">Cantidad: 12</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <div class="d-flex justify-content-end p-neutral">
-                                                        <span class="fs-5 fw-semibold">Envio: $1500</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="contenedorCompras" class="max-w-1200 w-100 d-flex flex-column gap-3">
+                <p class="text-center text-muted fs-5 mt-4">Seleccione un usuario y aplique los filtros para ver el
+                    historial.</p>
             </div>
         </div>
     </section>
 
-    <main>
+    <div class="modal fade" id="modalCompra" tabindex="-1" aria-labelledby="modalCompraLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable max-w-1200 m-neutral">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 p-neutral" id="modalCompraLabel">Productos de la compra</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalProductos">
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100 d-flex justify-content-end p-neutral">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script type="module" src="js/control-registros.js"></script>
+    <script type="module" src="modulos/registros.js"></script>
 </body>
 
 </html>
