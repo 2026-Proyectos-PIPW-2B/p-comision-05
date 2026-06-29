@@ -1,5 +1,5 @@
 import * as users from "../modulos/usuarios.js";
-
+import * as sesionActual from "../modulos/sesionActual.js"
 //nombreUsuario, nombre, apellido, contraseña, tipo todo boolean
 users.setUsuario("juanCarlos", "juan", "carlos", "asd123", "admin")
 users.setUsuario("facundoArana", "facundo", "araña", "asd123", "user")
@@ -22,8 +22,8 @@ inputBotonLogin.addEventListener("click", function(e) {
   e.preventDefault();
   let nombreUsuarioPasado = inputNombre.value
   let password = inputPassword.value;
-
   let usuario = users.getUsuario(nombreUsuarioPasado);
+
 
   if (usuario === null) {
     vaciarMensajes();
@@ -42,8 +42,11 @@ inputBotonLogin.addEventListener("click", function(e) {
 
         inputPassword.classList.add("is-invalid");
         inputMensajePassword.textContent = "Contraseña Incorrecto";
-        console.log("estoy aqui");
+
       } else {
+        let nombre = usuario.nombre
+        let apellido = usuario.apellido
+        sesionActual.set(nombreUsuarioPasado,nombre,apellido)
         vaciarMensajes();
         if (usuario.tipo === "admin") {
           window.location.href = "control-de-productos.html";
@@ -53,3 +56,5 @@ inputBotonLogin.addEventListener("click", function(e) {
       }
     }
   }});
+
+
