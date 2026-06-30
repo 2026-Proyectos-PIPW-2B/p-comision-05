@@ -6,7 +6,8 @@ import { crearFilaUsuario, createRegistroCompra } from "../modulos/crearDomEleme
 import * as registros from "../modulos/registros.js";
 import * as sesionActual from "../modulos/sesionActual.js"; 
 
-setUsuario("joaco_pan", "Joaquin", "Perez", "123456", "user");
+setUsuario("joaco_pan", "Joaquin", "Perez", "123456", "admin");
+setUsuario("joaco_pes", "Joaquin", "Perez", "123456", "user");
 
 
 
@@ -60,11 +61,6 @@ function eliminarUsuario(nombreUsuario) {
   }
 }
 
-btnCerrarSesion.addEventListener("click", function () {
-  sesionActual.limpiarSesionActual();
-  alert("Sesión cerrada, chau!");
-  window.location.href = "login.html";
-});
 
 const botonCrearUsuario = document.getElementById("crearUsuario");
 botonCrearUsuario.addEventListener("click", function (e) {
