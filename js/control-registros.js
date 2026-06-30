@@ -31,12 +31,6 @@ function cargarSelectUsuarios() {
 }
 
 
-btnCerrarSesion.addEventListener("click", function () {
-  sesionActual.limpiarSesionActual();
-  alert("Sesión cerrada, chau!");
-  window.location.href = "login.html";
-});
-
 btnFiltroRegistroAdmin.addEventListener("click", function (e) {
   e.preventDefault();
   const usuarioSeleccionado = selectUsuario.value;

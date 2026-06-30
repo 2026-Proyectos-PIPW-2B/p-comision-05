@@ -44,11 +44,6 @@ botonResetearFiltros.addEventListener("click", resetearFiltros);
 btnCrearEtiqueta.addEventListener("click", gestionarAltaEtiqueta)
 inputTitulos.addEventListener("change", actualizarImagenRegistro);
 
-btnCerrarSesion.addEventListener("click", function () {
-  sesionActual.limpiarSesionActual();
-  alert("Sesión cerrada, chau!");
-  window.location.href = "login.html";
-});
 
 //funciones
 function actualizarSelectoresEtiquetas() {
@@ -394,7 +389,6 @@ function resetearFiltros() {
 }
 
 function iniciar() {
-  console.log("Toda la página cargó por completo. Inicializando...");
   renderListaProductosDisponibles();
   actualizarSelectoresEtiquetas();
   actualizarTablaCompleta();
