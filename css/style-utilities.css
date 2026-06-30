@@ -112,6 +112,14 @@
     -ms-overflow-style: none; 
 }
 
+.border-radio-etiqueta + label {
+    border-bottom: 2px solid black;
+}
+
+.border-radio-etiqueta:checked + label {
+    border-bottom: 2px solid grey;
+}
+
 .card-descripcion {
     display: -webkit-box; /* Required for line-clamping */
     -webkit-box-orient: vertical; /* Sets the layout direction */

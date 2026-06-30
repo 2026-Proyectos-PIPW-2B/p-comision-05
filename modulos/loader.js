@@ -8,7 +8,6 @@ import { Usuario } from "../clases/Usuario.js"
  * @param {string} str 
  */
 export function loadProducto(str) {
-    console.log(str)
     const values = str.split("¡")
     return new Producto(values[0], JSON.parse(values[1]), values[2], JSON.parse(values[3]), JSON.parse(values[4]), values[5])
 }
@@ -25,7 +24,6 @@ export function loadUsuario(str) {
  */
 export function loadCarrito(str) {
     const values = str.split("¿")
-    console.log(values[0])
     // values[0] = fecha, values[1] = array de keys, values[2] = string de valores
     const mapa = new Map()
     if (str !== "") {
@@ -50,7 +48,6 @@ export function loadStock() {
     const mapa = new Map()
     const stockKeys = JSON.parse(localStorage.getItem("stockKeys"))
     if (stockKeys !== null) {
-        console.log(localStorage.getItem("stockValues"))
         const stockValues = localStorage.getItem("stockValues").split("|")
         for (let i = 0; i < stockKeys.length; i++) {
             if (stockValues[i] !== "") {

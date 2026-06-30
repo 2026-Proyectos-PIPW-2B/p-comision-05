@@ -67,7 +67,6 @@ function handlerRadioPage() {
 
 function handlerSelectBack() {
     const numeroPagina = Number(pageNumbers.dataset.selected)
-    console.log(numeroPagina)
     if (numeroPagina > 1) {
         if (numeroPagina % 5 == 1) {
             document.getElementById(`botonera${pageNumbers.dataset.pageGroupSelected}`).classList.add("d-none")
@@ -80,7 +79,6 @@ function handlerSelectBack() {
 
 function handlerSelectFoward() {
     const numeroPagina = Number(pageNumbers.dataset.selected)
-    console.log(numeroPagina)
     if (numeroPagina < Number(pageNumbers.dataset.ultimaPagina)) {
         if (numeroPagina % 5 == 0) {
             document.getElementById(`botonera${pageNumbers.dataset.pageGroupSelected}`).classList.add("d-none")
@@ -157,11 +155,19 @@ function mostrarTodosProductos() {
 function onLoad() {
     // Scroll lateral
     scrollEtiquetas.addEventListener("wheel", (event) => {
-    event.preventDefault()
-    scrollEtiquetas.scrollBy({
-        left: event.deltaY,
-        behavior: "smooth" // Smooths out the wheel steps
-    })
+        // If the user is already swiping horizontally on a touchpad, let the browser handle it
+        if (event.deltaX !== 0) {
+            return;
+        }
+
+        // Only intercept if there is purely vertical movement (like a standard mouse wheel)
+        if (event.deltaY !== 0) {
+            event.preventDefault();
+            scrollEtiquetas.scrollBy({
+                left: event.deltaY,
+                behavior: "smooth" // Smooths out the wheel steps
+            })
+        }
     }, { passive: false })
 
     sectionProductos.dataset.primerProductoAMostrar = 0
