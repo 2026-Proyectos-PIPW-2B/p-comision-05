@@ -21,6 +21,9 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <button type="button" id="btnCerrarSesion" class="btn btn-sm btn-outline-danger ms-neutral">
+                        <i class="bi bi-box-arrow-right"></i> 
+                    </button>
             </div>
             <div class="collapse navbar-collapse flex-grow-0 w-30" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
@@ -153,6 +156,7 @@
 
                                 <div id="contenedorImagenRegistro" class="mb-4">
                                     <label for="formFile" class="form-label">Imagen</label>
+                                    <img id="vistaPreviaImagenRegistro" src="" alt="Vista previa" class="img-fluid rounded border shadow-sm d-none" style="max-height: 200px;">
                                 </div>
                             </form>
                         </div>
@@ -181,7 +185,7 @@
                             <form id="formEditar">
                                 <div class="mb-4">
                                     <label for="editar-titulo" class="form-label">Titulo</label>
-                                    <input type="text" id="editar-titulo" class="form-control" />
+                                    <input type="text" id="editar-titulo" disabled class="form-control" />
                                 </div>
                                 <div class="mb-4">
                                     <label for="editar-info" class="form-label">Información</label>
@@ -193,12 +197,15 @@
                                 </div>
                                 <div class="mb-4" id="editar-etiquetas">
                                     <label class="form-label">Etiquetas del Producto</label>
-                                    <select id="selectEditarEtiquetas" class="form-select">
+                                    <select id="selectEditarEtiquetas" multiple class="form-select">
                                     </select>
+                                    <p class="text-muted">Manter presionado control para seleccionar más de
+                                        una.</p> 
                                 </div>
                                 <div class="mb-4">
                                     <label for="editar-valor" class="form-label">Valor</label>
                                     <input type="number" id="editar-valor" class="form-control" />
+                                    
                                 </div>
                             </form>
                         </div>

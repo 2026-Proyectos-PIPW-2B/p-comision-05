@@ -42,3 +42,8 @@ export function set(nombreUsuario, nombre, apellido) {
 export function get() {
     return sesionActual
 }
+
+export function limpiarSesionActual() {
+    sesionActual = null;
+    localStorage.removeItem("sesionActual");
+}
