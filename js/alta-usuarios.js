@@ -1,14 +1,13 @@
-import {
-  setUsuario,
-  removeUsuario,
-  getUsuario,
-  saveUsuarios,
-  getUsuarios,
+window.addEventListener("load", iniciar)
+
+import {setUsuario,removeUsuario,getUsuario,saveUsuarios,getUsuarios,
 } from "../modulos/usuarios.js";
 import { crearFilaUsuario, createRegistroCompra } from "../modulos/crearDomElements.js";
 import * as registros from "../modulos/registros.js";
+import * as sesionActual from "../modulos/sesionActual.js"; 
 
-setUsuario("joaco_pan", "Joaquin", "Perez", "123456", "user");
+setUsuario("joaco_pan", "Joaquin", "Perez", "123456", "admin");
+setUsuario("joaco_pes", "Joaquin", "Perez", "123456", "user");
 
 
 
@@ -61,6 +60,7 @@ function eliminarUsuario(nombreUsuario) {
     filaAEliminar.remove(); //remove elimina el elemento del doom
   }
 }
+
 
 const botonCrearUsuario = document.getElementById("crearUsuario");
 botonCrearUsuario.addEventListener("click", function (e) {
@@ -141,7 +141,7 @@ function mostrarHistorialUsuario(nombreUsuario) {
     for (let i = 0; i < carritosDeUsuario.length; i++) {
       const carrito = carritosDeUsuario[i];
       
-      createRegistroCompra(carrito, contenedor, i);
+      createRegistroCompra(carrito, contenedor, i,nombreUsuario);
     }
   } else {
     // si no tiene carrito creo el mensaje
@@ -152,8 +152,10 @@ function mostrarHistorialUsuario(nombreUsuario) {
   }
 }
 
+ function iniciar() {
+  actualizarTablaCompleta();
+ }
 
-actualizarTablaCompleta();
 console.log("-----------------")
 console.log(getUsuarios())
 console.log("-----------------")

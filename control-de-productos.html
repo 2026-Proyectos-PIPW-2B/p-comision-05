@@ -33,6 +33,11 @@
                     <li class="nav-item ms-auto " aria-current="page">
                         <a class="nav-link active text-nowrap" href="control-de-productos.html">Alta Productos</a>
                     </li>
+                    <li class="nav-item ms-auto">
+                        <button type="button" id="btnCerrarSesion" class="btn btn-sm btn-outline-danger ms-neutral">
+                            <i class="bi bi-box-arrow-right"></i>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -120,7 +125,7 @@
                             <form id="formRegistroProductos">
                                 <div class="mb-4">
                                     <label for="inputTitulos" class="form-label">Titulos</label>
-                                    <select id="inputTitulos" class="form-select"> 
+                                    <select id="inputTitulos" class="form-select">
                                         <option> </option>
                                     </select>
                                 </div>
@@ -142,7 +147,7 @@
                                     <select id="registroEtiquetas" class="form-select" multiple style="height: 110px;">
                                     </select>
                                     <p class="text-muted">Manter presionado control para seleccionar más de
-                                        una.</p> 
+                                        una.</p>
                                 </div>
 
                                 <div class="mb-4">
@@ -153,6 +158,8 @@
 
                                 <div id="contenedorImagenRegistro" class="mb-4">
                                     <label for="formFile" class="form-label">Imagen</label>
+                                    <img id="vistaPreviaImagenRegistro" src="" alt="Vista previa"
+                                        class="img-fluid rounded border shadow-sm d-none" style="max-height: 200px;">
                                 </div>
                             </form>
                         </div>
@@ -181,7 +188,7 @@
                             <form id="formEditar">
                                 <div class="mb-4">
                                     <label for="editar-titulo" class="form-label">Titulo</label>
-                                    <input type="text" id="editar-titulo" class="form-control" />
+                                    <input type="text" id="editar-titulo" disabled class="form-control" />
                                 </div>
                                 <div class="mb-4">
                                     <label for="editar-info" class="form-label">Información</label>
@@ -193,12 +200,15 @@
                                 </div>
                                 <div class="mb-4" id="editar-etiquetas">
                                     <label class="form-label">Etiquetas del Producto</label>
-                                    <select id="selectEditarEtiquetas" class="form-select">
+                                    <select id="selectEditarEtiquetas" multiple class="form-select">
                                     </select>
+                                    <p class="text-muted">Manter presionado control para seleccionar más de
+                                        una.</p>
                                 </div>
                                 <div class="mb-4">
                                     <label for="editar-valor" class="form-label">Valor</label>
                                     <input type="number" id="editar-valor" class="form-control" />
+
                                 </div>
                             </form>
                         </div>
@@ -211,34 +221,39 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalGestionEtiquetas" tabindex="-1" aria-labelledby="modalGestionEtiquetasLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header  text-white">
-                <h5 class="modal-title text-black" id="modalGestionEtiquetasLabel">Gestión de Etiquetas</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="d-flex gap-2 mb-3">
-                    <input type="text" id="inputNuevaEtiqueta" class="form-control" placeholder="Ej: Oferta, Sin Tacc, Glaseado...">
-                    <button type="button" id="btnCrearEtiqueta" class="btn btn-primary">Agregar</button>
+    <div class="modal fade" id="modalGestionEtiquetas" tabindex="-1" aria-labelledby="modalGestionEtiquetasLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header  text-white">
+                    <h5 class="modal-title text-black" id="modalGestionEtiquetasLabel">Gestión de Etiquetas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
-                
-                <h6 class="border-bottom pb-2 fw-semibold text-secondary">Etiquetas Activas:</h6>
-                <div id="listaEtiquetasGlobales" class="d-flex flex-column gap-2" style="max-height: 220px; overflow-y: auto;"> <!--Estilizado parcial-->
+                <div class="modal-body">
+                    <div class="d-flex gap-2 mb-3">
+                        <input type="text" id="inputNuevaEtiqueta" class="form-control"
+                            placeholder="Ej: Oferta, Sin Tacc, Glaseado...">
+                        <button type="button" id="btnCrearEtiqueta" class="btn btn-primary">Agregar</button>
                     </div>
-            </div>
-            <div class="modal-footer bg-light">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+                    <h6 class="border-bottom pb-2 fw-semibold text-secondary">Etiquetas Activas:</h6>
+                    <div id="listaEtiquetasGlobales" class="d-flex flex-column gap-2"
+                        style="max-height: 220px; overflow-y: auto;"> <!--Estilizado parcial-->
+                    </div>
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
         </script>
     <script type="module" src="js/control-de-productos.js"></script>
+    <script type="module" src="js/manejoDeSesion.js"></script>
 </body>
 
 </html>

@@ -20,6 +20,7 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
             </div>
             <div class="collapse navbar-collapse flex-grow-0 w-30" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
@@ -31,6 +32,11 @@
                     </li>
                     <li class="nav-item ms-auto " aria-current="page">
                         <a class="nav-link active text-nowrap" href="control-de-productos.html">Alta Productos</a>
+                    </li>
+                    <li class="nav-item ms-auto">
+                        <button type="button" id="btnCerrarSesion" class="btn btn-sm btn-outline-danger ms-neutral">
+                            <i class="bi bi-box-arrow-right"></i>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -84,6 +90,7 @@
         crossorigin="anonymous"></script>
     <script type="module" src="js/control-registros.js"></script>
     <script type="module" src="modulos/registros.js"></script>
+    <script type="module" src="js/manejoDeSesion.js"></script>
 </body>
 
 </html>
