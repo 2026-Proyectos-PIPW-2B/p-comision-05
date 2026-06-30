@@ -1,6 +1,7 @@
 import * as moduloProductos from "../modulos/stock.js";
 import { crearFilaProducto } from "../modulos/crearDomElements.js";
 import * as moduloEtiquetas from "../modulos/etiquetas.js";
+import * as productosDisponibles from "../modulos/productosDisponibles.js"
 let funcionParaBotonEditar = null;
 
 //para probar la tabla
@@ -37,6 +38,7 @@ const tbody = document.getElementById("cuerpoDeTabla");
 const formRegistro = document.getElementById("formRegistroProductos");
 const botonGuardar = document.getElementById("botonRegistroGuardar");
 const botonGuardarCambios = document.getElementById("botonGuardarCambios");
+const inputTitulos = document.getElementById("inputTitulos")
 
 //elementos de los filtros
 const filtroTitulo = document.getElementById("filtroTitulo");
@@ -196,15 +198,11 @@ function actualizarTablaCompleta() {
 }
 
 function registrarNuevoProducto() {
-  const titulo = document.getElementById("registroTitulo").value.trim();
   const info = document.getElementById("registroInfo").value.trim();
   const stock = parseInt(document.getElementById("registroStock").value);
   const valor = parseFloat(document.getElementById("registroValor").value);
-  
-  if (!titulo || !info || isNaN(stock) || isNaN(valor)) {
-    alert("Por favor completar los campos faltantes");
-    return;
-  }
+  const tituloElegido = inputTitulos.value
+  const direccionImagen = document.getElementById(contenedorImagenRegistro)
 
   const misProductos = moduloProductos.getStock(); // Traemos el Map de productos
   let nombreDuplicado = false;
@@ -325,6 +323,38 @@ function guardarCambiosProducto() {
   }
 }
 
+/* const listaGlobal = moduloEtiquetas.getEtiquetas();
+    for (let i = 0; i < listaGlobal.length; i++) {
+      const etiqueta = listaGlobal[i];
+      const optionEtiqueta = document.createElement("option");
+      optionEtiqueta.value = etiqueta;
+      optionEtiqueta.textContent = etiqueta;
+
+      // Si el producto actual tiene esta etiqueta, queda marcado (selected = true)
+      if (producto.etiquetas) {
+        for (let j = 0; j < producto.etiquetas.length; j++) {
+          if (producto.etiquetas[j] === etiqueta) {
+            optionEtiqueta.selected = true;
+            break;
+          }
+        }
+      }
+      selectEditar.appendChild(optionEtiqueta);
+    } */ 
+function renderListaProductosDisponibles() {
+  const inputTitulos = document.getElementById("inputTitulos")
+  const listaDeProductos = productosDisponibles.get()
+
+  for (let i=0; i<listaDeProductos.length; i++) {
+    const producto = listaDeProductos[i];
+    const optionProducto = document.createElement("option")
+    optionProducto.value = producto.toLowerCase()
+    optionProducto.textContent = producto.toLocaleUpperCase()
+    inputTitulos.appendChild(optionProducto)
+  }
+}
+
+
 function eliminarProducto(id) {
   moduloProductos.removeProducto(id);
 
@@ -353,6 +383,8 @@ function resetearFiltros() {
   filtroEtiqueta.value = "";
   actualizarTablaCompleta();
 }
-
+console.log("render")
+console.log(productosDisponibles.get())
+renderListaProductosDisponibles()
 actualizarSelectoresEtiquetas();
 actualizarTablaCompleta();

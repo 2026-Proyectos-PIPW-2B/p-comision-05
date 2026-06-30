@@ -119,9 +119,10 @@
                             <h1 class="card-title text-center mb-4">Registro De Producto</h1>
                             <form id="formRegistroProductos">
                                 <div class="mb-4">
-                                    <label for="registroTitulo" class="form-label">Titulo</label>
-                                    <input type="text" id="registroTitulo" class="form-control" />
-                                    <div class="invalid-feedback" id="mensajeRegistroTitulo"></div>
+                                    <label for="inputTitulos" class="form-label">Titulos</label>
+                                    <select id="inputTitulos" class="form-select"> 
+                                        <option> </option>
+                                    </select>
                                 </div>
 
                                 <div class="mb-4">
@@ -141,7 +142,7 @@
                                     <select id="registroEtiquetas" class="form-select" multiple style="height: 110px;">
                                     </select>
                                     <p class="text-muted">Manter presionado control para seleccionar más de
-                                        una.</p>
+                                        una.</p> 
                                 </div>
 
                                 <div class="mb-4">
@@ -150,7 +151,7 @@
                                     <div class="invalid-feedback " id="mensajeRegistroValor"></div>
                                 </div>
 
-                                <div class="mb-4">
+                                <div id="contenedorImagenRegistro" class="mb-4">
                                     <label for="formFile" class="form-label">Imagen</label>
                                 </div>
                             </form>
