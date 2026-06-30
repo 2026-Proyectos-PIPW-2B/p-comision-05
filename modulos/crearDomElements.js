@@ -439,7 +439,7 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
   tdNumero.textContent = indice;
 
   const tdTitulo = document.createElement("td");
-  tdTitulo.textContent = producto.nombre;
+  tdTitulo.textContent = producto.nombre.replace(/-/g, ' ').toUpperCase();
 
   const tdInfo = document.createElement("td");
   tdInfo.textContent = producto.descripcion;
@@ -452,7 +452,7 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
     for (let i = 0; i < producto.etiquetas.length; i++) {
       const etiqueta = producto.etiquetas[i];
       const spanEtiqueta = document.createElement("span");
-      spanEtiqueta.classList.add("badge", "rounded-pill", "me-1", coloresRandom());
+      spanEtiqueta.classList.add("badge", "rounded-pill", "me-1", "text-dark");
       spanEtiqueta.textContent = etiqueta;
       tdEtiquetas.appendChild(spanEtiqueta);
     }
@@ -497,17 +497,7 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
   return tr;
 }
 
-function coloresRandom() {
-  const colores = [
-    "text-bg-primary",
-    "text-bg-success",
-    "text-bg-danger",
-    "text-bg-warning",
-    "text-bg-info",
-    "text-bg-dark",
-  ];
-  return colores[Math.floor(Math.random() * colores.length)];
-}
+
 
 export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar) {
     const tr = document.createElement('tr');
