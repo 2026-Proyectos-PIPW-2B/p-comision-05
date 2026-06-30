@@ -8,6 +8,7 @@ import { Usuario } from "../clases/Usuario.js"
  * @param {string} str 
  */
 export function loadProducto(str) {
+    console.log(str)
     const values = str.split("¡")
     return new Producto(values[0], JSON.parse(values[1]), values[2], JSON.parse(values[3]), JSON.parse(values[4]), values[5])
 }
@@ -24,13 +25,17 @@ export function loadUsuario(str) {
  */
 export function loadCarrito(str) {
     const values = str.split("¿")
+    console.log(values[0])
     // values[0] = fecha, values[1] = array de keys, values[2] = string de valores
     const mapa = new Map()
     if (str !== "") {
         const productosKeys = JSON.parse(values[1])
         const productosValues = values[2].split("°")
+        console.log(productosValues)
         for (let i = 0; i < productosKeys.length; i++) {
-            mapa.set(productosKeys[i], loadProducto(productosValues[i]))
+            if (productosValues[i] !== "") {
+                mapa.set(productosKeys[i], loadProducto(productosValues[i]))
+            }
         }
     }
     return new Carrito(mapa, values[0])
@@ -45,9 +50,12 @@ export function loadStock() {
     const mapa = new Map()
     const stockKeys = JSON.parse(localStorage.getItem("stockKeys"))
     if (stockKeys !== null) {
+        console.log(localStorage.getItem("stockValues"))
         const stockValues = localStorage.getItem("stockValues").split("|")
         for (let i = 0; i < stockKeys.length; i++) {
-            mapa.set(stockKeys[i], loadProducto(stockValues[i]))
+            if (stockValues[i] !== "") {
+                mapa.set(stockKeys[i], loadProducto(stockValues[i]))
+            }
         }
     }
     return mapa
@@ -86,7 +94,6 @@ export function loadRegistros() {
     const registrosKeys = JSON.parse(localStorage.getItem("registrosKeys"))
     if (registrosKeys !== null) {
         const registrosValues = localStorage.getItem("registrosValues").split("|")
-        console.log(registrosValues)
         for (let i = 0; i < registrosKeys.length; i++) {
             const array = []
             const carritosACargar = registrosValues[i].split("¬")

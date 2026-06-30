@@ -1,11 +1,11 @@
 /** @type {Array<string>} */
 const productosDisponibles = [
     "cara-sucia",
-    "medialuna-dulce",
+    "medialuna",
     ""
 ]
 
 
 export function get() {
-    return
+    return productosDisponibles
 }

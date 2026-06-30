@@ -1,3 +1,4 @@
+import { Producto } from "../clases/Producto.js"
 import { createTarjetaTienda } from "../modulos/crearDomElements.js"
 import * as stock from "../modulos/stock.js"
 
@@ -6,68 +7,62 @@ const pageNumbers = document.getElementById("pageNumbers")
 const pageSelectBack = document.getElementById("pageSelectBack")
 const pageSelectFoward = document.getElementById("pageSelectFoward")
 const scrollEtiquetas = document.getElementById("scrollEtiquetas")
-/** @type {Array<HTMLDivElement>} */
-const tarjetas = []
-/** @type {Array<HTMLDivElement>} */
-const paginas = []
 
-function paginado(tarjetasAMostrar) {
+/** @type {Array<Producto>} */
+const productoAMostrar = []
+
+function paginado() {
     sectionProductos.replaceChildren()
-    paginas.length = 0
-    let cantidadPaginas = 1
-    let contador = 1
-    let divPagina = document.createElement("div")
-    divPagina.className = "row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2"
-    divPagina.id = `page${cantidadPaginas++}`
-    sectionProductos.append(divPagina)
-    paginas.push(divPagina)
-    for (const tarjeta of tarjetasAMostrar) {
-        if (contador == 13) {
-            divPagina = document.createElement("div")
-            divPagina.className = "row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 d-none"
-            divPagina.id = `page${cantidadPaginas++}`
-            sectionProductos.append(divPagina)
-            paginas.push(divPagina)
-            contador = 1
-        }
-        divPagina.append(tarjeta)
-        contador++
+    const primerProducto = Number(sectionProductos.dataset.primerProductoAMostrar)
+    const productosSeparados = productoAMostrar.slice(primerProducto, primerProducto + 12)
+    for (const producto of productosSeparados) {
+        sectionProductos.append(createTarjetaTienda(producto))    
     }
 }
 
 function filtradoNombre(str) {
-    const tarjetasACargar = []
-    for (const tarjeta of tarjetas) {
-        if (stock.getProducto(tarjeta.dataset.id).nombre.includes(str)) {
-            tarjetasACargar.push(tarjeta)
+    productoAMostrar.length = 0
+    for (const producto of stock.getStock().values()) {
+        if (producto.nombre.includes(str)) {
+            productoAMostrar.push(producto)
         }
     }
-    paginado(tarjetasACargar)
+    paginado()
 }
 
 function filtradoCategoria(categoria) {
-    const tarjetasACargar = []
-    for (const tarjeta of tarjetas) {
-        if (stock.getProducto(tarjeta.dataset.id).etiquetas.includes(categoria)) {
-            tarjetasACargar.push(tarjeta)
+    productoAMostrar.length = 0
+    for (const producto of stock.getStock().values()) {
+        if (producto.etiquetas.includes(categoria)) {
+            productoAMostrar.push(producto)
         }
     }
-    paginado(tarjetasACargar)
+    paginado()
 }
 
 function handlerRadioPage() {
-    // Select all elements initialized as popovers
+    // Oculto todos los popovers abiertos en la pagina
     const buttonPopovers = document.querySelectorAll('[aria-describedby^="popover"]');
     for (const button of buttonPopovers) {
         button.click()
     }
+
+    // Scrolleo hasta el inicio de la pagina
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     })
-    document.getElementById(`page${pageNumbers.dataset.selected}`).classList.add("d-none")
-    pageNumbers.dataset.selected = this.dataset.number
-    document.getElementById(`page${this.dataset.number}`).classList.remove("d-none")
+
+    const numeroPagina = Number(this.dataset.number)
+    let primerProductoACargar = 0
+    if (numeroPagina > 0) {
+        primerProductoACargar = (numeroPagina * 12)
+    }
+    sectionProductos.dataset.primerProductoAMostrar = primerProductoACargar
+    console.log(sectionProductos.dataset.primerProductoAMostrar)
+    paginado()
+    pageNumbers.dataset.selected = numeroPagina + 1
+    console.log(pageNumbers.dataset.selected)
 }
 
 function handlerSelectBack() {
@@ -76,7 +71,7 @@ function handlerSelectBack() {
     if (numeroPagina > 1) {
         if (numeroPagina % 5 == 1) {
             document.getElementById(`botonera${pageNumbers.dataset.pageGroupSelected}`).classList.add("d-none")
-            pageNumbers.dataset.pageGroupSelected = pageNumbers.dataset.pageGroupSelected - 1
+            pageNumbers.dataset.pageGroupSelected = Number(pageNumbers.dataset.pageGroupSelected) - 1
             document.getElementById(`botonera${pageNumbers.dataset.pageGroupSelected}`).classList.remove("d-none")
         }
         document.getElementById(`radioPage${numeroPagina - 1}`).click()
@@ -86,11 +81,10 @@ function handlerSelectBack() {
 function handlerSelectFoward() {
     const numeroPagina = Number(pageNumbers.dataset.selected)
     console.log(numeroPagina)
-    if (numeroPagina < paginas.length) {
+    if (numeroPagina < Number(pageNumbers.dataset.ultimaPagina)) {
         if (numeroPagina % 5 == 0) {
             document.getElementById(`botonera${pageNumbers.dataset.pageGroupSelected}`).classList.add("d-none")
             pageNumbers.dataset.pageGroupSelected = Number(pageNumbers.dataset.pageGroupSelected) + 1
-            console.log(pageNumbers.dataset.pageGroupSelected)
             document.getElementById(`botonera${pageNumbers.dataset.pageGroupSelected}`).classList.remove("d-none")
         }
         document.getElementById(`radioPage${numeroPagina + 1}`).click()
@@ -98,6 +92,10 @@ function handlerSelectFoward() {
 }
 
 function numeroPaginas() {
+    let cantidadPaginas = Math.floor(productoAMostrar.length / 12)
+    if ((productoAMostrar.length % 12) != 0) {
+        cantidadPaginas++
+    }
     let cantidadBotoneras = 1
     let contador = 1
     let divBotonera = document.createElement("div")
@@ -105,13 +103,13 @@ function numeroPaginas() {
     divBotonera.role = "group"
     divBotonera.id = `botonera${cantidadBotoneras++}`
     pageNumbers.append(divBotonera)
-    for (const [i, pagina] of paginas.entries()) {
+    for (let i = 0; i < cantidadPaginas; i++) {
         if (contador == 6) {
             let divDots = document.createElement("div")
             divDots.className = "text-info ps-neutral"
             divDots.textContent = "..."
             divBotonera.append(divDots)
-
+    
             divBotonera = document.createElement("div")
             divBotonera.className = "btn-group d-none"
             divBotonera.role = "group"
@@ -129,7 +127,7 @@ function numeroPaginas() {
         radio.className = "btn-check"
         radio.id = `radioPage${i + 1}`
         radio.name = "radioPage"
-        radio.dataset.number = i + 1
+        radio.dataset.number = i
         radio.autocomplete = "off"
         radio.addEventListener("change", handlerRadioPage)
         if (i == 0) {
@@ -143,10 +141,21 @@ function numeroPaginas() {
         contador++
     }
     pageNumbers.dataset.selected = 1
+    pageNumbers.dataset.ultimaPagina = cantidadPaginas
     pageNumbers.dataset.pageGroupSelected = 1
 }
 
+function mostrarTodosProductos() {
+    productoAMostrar.length = 0
+    const productosStock = stock.getStock()
+    for (const producto of productosStock.values()) {
+        productoAMostrar.push(producto)
+    }
+    paginado()
+}
+
 function onLoad() {
+    // Scroll lateral
     scrollEtiquetas.addEventListener("wheel", (event) => {
     event.preventDefault()
     scrollEtiquetas.scrollBy({
@@ -154,15 +163,11 @@ function onLoad() {
         behavior: "smooth" // Smooths out the wheel steps
     })
     }, { passive: false })
-    const productosStock = stock.getStock()
-    
-    for (const producto of productosStock.values()) {
-        if (producto.cantidad > 0) {
-            tarjetas.push(createTarjetaTienda(producto))
-        }
-    }
-    paginado(tarjetas)
+
+    sectionProductos.dataset.primerProductoAMostrar = 0
+    mostrarTodosProductos()
     numeroPaginas()
+
     pageSelectBack.addEventListener("click", handlerSelectBack)
     pageSelectFoward.addEventListener("click", handlerSelectFoward)
 }

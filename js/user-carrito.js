@@ -8,6 +8,7 @@ const carrito = carritos.getCarrito(sesionActual.get().nombreUsuario)
 
 function handlerConfirmarCompra() {
     carritos.addCarritoToRegistro(sesionActual.get().nombreUsuario)
+    console.log("carrito confirmado")
     sectionProductos.replaceChildren()
     document.getElementById("alertaCarrito").classList.remove("d-none")
 }

@@ -4,7 +4,7 @@ import * as carritos from "./carritos.js";
 // Cargo etiquetas de localStorage si hay, y si no inicializo un par
 let etiquetasGlobales = JSON.parse(
     localStorage.getItem("etiquetasGlobales"),
-) || ["Glaseado", "Panificado", "Tortas", "Salchicha", "Pistacho"];
+) || ["glaseado", "panificado", "tortas", "salchicha", "pistacho"];
 
 //retorna un array de etiquetas, traido de localStorage, o previamente inicializado.
 export function getEtiquetas() {
