@@ -23,6 +23,9 @@ function cargarSelectUsuarios() {
 
   const mapaUsuarios = usuarios.getUsuarios();
   for (const usuario of mapaUsuarios.values()) {
+    if (usuario.tipo === "admin") {
+      continue; 
+    }
     const option = document.createElement("option");
     option.value = usuario.nombreUsuario;
     option.textContent = `${usuario.nombre} ${usuario.apellido} (${usuario.nombreUsuario})`;

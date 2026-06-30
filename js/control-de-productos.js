@@ -175,28 +175,49 @@ function actualizarTablaCompleta() {
 
 function registrarNuevoProducto() {
   const info = document.getElementById("registroInfo").value.trim();
-  const stock = parseInt(document.getElementById("registroStock").value);
-  const valor = parseFloat(document.getElementById("registroValor").value);
-  const tituloElegido = inputTitulos.value
-  const direccionImagen = document.getElementById("contenedorImagenRegistro")
+  const stockValue = document.getElementById("registroStock").value;
+  const valorValue = document.getElementById("registroValor").value;
+  const stock = parseInt(stockValue);
+  const valor = parseFloat(valorValue);
+  const tituloElegido = inputTitulos.value;
+  const direccionImagen = document.getElementById("contenedorImagenRegistro");
 
-  const misProductos = moduloProductos.getStock(); // Traemos el Map de productos
-  let nombreDuplicado = false;
-
-  if (!tituloElegido) {
-    alert("por favor selecciona un producto de la lista.");
+  if (!tituloElegido || tituloElegido === "") {
+    alert("Por favor selecciona un producto de la lista.");
     return;
   }
 
+  if (info === "") {
+    alert("Por favor ingresa una descripción para el producto.");
+    return;
+  }
+
+  // Si están vacíos o el parseo se hizo sobre nada(parseFloat o int(nada) = nan), o metieron números negativos
+  if (stockValue === "" || isNaN(stock) || stock < 0) {
+    alert("Por favor ingresa un número de stock válido (mayor o igual a 0).");
+    return;
+  }
+
+  if (valorValue === "" || isNaN(valor) || valor <= 0) {
+    alert("Por favor ingresa un precio válido (mayor a 0).");
+    return;
+  }
+
+  const misProductos = moduloProductos.getStock(); 
+  let nombreDuplicado = false;
+
+  const tituloSinCaracteres = tituloElegido.replace(/-/g, ' ').toUpperCase().trim();
+
   for (const [id, producto] of misProductos) {
-    if (producto.nombre.toUpperCase().trim() === tituloElegido.toUpperCase()) {
+    const tituloStockSinCaracteres = producto.nombre.replace(/-/g, ' ').toUpperCase().trim();
+    if (tituloStockSinCaracteres === tituloSinCaracteres) {
       nombreDuplicado = true;
       break;
     }
   }
 
   if (nombreDuplicado) {
-    alert("ya existe un producto registrado con ese nombre, elegir otro.");
+    alert("Ya existe un producto registrado con ese nombre, elegir otro.");
     return;
   }
 
@@ -210,17 +231,16 @@ function registrarNuevoProducto() {
 
   actualizarTablaCompleta();
   formRegistro.reset();
-  //reset de la imagen (la que esta relacionada con los titulos)
-  const imgElement = document.getElementById("vistaPreviaImagenRegistro");
-  if (imgElement) {
-    imgElement.src = "";          
-    imgElement.classList.add("d-none"); 
+
+  const imagenModal = document.getElementById("vistaPreviaImagenRegistro");
+  if (imagenModal) {
+    imagenModal.src = "";          
+    imagenModal.classList.add("d-none"); 
   }
-  //busco si hay un modal activo
+
   const modalOcultarInstancia = bootstrap.Modal.getInstance(
     document.getElementById("modal"),
   );
-  //si el modal existe, lo oculto
   if (modalOcultarInstancia) modalOcultarInstancia.hide();
 }
 
@@ -331,8 +351,12 @@ function guardarCambiosProducto() {
 function renderListaProductosDisponibles() {
   const inputTitulos = document.getElementById("inputTitulos")
   const listaDeProductos = productosDisponibles.get()
+  inputTitulos.innerHTML
 
-  inputTitulos.innerHTML = '<option value="">Seleccione un producto...</option>';
+  const optionDefault = document.createElement("option")
+  optionDefault.value = ""
+  optionDefault.textContent = "Selecione un producto..."
+  inputTitulos.appendChild(optionDefault)
 
   for (let i=0; i<listaDeProductos.length; i++) {
     const producto = listaDeProductos[i];
