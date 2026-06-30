@@ -1,4 +1,5 @@
 import * as sesionActual from "../modulos/sesionActual.js"; 
+import * as usuarios from "../modulos/usuarios.js";
 
 function controlarSesionYBotones() {
   const usuarioLogueado = sesionActual.get();
@@ -15,5 +16,8 @@ function controlarSesionYBotones() {
       alert("Sesión cerrada, chau!");
       window.location.href = "login.html";
     });
+    
 }
+
+
 window.onload = controlarSesionYBotones;
