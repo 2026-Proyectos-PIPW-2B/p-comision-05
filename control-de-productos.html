@@ -14,7 +14,7 @@
     <!--Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary sticky-top z-1080">
         <div class="container-fluid d-flex">
-            <div class="w-40 m-0">
+            <div class="w-45 m-0">
                 <a class="navbar-brand m-0 fs-4 fw-bold">
                     <img src="img/panaderia-icon.png" alt="Icono" width="40" height="40">
                     <span class="d-none d-lg-inline">Panaderia ATR</span>
@@ -30,12 +30,12 @@
                     <li><a id="buttonCerrarSesion" class="dropdown-item" href="#"><i class="bi bi-box-arrow-left"></i> Cerrar sesión</a></li>
                 </ul>
             </div>
-            <div class="d-flex justify-content-end d-lg-none w-40">
+            <div class="d-flex justify-content-end d-lg-none w-45">
                 <button class="navbar-toggler border-0 text-black fs-4 p-0 outline-collapse-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="bi bi-list fs-1 p-1"></i>
                 </button>
             </div>
-            <div class="collapse navbar-collapse flex-grow-0 w-40" id="navbarNav">
+            <div class="collapse navbar-collapse flex-grow-0 w-45" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ms-auto fw-semibold">
                         <a class="nav-link active" aria-current="page" href="control-de-productos.html">Alta Productos</a>
@@ -54,12 +54,12 @@
     <!--Filtros-->
 
     <section id="tablaProductos" class="flex-grow-1 w-100 d-flex flex-column flex-lg-row bg-light">
-        <div class="p-neutral d-flex flex-wrap pixel-w-lg-180">
+        <div class="p-neutral d-flex flex-wrap pixel-w-lg-200 bg-primary">
             <div class="ms-auto d-lg-none">
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                     <input type="checkbox" id="btnFiltros" class="btn-check" data-bs-toggle="collapse"
                         data-bs-target="#filtros" aria-expanded="false" aria-controls="filtros">
-                    <label for="btnFiltros" class="btn btn-primary">Filtros <i class="bi bi-filter"></i></label>
+                    <label for="btnFiltros" class="btn btn-dark">Filtros <i class="bi bi-filter"></i></label>
                 </div>
             </div>
             <form id="filtros" class="collapse d-lg-block w-100">
@@ -75,8 +75,8 @@
                 <label for="filtroEtiqueta" class="form-label mt-2">Etiquetas</label>
                 <select id="filtroEtiqueta" class="form-select"> </select>
 
-                <button type="button" id="botonAplicarFiltros" class="btn btn-primary mt-2 ">Aplicar Filtros</button>
-                <button type="button" id="botonResetearFiltros" class="btn btn-primary mt-2 w-30">
+                <button type="button" id="botonAplicarFiltros" class="btn btn-dark mt-2 ">Aplicar Filtros</button>
+                <button type="button" id="botonResetearFiltros" class="btn btn-dark mt-2 w-30">
                     <i class="bi bi-arrow-clockwise"></i>
                 </button>
 
@@ -245,8 +245,7 @@
                     </div>
 
                     <h6 class="border-bottom pb-2 fw-semibold text-secondary">Etiquetas Activas:</h6>
-                    <div id="listaEtiquetasGlobales" class="d-flex flex-column gap-2"
-                        style="max-height: 220px; overflow-y: auto;"> <!--Estilizado parcial-->
+                    <div id="listaEtiquetasGlobales" class="d-flex flex-column gap-2 overflow-y-auto max-h-250"> <!--Estilizado parcial-->
                     </div>
                 </div>
                 <div class="modal-footer bg-light">

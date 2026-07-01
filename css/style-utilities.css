@@ -94,6 +94,10 @@ body {
     height: 50px !important;
 }
 
+.max-h-250 {
+    max-height: 250px !important;
+}
+
 .min-w-220 {
     min-width: 220px !important;
 }
@@ -116,6 +120,10 @@ body {
 
 .w-85 {
     width: 85% !important;
+}
+
+.w-45 {
+    width: 45% !important;
 }
 
 .w-40 {
@@ -298,6 +306,11 @@ input:autofill {
     .pixel-w-lg-180 {
         width: 180px;
         flex: 0 0 180px; 
+    }
+
+    .pixel-w-lg-200 {
+        width: 200px;
+        flex: 0 0 200px; 
     }
 
     .scroll-lg {

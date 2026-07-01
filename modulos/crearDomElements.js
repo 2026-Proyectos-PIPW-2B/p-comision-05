@@ -472,7 +472,7 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
     for (let i = 0; i < producto.etiquetas.length; i++) {
       const etiqueta = producto.etiquetas[i];
       const spanEtiqueta = document.createElement("span");
-      spanEtiqueta.classList.add("badge", "rounded-pill", "me-1", "text-dark");
+      spanEtiqueta.classList.add("badge", "rounded-pill", "me-1", "text-dark", "bg-primary");
       spanEtiqueta.textContent = etiqueta;
       tdEtiquetas.appendChild(spanEtiqueta);
     }
