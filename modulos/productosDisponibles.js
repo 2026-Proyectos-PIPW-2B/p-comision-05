@@ -1,7 +1,6 @@
 /** @type {Array<string>} */
 const productosDisponibles = [
     "cara-sucia",
-    "medialuna-dulce",
     "cañoncito",
     "caprese",
     "chipa",
