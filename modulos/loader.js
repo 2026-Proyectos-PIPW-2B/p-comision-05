@@ -29,7 +29,6 @@ export function loadCarrito(str) {
     if (str !== "") {
         const productosKeys = JSON.parse(values[1])
         const productosValues = values[2].split("°")
-        console.log(productosValues)
         for (let i = 0; i < productosKeys.length; i++) {
             if (productosValues[i] !== "") {
                 mapa.set(productosKeys[i], loadProducto(productosValues[i]))
