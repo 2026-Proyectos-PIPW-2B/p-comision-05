@@ -52,11 +52,15 @@
     </nav>
 
     <main class="flex-grow-1 w-100 d-flex justify-content-center bg-light">
-        <section id="sectionRegistro" class="w-100 flex-grow-1 d-flex flex-column flex-lg-row align-items-lg-start max-w-1200 p-neutral"></section>
+        <section id="sectionRegistro" class="w-100 flex-grow-1 d-flex flex-column align-items-lg-start max-w-1200 p-neutral">
+            <div id="alertaRegistro" class="min-h-130 d-flex justify-content-center align-items-center d-none">
+                <span class="border rounded rounded-2 shadow p-neutral fs-5 bg-white">No hay compras anteriores</span>
+            </div>
+        </section>
         <div class="modal fade z-index-modal" id="modalCompra" tabindex="-1" aria-labelledby="modalCompra" aria-hidden="true">
             <div class="d-flex justify-content-center align-items-center h-100 z-index-modal">
                 <div class="modal-dialog modal-dialog-scrollable w-100 max-w-1200 m-neutral">
-                    <div class="modal-content">
+                    <div class="modal-content bg-light">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5 p-neutral fw-semibold" id="modalCompra">Productos de la compra</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -125,7 +129,9 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"crossorigin="anonymous"></script>
+    <script type="module" src="js/manejoDeNavbar.js"></script>
     <script type="module" src="js/user-registro.js"></script>
+    <script src="js/manejoDeFooter.js"></script>
 </body>
 
 </html>

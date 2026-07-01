@@ -6,8 +6,14 @@ const sectionRegistro = document.getElementById("sectionRegistro")
 
 function onLoad() {
     const registro = registros.getRegistro(sesionActual.get().nombreUsuario)
-    for (const [i, carrito] of registro.entries()) {
-        createRegistroCompra(carrito, sectionRegistro, i)
+    if (registro.length > 0) {
+        for (const [i, carrito] of registro.entries()) {
+            createRegistroCompra(carrito, sectionRegistro, i)
+        }
+    }
+    else {
+        console.log("holas")
+        document.getElementById("alertaRegistro").classList.remove("d-none")
     }
 }
 
