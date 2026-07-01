@@ -52,6 +52,10 @@ body {
     padding-right: calc(var(--neutral) * 3);
 }
 
+.pb-neutral {
+    padding-bottom: calc(var(--neutral) * 2);
+}
+
 .ps-neutral {
     padding-left: calc(var(--neutral) * 3);
 }
@@ -257,6 +261,14 @@ input:autofill {
   
   /* Replace #ffffff with your desired text color */
   -webkit-text-fill-color: black !important;
+}
+
+.z-index-modal {
+    z-index: 1090;
+}
+
+.modal-backdrop {
+    z-index: 1089;
 }
 
 /* media queary lg */

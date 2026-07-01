@@ -103,7 +103,13 @@ export function createTarjetaTienda(producto) {
     inputCantidad.classList.add("form-control", "fw-semibold", "border-info", "text-center")
     inputCantidad.type = "number"
     inputCantidad.min = "1"
-    inputCantidad.max = producto.cantidad
+    const productoCarrito = carritos.getCarrito(sesionActual.get().nombreUsuario).getProducto(producto.id)
+    if (productoCarrito) {
+        inputCantidad.max = producto.cantidad - productoCarrito.cantidad
+    }
+    else {
+        inputCantidad.max = producto.cantidad
+    }
     inputCantidad.value = "1"
     inputCantidad.id = `${producto.id}/cantidad`
     inputCantidad.dataset.id = producto.id
@@ -130,7 +136,6 @@ export function createTarjetaTienda(producto) {
     i.classList.add("bi", "bi-bag")
 
     // Chequeo cantidad
-    const productoCarrito = carritos.getCarrito(sesionActual.get().nombreUsuario).getProducto(producto.id)
     if (productoCarrito && productoCarrito.cantidad >= producto.cantidad) {
         span.textContent = ""
         span.className = "text-danger text-end"
@@ -178,6 +183,7 @@ function handlerRemoverProducto() {
     carritoActual.removeProducto(this.dataset.id)
     carritos.saveCarritos()
     document.getElementById("spanTotalCompra").textContent = `$${carritoActual.valorTotal}`
+    document.getElementById("spanEnvio").textContent = `$${carritoActual.envio}`
 }
 
 function changeCantidadProductoCarrito() {
@@ -187,6 +193,7 @@ function changeCantidadProductoCarrito() {
     carritos.saveCarritos()
     document.getElementById(`${this.dataset.id}/total`).textContent = `$${producto.valorTotal}`
     document.getElementById("spanTotalCompra").textContent = `$${carritoActual.valorTotal}`
+    document.getElementById("spanEnvio").textContent = `$${carritoActual.envio}`
 }
 
 /**
@@ -198,7 +205,7 @@ function changeCantidadProductoCarrito() {
 export function createTarjetaCarrito(producto, agregar) {
     // Primero
     const divContenedor = document.createElement("div")
-    divContenedor.className = "d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow"
+    divContenedor.className = "d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral bg-white shadow"
     divContenedor.id = producto.id
     // Segundo
     const divImagen = document.createElement("div")
@@ -213,12 +220,13 @@ export function createTarjetaCarrito(producto, agregar) {
     divInfo.classList.add("w-85", "ps-neutral", "d-flex", "flex-column")
     // Tercero
     const h5 = document.createElement("h5")
-    h5.textContent = producto.nombre
+    h5.textContent = producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1).replace(/-/g, ' ')
+    h5.className = "fw-semibold border-bottom pb-neutral"
     const pDescripcion = document.createElement("p")
     pDescripcion.classList.add("flex-grow-1")
     pDescripcion.textContent = producto.descripcion
     const pTotal = document.createElement("p")
-    pTotal.classList.add("m-0", "fs-5", "fw-semibold", "text-end")
+    pTotal.className = "m-0 fs-5 fw-semibold text-end text-secondary"
     pTotal.id = `${producto.id}/total`
     pTotal.textContent = `$${producto.valorTotal}`
     // Segundo
@@ -226,7 +234,7 @@ export function createTarjetaCarrito(producto, agregar) {
     divCantidad.classList.add("w-100", "pt-neutral", "border-top", "mt-neutral", "d-flex", "justify-content-end", "align-items-baseline")
     // Tercero
     const inputCantidad = document.createElement("input")
-    inputCantidad.classList.add("form-control", "fw-semibold", "border-info", "w-8", "text-center", "mx-neutral")
+    inputCantidad.className = "form-control fw-semibold border-primary w-8 text-center mx-neutral"
     inputCantidad.type = "number"
     inputCantidad.min = "1"
     inputCantidad.max = stock.getProducto(producto.id).cantidad
@@ -238,11 +246,12 @@ export function createTarjetaCarrito(producto, agregar) {
     if (producto.cantidad >= inputCantidad.max) {
         const spanTexto = document.createElement("span")
         spanTexto.textContent = `Ultimas ${producto.cantidad} disponibles!`
+        spanTexto.className = "text-danger"
         divCantidad.append(spanTexto)
     }
     
     const buttonEliminar = document.createElement("button")
-    buttonEliminar.classList.add("btn", "btn-info")
+    buttonEliminar.classList.add("btn", "btn-primary")
     buttonEliminar.dataset.id = producto.id
     buttonEliminar.addEventListener("click", handlerRemoverProducto)
     const iEliminar = document.createElement("i")
@@ -347,6 +356,7 @@ function handlerVerMas() {
     for (const producto of carrito.productos.values()) {
         createTarjetaRegistro(producto, modalProductos)
     }
+    document.getElementById("spanEnvioModal").textContent = `$${carrito.envio}`
 }
 
 /**
@@ -359,16 +369,16 @@ function handlerVerMas() {
 export function createRegistroCompra(carrito, agregar, numero, usuario = sesionActual.get().nombreUsuario) {
     // Primero
     const divContenedor = document.createElement("div")
-    divContenedor.classList.add("w-100", "border", "rounded", "rounded-2", "p-neutral", "d-flex", "flex-column", "shadow")
+    divContenedor.className = "w-100 border rounded rounded-2 p-neutral d-flex flex-column shadow bg-white"
     // Segundo
     const divTitulo = document.createElement("div")
     divTitulo.classList.add("w-100", "d-flex", "border-bottom", "mb-neutral", "align-items-baseline")
     // Tercero
     const h5Titulo = document.createElement("h5")
-    h5Titulo.classList.add("w-50")
+    h5Titulo.className = "w-50 fw-semibold"
     h5Titulo.textContent = `Compra #${numero + 1}`
     const divFecha = document.createElement("div")
-    divFecha.classList.add("w-50", "fs-5", "text-end")
+    divFecha.className = "w-50 fs-5 text-end fw-normal"
     divFecha.textContent = `Fecha: ${carrito.fecha}`
     // Segundo
     const divContenido = document.createElement("div")
@@ -409,11 +419,17 @@ export function createRegistroCompra(carrito, agregar, numero, usuario = sesionA
     const divTotal = document.createElement("div")
     divTotal.classList.add("w-50", "d-flex", "flex-column", "justify-content-end", "align-items-end")
     // Cuarto
+    const divValor = document.createElement("div")
+    divValor.className = "fs-5"
+    const spanTextoTotal = document.createElement("span")
+    spanTextoTotal.textContent = `Total: `
     const spanValor = document.createElement("span")
-    spanValor.classList.add("fs-5")
-    spanValor.textContent = `Total: $${carrito.valorTotal}`
+    spanValor.className = "text-secondary fw-semibold"
+    spanValor.textContent = `$${carrito.valorTotal}`
+    divValor.append(spanTextoTotal, spanValor)
+
     const buttonModal = document.createElement("button")
-    buttonModal.classList.add("btn", "btn-info")
+    buttonModal.className = "btn btn-primary"
     buttonModal.type = "button"
     buttonModal.dataset.bsToggle = "modal"
     buttonModal.dataset.bsTarget = "#modalCompra"
@@ -423,7 +439,7 @@ export function createRegistroCompra(carrito, agregar, numero, usuario = sesionA
     buttonModal.addEventListener("click", handlerVerMas)
 
     // Anidamiento
-    divTotal.append(spanValor, buttonModal)
+    divTotal.append(divValor, buttonModal)
     divContenido.append(divImagenes, divTotal)
     divTitulo.append(h5Titulo, divFecha)
     divContenedor.append(divTitulo, divContenido)

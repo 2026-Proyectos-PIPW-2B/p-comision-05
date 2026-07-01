@@ -11,6 +11,8 @@ function handlerConfirmarCompra() {
     console.log("carrito confirmado")
     sectionProductos.replaceChildren()
     document.getElementById("alertaCarrito").classList.remove("d-none")
+    document.getElementById("spanTotalCompra").textContent = `$0`
+    document.getElementById("spanEnvio").textContent = `$0`
 }
 
 function onLoad() {
@@ -21,7 +23,10 @@ function onLoad() {
         for (const producto of carrito.productos.values()) {
             createTarjetaCarrito(producto, sectionProductos)
         }
+
         document.getElementById("spanTotalCompra").textContent = `$${carrito.valorTotal}`
+        document.getElementById("spanEnvio").textContent = `$${carrito.envio}`
+        
         document.getElementById("buttonConfirmarCompra").addEventListener("click", handlerConfirmarCompra)
     }
 }

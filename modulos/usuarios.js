@@ -55,7 +55,6 @@ export function getUsuario(nombreUsuario) {
     return toReturn
 }
 
-
 /**
  * 
  * @param {string} nombreUsuario 
@@ -63,6 +62,10 @@ export function getUsuario(nombreUsuario) {
 export function removeUsuario(nombreUsuario) {
     usuarios.delete(nombreUsuario)
     saveUsuarios()
+}
+
+export function clear() {
+    usuarios.clear()
 }
 
 export function saveUsuarios() {

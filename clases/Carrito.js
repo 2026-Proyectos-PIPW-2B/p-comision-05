@@ -9,6 +9,7 @@ export class Carrito {
      */
     #productos
     #valorTotal
+    #envio
     /**
      * Fecha para guarda al confirmar el carrito.
      * 
@@ -45,6 +46,19 @@ export class Carrito {
         let toReturn = 0
         for (const producto of this.#productos.values()) {
             toReturn += producto.valorTotal
+        }
+        return toReturn
+    }
+
+    /**
+     * Se calcula solo con el total se le asigna en la clase carrito
+     * 
+     * @type {string}
+     */
+    get envio() {
+        let toReturn = "1500"
+        if (this.valorTotal > 15000) {
+            toReturn = "Gratis!"
         }
         return toReturn
     }

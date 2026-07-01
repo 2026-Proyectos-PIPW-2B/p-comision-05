@@ -1,7 +1,6 @@
 window.addEventListener("load", iniciar)
 
-import {setUsuario,removeUsuario,getUsuario,saveUsuarios,getUsuarios,
-} from "../modulos/usuarios.js";
+import { setUsuario, removeUsuario, getUsuario, saveUsuarios, getUsuarios } from "../modulos/usuarios.js";
 import { crearFilaUsuario, createRegistroCompra } from "../modulos/crearDomElements.js";
 import * as registros from "../modulos/registros.js";
 import * as sesionActual from "../modulos/sesionActual.js"; 
@@ -143,11 +142,7 @@ function mostrarHistorialUsuario(nombreUsuario) {
   }
 }
 
- function iniciar() {
+function iniciar() {
   actualizarTablaCompleta();
- }
-
-console.log("-----------------")
-console.log(getUsuarios())
-console.log("-----------------")
+}
 
