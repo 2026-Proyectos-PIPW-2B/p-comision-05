@@ -5,47 +5,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panaderia</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/customBoostrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style-utilities.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-xxl navbar-dark bg-black sticky-top">
+    <nav class="navbar navbar-expand-lg bg-primary sticky-top z-1080">
         <div class="container-fluid d-flex">
-            <a class="navbar-brand w-30 m-0">Panaderia</a>
-            <div class="d-flex justify-content-end d-xxl-none w-30">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
+            <div class="w-40 m-0">
+                <a class="navbar-brand m-0 fs-4 fw-bold">
+                    <img src="img/panaderia-icon.png" alt="Icono" width="40" height="40">
+                    <span class="d-none d-lg-inline">Panaderia ATR</span>
+                </a>
             </div>
-            <div class="collapse navbar-collapse flex-grow-0 w-30" id="navbarNav">
+            <div class="circle-navbar-button dropdown">
+                <button type="button" class="btn rounded rounded-circle circle-navbar-button dropdown-toggle p-0" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                    <img src="img/user-profile-pic.png" alt="user-pic" class="circle-navbar-img">
+                </button>
+                <ul class="dropdown-menu border-info bg-light">
+                    <li id="textoSesion" class="dropdown-item-text"></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a id="buttonCerrarSesion" class="dropdown-item" href="#"><i class="bi bi-box-arrow-left"></i> Cerrar sesión</a></li>
+                </ul>
+            </div>
+            <div class="d-flex justify-content-end d-lg-none w-40">
+                <button class="navbar-toggler border-0 text-black fs-4 p-0 outline-collapse-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list fs-1 p-1"></i>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse flex-grow-0 w-40" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item ms-auto">
-                        <a class="nav-link text-nowrap" aria-current="page" href="control-de-productos.html">Alta
-                            Productos</a>
+                    <li class="nav-item ms-auto fw-semibold">
+                        <a class="nav-link" href="control-de-productos.html">Alta Productos</a>
                     </li>
-                    <li class="nav-item ms-auto">
+                    <li class="nav-item ms-auto fw-semibold">
+                        <a class="nav-link active" aria-current="page" href="alta-usuario.html">Alta Usuario</a>
+                    </li>
+                    <li class="nav-item ms-auto fw-semibold">
                         <a class="nav-link " href="control-registros.html">Registros</a>
-                    </li>
-                    <li class="nav-item ms-auto text-nowrap">
-                        <a class="nav-link active" href="alta-usuario.html">Alta Usuario</a>
-                    </li>
-                    <li class="nav-item ms-auto">
-                        <button type="button" id="btnCerrarSesion" class="btn btn-sm btn-outline-danger ms-neutral">
-                            <i class="bi bi-box-arrow-right"></i>
-                        </button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <section id="tienda" class="flex-grow-1 w-100 d-flex flex-column flex-lg-row">
-        <div class="p-neutral d-flex flex-wrap pixel-w-lg-180 border-end">
-            <!--<div class="ms-auto d-lg-none">
+
+    <section id="tablaUsuarios" class="flex-grow-1 w-100 d-flex flex-column flex-lg-row bg-light">
+        <!-- <div class="p-neutral d-flex flex-wrap pixel-w-lg-180 border-end">
+            <div class="ms-auto d-lg-none">
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                     <input type="checkbox" id="btnFiltros" class="btn-check" data-bs-toggle="collapse"
                         data-bs-target="#filtros" aria-expanded="false" aria-controls="filtros">
@@ -59,12 +66,12 @@
                     <option value="categoria1">Decendente </option>
                     <option value="categoria1">Por Apellido</option>
                 </select>
-            </form> -->
-        </div>
+            </form>
+        </div> -->
         <div class="p-neutral ps-lg-0 flex-grow-1 d-flex justify-content-center align-items-start">
             <div class="w-100 max-w-1200">
-                <div class="table-responsive">
-                    <table class="table m-0 table-hover">
+                <div class="table-responsive border rounded shadow">
+                    <table class="table m-0 table-hover text-center table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Nombre</th>
@@ -91,9 +98,9 @@
         data-bs-toggle="modal" data-bs-target="#modal" data-bs-whatever="@mdo" style="z-index: 2;">
         <i class="bi bi-plus"></i>
     </button>
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal fade z-index-modal" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
-            <div class="modal-content">
+            <div class="modal-content ">
                 <div class="modal-header">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -126,12 +133,12 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="rolUsuario"
                                                 id="rol_usuario" value="user" checked />
-                                            <label class="form-check-label" for="rol_usuario">Usuario</label>
+                                            <label class="form-check-label cursor-pointer" for="rol_usuario">Usuario</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="rolUsuario"
                                                 id="rol_usuario_admin" value="admin" />
-                                            <label class="form-check-label" for="rol_usuario_admin">Admin</label>
+                                            <label class="form-check-label cursor-pointer" for="rol_usuario_admin">Admin</label>
                                         </div>
                                     </div>
 
@@ -140,7 +147,7 @@
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch"
                                                 id="switch_estado">
-                                            <label class="form-check-label" for="switch_estado">Activar Usuario</label>
+                                            <label class="form-check-label cursor-pointer" for="switch_estado">Activar Usuario</label>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +164,7 @@
 
     </div>
 
-    <div class="modal fade" id="modalHistorial" tabindex="-1" aria-labelledby="modalHistorialLabel" aria-hidden="true">
+    <div class="modal fade z-index-modal" id="modalHistorial" tabindex="-1" aria-labelledby="modalHistorialLabel" aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -175,8 +182,7 @@
     </div>
 
     <!-- Modal para el boton de ver mas, de los carritos-->
-    <div class="modal fade" id="modalCompra" tabindex="-1" aria-labelledby="modalCompraLabel" aria-hidden="true"
-        style="z-index: 1060;">
+    <div class="modal fade z-index-modal" id="modalCompra" tabindex="-1" aria-labelledby="modalCompraLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -198,10 +204,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+        <script type="module" src="js/manejoDeNavbar.js"></script>
     <script type="module" src="js/alta-usuarios.js"></script>
     <script type="module" src="modulos/crearDomElements.js"></script>
     <script type="module" src="modulos/productosDisponibles.js"></script>
-    <script type="module" src="js/manejoDeSesion.js"></script>
 </body>
 
 </html>

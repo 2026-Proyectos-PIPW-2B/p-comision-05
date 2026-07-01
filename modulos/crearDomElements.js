@@ -100,7 +100,7 @@ export function createTarjetaTienda(producto) {
     divPopover.classList.add("d-flex")
     // Agrego los botones y inputs del popover
     const inputCantidad = document.createElement("input")
-    inputCantidad.classList.add("form-control", "fw-semibold", "border-info", "text-center")
+    inputCantidad.className = "form-control fw-semibold border-info text-center"
     inputCantidad.type = "number"
     inputCantidad.min = "1"
     const productoCarrito = carritos.getCarrito(sesionActual.get().nombreUsuario).getProducto(producto.id)
@@ -223,7 +223,7 @@ export function createTarjetaCarrito(producto, agregar) {
     h5.textContent = producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1).replace(/-/g, ' ')
     h5.className = "fw-semibold border-bottom pb-neutral"
     const pDescripcion = document.createElement("p")
-    pDescripcion.classList.add("flex-grow-1")
+    pDescripcion.className = "flex-grow-1 card-descripcion"
     pDescripcion.textContent = producto.descripcion
     const pTotal = document.createElement("p")
     pTotal.className = "m-0 fs-5 fw-semibold text-end text-secondary"
@@ -234,7 +234,7 @@ export function createTarjetaCarrito(producto, agregar) {
     divCantidad.classList.add("w-100", "pt-neutral", "border-top", "mt-neutral", "d-flex", "justify-content-end", "align-items-baseline")
     // Tercero
     const inputCantidad = document.createElement("input")
-    inputCantidad.className = "form-control fw-semibold border-primary w-8 text-center mx-neutral"
+    inputCantidad.className = "form-control fw-semibold border-primary w-8 text-center mx-neutral min-w-72"
     inputCantidad.type = "number"
     inputCantidad.min = "1"
     inputCantidad.max = stock.getProducto(producto.id).cantidad
@@ -459,7 +459,10 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
   tdTitulo.textContent = producto.nombre.replace(/-/g, ' ').toUpperCase();
 
   const tdInfo = document.createElement("td");
-  tdInfo.textContent = producto.descripcion;
+  const divInfo = document.createElement("div")
+  divInfo.className = "card-descripcion h-100"
+  divInfo.textContent = producto.descripcion;
+  tdInfo.append(divInfo)
 
   const tdStock = document.createElement("td");
   tdStock.textContent = producto.cantidad;
@@ -480,7 +483,7 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
 
   const tdAcciones = document.createElement("td");
   const divContenedor = document.createElement("div");
-  divContenedor.classList.add("d-flex", "gap-3", "align-items-center");
+  divContenedor.className = "d-flex gap-3 align-items-center justify-content-center";
 
   const iconoBorrar = document.createElement("i");
   iconoBorrar.classList.add("bi", "bi-trash3-fill", "text-danger");
@@ -572,7 +575,7 @@ export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar
     const tdAcciones = document.createElement('td');
     
     const divContenedor = document.createElement('div');
-    divContenedor.classList.add('d-flex', 'align-items-center', 'gap-3');
+    divContenedor.classList.add('d-flex', 'align-items-center', 'gap-3', "justify-content-center");
 
     const iconoBorrar = document.createElement('i');
     iconoBorrar.classList.add('bi', 'bi-trash3-fill', 'text-danger');
@@ -586,7 +589,7 @@ export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar
     divSwitch.classList.add('form-check', 'form-switch', 'm-0');
 
     const inputSwitch = document.createElement('input');
-    inputSwitch.classList.add('form-check-input');
+    inputSwitch.classList.add('form-check-input', "cursor-pointer");
     inputSwitch.type = 'checkbox';
     inputSwitch.setAttribute('role', 'switch');
     inputSwitch.checked = usuario.habilitado; 

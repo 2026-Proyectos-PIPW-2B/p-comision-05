@@ -7,8 +7,8 @@ const sectionRegistro = document.getElementById("sectionRegistro")
 function onLoad() {
     const registro = registros.getRegistro(sesionActual.get().nombreUsuario)
     if (registro.length > 0) {
-        for (const [i, carrito] of registro.entries()) {
-            createRegistroCompra(carrito, sectionRegistro, i)
+        for (let i = registro.length - 1; i >= 0; i--) {
+            createRegistroCompra(registro[i], sectionRegistro, i)
         }
     }
     else {
