@@ -76,11 +76,11 @@ export function createTarjetaTienda(producto) {
     img.alt = producto.nombre
     img.classList.add("card-img-top")
     const divBody = document.createElement("div")
-    divBody.classList.add("card-body", "d-flex", "flex-column")
+    divBody.className = "card-body d-flex flex-column"
     // Cuarto
     const h5 = document.createElement("h5")
     h5.textContent = producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1).replace(/-/g, ' ')
-    h5.classList.add("card-title")
+    h5.className = "card-title fw-semibold"
     const p = document.createElement("p")
     p.textContent = producto.descripcion
     p.classList.add("card-text", "h-50", "card-descripcion")
@@ -89,11 +89,11 @@ export function createTarjetaTienda(producto) {
     // Quinto
     const span = document.createElement("span")
     span.textContent = `$${producto.valor} C/U`
-    span.classList.add("fs-5")
+    span.className = "text-secondary fs-5"
     span.id = `${producto.id}/span`
 
     const button = document.createElement("button")
-    button.classList.add("btn", "btn-primary", "align-self-end")
+    button.className = "btn btn-primary align-self-end"
     button.id = `${producto.id}/button`
     // Crear popover
     const divPopover = document.createElement("div")
@@ -111,7 +111,7 @@ export function createTarjetaTienda(producto) {
 
     const buttonAgregar = document.createElement("button")
     buttonAgregar.dataset.id = producto.id
-    buttonAgregar.classList.add("btn", "btn-primary", "ms-neutral")
+    buttonAgregar.classList.add("btn", "btn-info", "ms-neutral")
     buttonAgregar.addEventListener("click", handlerAñadirACarrito)
     const iAgregar = document.createElement("i")
     iAgregar.classList.add("bi", "bi-cart-plus")

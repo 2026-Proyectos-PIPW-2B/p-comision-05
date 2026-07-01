@@ -2,11 +2,15 @@ import * as moduloProductos from "./stock.js";
 import * as carritos from "./carritos.js";
 
 // Cargo etiquetas de localStorage si hay, y si no inicializo un par
+/**  @type {Array<string>} */
 let etiquetasGlobales = JSON.parse(
     localStorage.getItem("etiquetasGlobales"),
 ) || ["glaseado", "panificado", "tortas", "salchicha", "pistacho"];
 
-//retorna un array de etiquetas, traido de localStorage, o previamente inicializado.
+/** retorna un array de etiquetas, traido de localStorage, o previamente inicializado.
+ * 
+ * @returns {Array<string>}
+ */ 
 export function getEtiquetas() {
     return etiquetasGlobales;
 }

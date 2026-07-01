@@ -5,42 +5,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inicio-de-sesión</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/customBoostrap.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style-utilities.css">
 </head>
 
 <body>
-  <main style="
-        background: linear-gradient(
-          120deg,
-          rgb(42, 65, 165),
-          #000850,
-          rgb(27, 150, 250),
-          blue
-        );
-      ">
+  <main class="login-background">
     <div class="container">
       <div class="row justify-content-center align-items-center vh-100">
         <div class="col-12 col-md-8 col-lg-6">
           <div class="card shadow">
-            <div class="card-body p-4">
-              <h1 class="card-title text-center mb-4">Inicio de sesión</h1>
+            <div class="card-body p-4 bg-light">
+              <h1 class="card-title text-center mb-4 fw-semibold text-black">Inicio de sesión</h1>
               <form id="formLogin">
                 <div class="mb-4">
-                  <label for="inputNombre" class="form-label">Nombre de Usuario</label>
-                  <input type="text" id="inputNombre" class="form-control " />
+                  <label for="inputNombre" class="form-label fw-semibold">Nombre de Usuario</label>
+                  <input type="text" id="inputNombre" class="form-control" placeholder="..."/>
                   <div class="invalid-feedback" id="mensajeNombre">sdd</div>
                 </div>
 
                 <div class="mb-4">
-                  <label for="inputPassword" class="form-label">Contraseña</label>
-                  <input type="password" id="inputPassword" class="form-control" placeholder="********" />
+                  <label for="inputPassword" class="form-label fw-semibold">Contraseña</label>
+                  <input type="password" id="inputPassword" class="form-control" placeholder="..." />
                   <div class="invalid-feedback" id="mensajeContraseña"></div>
                 </div>
 
                 <div class="mb-4 d-grid gap-2">
-                  <input type="submit" class="btn btn-primary" id="botonLogin" value="Entrar" />
+                  <input type="submit" class="btn btn-primary fw-semibold" id="botonLogin" value="Entrar" />
                 </div>
               </form>
             </div>
@@ -51,18 +43,17 @@
   </main>
 
 
-  <footer class="p-neutral">
-        <div class="container-fluid margin-b border-bottom border-1 border-secondary ">
+  <footer class="p-neutral bg-light">
+        <div class="container-fluid margin-b border-bottom border-1 border-black ">
             <div class="d-lg-none mt-2  align-items-center text-center">
-                <button class="btn bi bi-list-ul  " type="button" data-bs-toggle="collapse" data-bs-target="#footerInfo"
+                <button id="buttonFooter" class="btn bi bi-list-ul  " type="button" data-bs-toggle="collapse" data-bs-target="#footerInfo"
                     aria-controls="footerInfo" aria-expanded="false" aria-label="Toggle navigation"> Ver más
                 </button>
             </div>
             <div id="footerInfo" class="collapse d-lg-flex row justify-content-center mb-2">
                 <div class="col-lg-4 col-12 mt-2 ">
                     <h5 class="text-center">TIENDAS</h5>
-                    <ul class="nav flex-column align-items-center">
-    
+                    <ul class="nav flex-column align-items-center">   
                         <li class="nav-item mb-2">
                             <i class="bi bi-geo-alt"></i> Sarmiento 205
                         </li>
@@ -98,14 +89,15 @@
                 </div>
             </div>
         </div class="mt-2">
-        <p class="text-center">© 1998 Panaderia, ATR</p>
+        <p class="text-center p-neutral m-0">© 1998 Panaderia, ATR</p>
         </div>
     </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
-    <script type="module" src="js/login.js"></script>
+  <script type="module" src="js/login.js"></script>
+  <script src="js/manejoDeFooter.js"></script>
 </body>
 
 </html>
