@@ -224,6 +224,16 @@ function handlerButtonBuscar() {
     if (str != "") {
         filtradoNombre(str)
     }
+    else {
+        mostrarTodosProductos()
+    }
+}
+
+function handlerSearchEnter() {
+    if (event.key === 'Enter') {
+        event.preventDefault()
+        handlerButtonBuscar()
+    }
 }
 
 function handlerSearchCancel() {
@@ -265,6 +275,7 @@ function onLoad() {
     // Boton buscar del search
     buttonBuscar.addEventListener("click", handlerButtonBuscar)
     inputBuscar.addEventListener("search", handlerSearchCancel)
+    inputBuscar.addEventListener("keydown", handlerSearchEnter)
 
     generateScrollCategorias()
     
