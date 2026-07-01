@@ -294,6 +294,11 @@ input:autofill {
         background-color: var(--bs-light) !important;
     }
 
+    .bg-lg-white {
+        --bs-bg-opacity: 0;
+        background-color: white !important;
+    }
+
     .text-lg-black {
         --bs-text-opacity: 1;
     color: black !important;
