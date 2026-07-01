@@ -43,7 +43,10 @@ export function get() {
     return sesionActual
 }
 
-export function limpiarSesionActual() {
+/**
+ * Limpia el localStorage de sesionActual y pone a sesionActual como null
+ */
+export function clear() {
     sesionActual = null;
     localStorage.removeItem("sesionActual");
 }

@@ -29,8 +29,11 @@ export function loadCarrito(str) {
     if (str !== "") {
         const productosKeys = JSON.parse(values[1])
         const productosValues = values[2].split("°")
+        console.log(productosValues)
         for (let i = 0; i < productosKeys.length; i++) {
-            mapa.set(productosKeys[i], loadProducto(productosValues[i]))
+            if (productosValues[i] !== "") {
+                mapa.set(productosKeys[i], loadProducto(productosValues[i]))
+            }
         }
     }
     return new Carrito(mapa, values[0])
@@ -47,7 +50,9 @@ export function loadStock() {
     if (stockKeys !== null) {
         const stockValues = localStorage.getItem("stockValues").split("|")
         for (let i = 0; i < stockKeys.length; i++) {
-            mapa.set(stockKeys[i], loadProducto(stockValues[i]))
+            if (stockValues[i] !== "") {
+                mapa.set(stockKeys[i], loadProducto(stockValues[i]))
+            }
         }
     }
     return mapa
@@ -86,7 +91,6 @@ export function loadRegistros() {
     const registrosKeys = JSON.parse(localStorage.getItem("registrosKeys"))
     if (registrosKeys !== null) {
         const registrosValues = localStorage.getItem("registrosValues").split("|")
-        console.log(registrosValues)
         for (let i = 0; i < registrosKeys.length; i++) {
             const array = []
             const carritosACargar = registrosValues[i].split("¬")

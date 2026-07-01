@@ -76,10 +76,18 @@ export function addCarritoToRegistro(nombreUsuario) {
     // Guardo y limpio el carrito
     registros.addCarrito(nombreUsuario, carritoAgregar)
     for (const producto of carritoAgregar.productos.values()) {
-        stock.getStock().get(producto.id).cantidad -= producto.cantidad
+        const productoStock = stock.getStock().get(producto.id)
+        productoStock.cantidad -= producto.cantidad
+        if (productoStock.cantidad == 0) {
+            stock.removeProducto(producto.id)
+        }
     }
     stock.saveStock()
     clearCarrito(nombreUsuario)
+}
+
+export function clear() {
+    carritos.clear()
 }
 
 export function saveCarritos() {

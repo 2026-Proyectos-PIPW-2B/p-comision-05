@@ -58,6 +58,10 @@ export function removeProducto(id) {
     saveStock()
 }
 
+export function clear() {
+    stock.clear()
+}
+
 /**
  * Guarda el stock de productos al localStorage.
  */

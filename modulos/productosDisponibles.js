@@ -21,9 +21,6 @@ const productosDisponibles = [
     "vigilante",
 ]
 
-
 export function get() {
-    return productosDisponibles;
+    return productosDisponibles
 }
-
-//asd

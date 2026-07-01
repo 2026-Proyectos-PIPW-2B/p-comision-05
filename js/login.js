@@ -1,9 +1,6 @@
 import * as users from "../modulos/usuarios.js";
 import * as sesionActual from "../modulos/sesionActual.js"
 
-users.setUsuario("juanCarlos", "juan", "carlos", "asd123", "admin")
-users.setUsuario("facundoArana", "facundo", "araña", "asd123", "user")
-
 const inputNombre = document.getElementById("inputNombre");
 const inputPassword = document.getElementById("inputPassword");
 const inputBotonLogin = document.getElementById("botonLogin");

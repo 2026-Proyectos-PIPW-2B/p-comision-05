@@ -45,6 +45,10 @@ export function addCarrito(nombreUsuario, carrito) {
     saveRegistros()
 }
 
+export function clear() {
+    registros.clear()
+}
+
 export function saveRegistros() {
     localStorage.setItem("registrosKeys", JSON.stringify(Array.from(registros.keys())))
     let values = ""

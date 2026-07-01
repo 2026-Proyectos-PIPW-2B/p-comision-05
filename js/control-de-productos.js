@@ -1,7 +1,7 @@
 window.addEventListener("load", iniciar);
 
-import * as moduloProductos from "../modulos/stock.js";
 import { crearFilaProducto } from "../modulos/crearDomElements.js";
+import * as moduloProductos from "../modulos/stock.js";
 import * as moduloEtiquetas from "../modulos/etiquetas.js";
 import * as productosDisponibles from "../modulos/productosDisponibles.js"
 import * as sesionActual from "../modulos/sesionActual.js"; 
@@ -417,5 +417,3 @@ function iniciar() {
   actualizarSelectoresEtiquetas();
   actualizarTablaCompleta();
 }
-console.log("render")
-console.log(productosDisponibles.get())
