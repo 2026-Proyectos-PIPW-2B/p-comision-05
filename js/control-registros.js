@@ -61,13 +61,11 @@ btnFiltroRegistroAdmin.addEventListener("click", function (e) {
   if (inputFechaDeInicio.value) {
     const fechaInicFormateada = inputFechaDeInicio.value.replace(/-/g, "/");
     fechaInicioVal = new Date(fechaInicFormateada);
-    fechaInicioVal.setHours(0, 0, 0, 0); // desde el primer segundo del día
   }
 
   if (inputFechaFinal.value) {
     const fechaFinFormateada = inputFechaFinal.value.replace(/-/g, "/");
     fechaFinalVal = new Date(fechaFinFormateada);
-    fechaFinalVal.setHours(23, 59, 59, 999); // hasta el ultimo segundo del dia
   }
 
   let comprasMostradas = 0;
@@ -87,8 +85,6 @@ btnFiltroRegistroAdmin.addEventListener("click", function (e) {
     } else {
       fechaCarrito = new Date(carrito.fecha);
     }
-
-    fechaCarrito.setHours(12, 0, 0, 0);
 
     if (fechaInicioVal && fechaCarrito < fechaInicioVal) continue;
     if (fechaFinalVal && fechaCarrito > fechaFinalVal) continue;
