@@ -74,7 +74,7 @@ export function createTarjetaTienda(producto) {
     const img = document.createElement("img")
     img.src = producto.imagen
     img.alt = producto.nombre
-    img.classList.add("card-img-top")
+    img.classList.add("card-img-top", "border")
     const divBody = document.createElement("div")
     divBody.className = "card-body d-flex flex-column"
     // Cuarto
@@ -212,7 +212,7 @@ export function createTarjetaCarrito(producto, agregar) {
     divImagen.classList.add("w-15")
     // Tercero
     const img = document.createElement("img")
-    img.classList.add("w-100", "rounded", "rounded-2")
+    img.classList.add("w-100", "rounded", "rounded-2", "border")
     img.src = producto.imagen
     img.alt = producto.nombre
     // Segundo
@@ -274,13 +274,13 @@ export function createTarjetaCarrito(producto, agregar) {
 export function createTarjetaRegistro(producto, agregar) {
     // Primero
     const divContenedor = document.createElement("div")
-    divContenedor.className = "d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral shadow"
+    divContenedor.className = "d-flex flex-wrap rounded rounded-2 border p-neutral mb-neutral bg-white shadow"
     // Segundo
     const divImagen = document.createElement("div")
     divImagen.classList.add("w-15")
     // Tercero
     const img = document.createElement("img")
-    img.classList.add("w-100", "rounded", "rounded-2")
+    img.classList.add("w-100", "rounded", "rounded-2", "border")
     img.src = producto.imagen
     img.alt = producto.nombre
     // Segundo
@@ -288,16 +288,17 @@ export function createTarjetaRegistro(producto, agregar) {
     divInfo.classList.add("w-85", "ps-neutral", "d-flex", "flex-column")
     // Tercero
     const h5 = document.createElement("h5")
-    h5.textContent = producto.nombre
+    h5.textContent = producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1).replace(/-/g, ' ')
+    h5.className = "fw-semibold border-bottom pb-neutral"
     const pDescripcion = document.createElement("p")
     pDescripcion.classList.add("flex-grow-1")
     pDescripcion.textContent = producto.descripcion
     const pTotal = document.createElement("p")
-    pTotal.classList.add("m-0", "fs-5", "fw-semibold", "text-end")
+    pTotal.className = "m-0 fs-5 fw-semibold text-end text-secondary"
     pTotal.textContent = `$${producto.valorTotal}`
     // Segundo
     const divCantidad = document.createElement("div")
-    divCantidad.classList.add("w-100", "pt-neutral", "border-top", "mt-neutral", "d-flex", "justify-content-end", "align-items-baseline")
+    divCantidad.className = "w-100 pt-neutral border-top mt-neutral d-flex justify-content-end align-items-baseline text-secondary"
     // Tercero
     const spanTextoCantidad = document.createElement("span")
     spanTextoCantidad.classList.add("fw-semibold", "pe-1")
@@ -369,7 +370,7 @@ function handlerVerMas() {
 export function createRegistroCompra(carrito, agregar, numero, usuario = sesionActual.get().nombreUsuario) {
     // Primero
     const divContenedor = document.createElement("div")
-    divContenedor.className = "w-100 border rounded rounded-2 p-neutral d-flex flex-column shadow bg-white"
+    divContenedor.className = "w-100 border rounded rounded-2 p-neutral d-flex flex-column shadow bg-white mb-neutral"
     // Segundo
     const divTitulo = document.createElement("div")
     divTitulo.classList.add("w-100", "d-flex", "border-bottom", "mb-neutral", "align-items-baseline")
@@ -390,21 +391,21 @@ export function createRegistroCompra(carrito, agregar, numero, usuario = sesionA
     const imagenes = generateArrayImagenes(carrito)
     if (imagenes.length > 0) {
         const imagen1 = document.createElement("img")
-        imagen1.classList.add("rounded", "img-1", "shadow")
+        imagen1.classList.add("rounded", "img-1", "shadow", "border")
         imagen1.src = imagenes[0]
         imagen1.alt = imagenes[0].slice(5, -4)
         divImagenes.append(imagen1)
     }
     if (imagenes.length > 1) {
         const imagen2 = document.createElement("img")
-        imagen2.classList.add("rounded", "position-relative", "img-2", "shadow")
+        imagen2.classList.add("rounded", "position-relative", "img-2", "shadow", "border")
         imagen2.src = imagenes[1]
         imagen2.alt = imagenes[1].slice(5, -4)
         divImagenes.append(imagen2)
     }
     if (imagenes.length > 2) {
         const imagen3 = document.createElement("img")
-        imagen3.classList.add("rounded", "position-relative", "img-3", "shadow")
+        imagen3.classList.add("rounded", "position-relative", "img-3", "shadow", "border")
         imagen3.src = imagenes[2]
         imagen3.alt = imagenes[2].slice(5, -4)
         divImagenes.append(imagen3)
