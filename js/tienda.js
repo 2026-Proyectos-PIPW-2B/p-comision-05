@@ -26,6 +26,11 @@ function paginado() {
     console.log(productoAMostrar.length)
     if (productoAMostrar.length == 0) {
         document.getElementById("alertaTienda").classList.remove("d-none")
+        sectionProductos.classList.add("d-none")
+    }
+    else {
+        sectionProductos.classList.remove("d-none")
+        document.getElementById("alertaTienda").classList.add("d-none")
     }
 }
 

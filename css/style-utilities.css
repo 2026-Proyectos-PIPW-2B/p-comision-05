@@ -29,6 +29,10 @@ body {
     z-index: 1080 !important;
 }
 
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
 /* clase personales */
 .p-neutral {
     padding: calc(var(--neutral) * 2) calc(var(--neutral) * 3);
@@ -92,6 +96,10 @@ body {
 
 .min-w-220 {
     min-width: 220px !important;
+}
+
+.min-w-72 {
+    min-width: 72px !important;
 }
 
 .max-w-900 {

@@ -83,7 +83,7 @@ function renderizarListaGestion() {
     const etiqueta = lista[i];
 
     const divItem = document.createElement("div");
-    divItem.className ="d-flex justify-content-between align-items-center p-2 border rounded bg-light";
+    divItem.className ="d-flex justify-content-between align-items-center p-2 border rounded bg-white";
 
     const spanTexto = document.createElement("span");
     spanTexto.textContent = etiqueta;
