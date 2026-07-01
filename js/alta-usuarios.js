@@ -6,12 +6,6 @@ import { crearFilaUsuario, createRegistroCompra } from "../modulos/crearDomEleme
 import * as registros from "../modulos/registros.js";
 import * as sesionActual from "../modulos/sesionActual.js"; 
 
-setUsuario("joaco_pan", "Joaquin", "Perez", "123456", "admin");
-setUsuario("joaco_pes", "Joaquin", "Perez", "123456", "user");
-
-
-
-
 const tbodyUsuarios = document.getElementById("tabla-usuarios-body");
 
 function actualizarTablaCompleta() {
@@ -131,9 +125,6 @@ function compararNombreUsuario(nuevoNombre) { //retorna un boolean, si el nombre
 function mostrarHistorialUsuario(nombreUsuario) {
   const contenedor = document.getElementById("historialContenedor");
   const carritosDeUsuario = registros.getRegistro(nombreUsuario);
-
-  console.log("Nombre de usuario clickeado:", nombreUsuario);
-  console.log("Lo que devuelve el registro:", carritosDeUsuario);
 
   contenedor.innerHTML = ""
 

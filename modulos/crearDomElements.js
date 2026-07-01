@@ -499,7 +499,7 @@ export function crearFilaProducto(producto,indice,funcionEliminar,functionEditar
 
 
 
-export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar) {
+export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar,funcionHistorial) {
     const tr = document.createElement('tr');
     tr.dataset.id = usuario.nombreUsuario; 
 
@@ -547,6 +547,9 @@ export function crearFilaUsuario(usuario, funcionoCambiarEstado, funcionEliminar
     iconoHistorial.setAttribute("data-bs-toggle", "modal"); 
     iconoHistorial.setAttribute("data-bs-target", "#modalHistorial"); 
     iconoHistorial.dataset.usuario = usuario.nombreUsuario; 
+    iconoHistorial.addEventListener('click', function() {
+        funcionHistorial(usuario.nombreUsuario);
+    });
     tdHistorial.appendChild(iconoHistorial);
 
     const tdAcciones = document.createElement('td');
