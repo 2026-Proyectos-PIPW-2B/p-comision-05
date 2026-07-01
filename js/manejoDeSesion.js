@@ -3,7 +3,6 @@ import * as usuarios from "../modulos/usuarios.js";
 
 function controlarSesionYBotones() {
   const usuarioLogueado = sesionActual.get();
-
   //si el usuario no esta logueado, que vaya directo al login
   if (!usuarioLogueado) {
     window.location.href = "login.html";
@@ -16,7 +15,6 @@ function controlarSesionYBotones() {
       alert("Sesión cerrada, chau!");
       window.location.href = "login.html";
     });
-    
 }
 
 
