@@ -23,7 +23,7 @@ function paginado() {
     for (const producto of productosSeparados) {
         sectionProductos.append(createTarjetaTienda(producto))    
     }
-    console.log(productoAMostrar.length)
+    
     if (productoAMostrar.length == 0) {
         document.getElementById("alertaTienda").classList.remove("d-none")
         sectionProductos.classList.add("d-none")
